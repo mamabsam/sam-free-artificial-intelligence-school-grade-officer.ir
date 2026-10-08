@@ -71,19 +71,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Tahoma,sans-
 .mb pre{background:#0a0a0a;padding:14px 16px;border-radius:12px;margin:12px 0;overflow-x:auto;direction:ltr;text-align:left;font-family:'SF Mono',Monaco,monospace;font-size:.82rem;line-height:1.6;border:1px solid rgba(66,133,244,.25)}
 .mb code{background:rgba(66,133,244,.18);padding:3px 8px;border-radius:6px;font-family:'SF Mono',Monaco,monospace;font-size:.85em;direction:ltr;display:inline-block;color:#a8c7fa}
 .mb a{color:#a8c7fa;text-decoration:none;font-weight:700;border-bottom:1px dashed #a8c7fa;padding-bottom:1px}
-
-/* کارت ایستگاه */
 .station-card{background:linear-gradient(135deg,rgba(66,133,244,.15),rgba(155,114,203,.15));border:1px solid rgba(66,133,244,.3);border-radius:14px;padding:12px 14px;margin-top:10px}
 .station-name{font-size:.92rem;font-weight:700;color:#a8c7fa;margin-bottom:8px;display:flex;align-items:center;gap:8px}
 .station-name::before{content:'🚇';font-size:1rem}
 .station-list{list-style:none;padding:0;margin:0}
-.station-item{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(255,255,255,.04);border-radius:10px;margin-bottom:6px;font-size:.85rem;cursor:pointer;transition:.2s}
-.station-item:hover{background:rgba(66,133,244,.2)}
+.station-item{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(255,255,255,.04);border-radius:10px;margin-bottom:6px;font-size:.85rem}
 .station-item .name{color:#e3e3e3;font-weight:500}
 .station-item .time{color:#00d97e;font-weight:700;font-size:.82rem}
 .station-item .time.soon{color:#ff6b6b;animation:pulse3 1.5s infinite}
 @keyframes pulse3{0%,100%{opacity:1}50%{opacity:.5}}
-
 .typing{display:flex;gap:6px;padding:6px 0}
 .td{width:9px;height:9px;border-radius:50%;animation:tb 1.3s infinite ease-in-out}
 .td:nth-child(1){background:#4285f4}
@@ -270,10 +266,13 @@ let isGen = false;
 let file = null;
 const MAX = 200 * 1024 * 1024;
 
-/* ============ لینک‌ها ============ */
-const HAMYAR_URL     = 'https://hamyar.me/topics/پایه-هفتم/';
-const NESHAN_URL     = 'https://neshan.org/';
+/* ================================================================
+   لینک‌های ثابت
+   ================================================================ */
+const HAMYAR_URL      = 'https://hamyar.me/topics/پایه-هفتم/';
+const NESHAN_URL      = 'https://neshan.org/maps';
 const FLIGHTRADAR_URL = 'https://www.flightradar24.com/';
+const DEEPSEEK_URL    = 'https://chat.deepseek.com/';
 
 const chat = document.getElementById('chat');
 const ci = document.getElementById('ci');
@@ -286,7 +285,9 @@ const schedulePanel = document.getElementById('schedulePanel');
 const reminderPanel = document.getElementById('reminderPanel');
 const inputWrap = document.getElementById('inputWrap');
 
-/* ============ برنامه کلاسی ============ */
+/* ================================================================
+   برنامه کلاسی
+   ================================================================ */
 const SCHEDULE = {
   'شنبه': [
     { subject: 'ورزش', teacher: 'آقای شهاب' },
@@ -319,7 +320,9 @@ const DAYS_FA = ['یک‌شنبه','دوشنبه','سه‌شنبه','چهارش�
 function getToday(){ return DAYS_FA[new Date().getDay()]; }
 function getTomorrow(){ return DAYS_FA[(new Date().getDay() + 1) % 7]; }
 
-/* ============ ذرات ============ */
+/* ================================================================
+   ذرات
+   ================================================================ */
 function createParticles(){
   const c = document.getElementById('particles');
   if (!c) return;
@@ -343,7 +346,9 @@ function createParticles(){
   }
 }
 
-/* ============ توابع کمکی ============ */
+/* ================================================================
+   توابع کمکی
+   ================================================================ */
 function toast(msg, dur){
   dur = dur || 2200;
   const t = document.getElementById('toast');
@@ -362,7 +367,9 @@ function scrollBottom(){
 }
 function pick(a){ return a[(Math.random() * a.length) | 0]; }
 
-/* ============ تشخیص سلام ============ */
+/* ================================================================
+   تشخیص سلام
+   ================================================================ */
 function isGreeting(text){
   const t = (text || '').toLowerCase().trim();
   const clean = t.replace(/[^\u0600-\u06FF\s]/g, '').trim();
@@ -380,7 +387,9 @@ function greetingReply(){
   ]);
 }
 
-/* ============ پاسخ آفلاین ============ */
+/* ================================================================
+   پاسخ آفلاین
+   ================================================================ */
 function offlineReply(text){
   const t = (text || '').toLowerCase().trim();
   const clean = t.replace(/[^\u0600-\u06FF\s]/g, '').trim();
@@ -400,85 +409,97 @@ function offlineReply(text){
   return null;
 }
 
-/* ============ تشخیص درخواست هواپیما ============ */
+/* ================================================================
+   ⭐ تشخیص درخواست سایت همیار (جدید)
+   ================================================================ */
+function isHamyarSiteRequest(text){
+  if (!text) return false;
+  const t = text.toLowerCase().trim();
+  const clean = t.replace(/[^\u0600-\u06FF\s]/g, '').trim();
+  // "سایت همیار" یا "همیار" یا "سایت همیار باز شه" یا "همیار باز کن"
+  return /(سایت\s*همیار|همیار|همیار\.me|hamyar)/i.test(clean);
+}
+
+/* ================================================================
+   تشخیص درخواست هواپیما
+   ================================================================ */
 function isAirplaneRequest(text){
   if (!text) return false;
   const t = text.toLowerCase();
-  return /(هواپیما|هواپیمایی|فرودگاه|پرواز|airplane|flight|airport|فِلایت|فلايت)/i.test(t);
+  return /(هواپیما|هواپیمایی|فرودگاه|پرواز|airplane|flight|airport)/i.test(t);
 }
 
-/* ============ تشخیص درخواست مترو ============ */
+/* ================================================================
+   تشخیص درخواست مترو
+   ================================================================ */
 function isMetroRequest(text){
   if (!text) return false;
   const t = text.toLowerCase();
   return /(مترو|قطار\s*شهری|subway|metro|متروی|ایستگاه\s*مترو)/i.test(t);
 }
 
-/* ============ تشخیص درخواست اتوبوس ============ */
+/* ================================================================
+   تشخیص درخواست اتوبوس
+   ================================================================ */
 function isBusRequest(text){
   if (!text) return false;
   const t = text.toLowerCase();
   return /(اتوبوس|بی\s*آر\s*تی|\bbrt\b|bus|اتوبوسرانی|ایستگاه\s*اتوبوس|ایستگاه\s*بی\s*آر\s*تی)/i.test(t);
 }
 
-/* ============ تشخیص درخواست زمان‌بندی مترو ============ */
+/* ================================================================
+   تشخیص درخواست زمان‌بندی مترو
+   ================================================================ */
 function isMetroScheduleRequest(text){
   if (!text) return false;
   const t = text.toLowerCase();
-  // فقط وقتی می‌نویسه "زمان بندی مترو"
   return /(زمان\s*بندی\s*مترو|زمانبندی\s*مترو|برنامه\s*مترو|ساعت\s*مترو)/i.test(t);
 }
 
-/* ============ ساخت کارت ایستگاه‌های مترو ============ */
+/* ================================================================
+   کارت زمان‌بندی مترو شیراز (خط ۱)
+   ================================================================ */
 function buildMetroScheduleHTML(){
-  // لیست ایستگاه‌های مترو تهران (نمونه)
   const stations = [
-    { name: 'ایستگاه تجریش', line: 'خط ۱', minutes: 2 },
-    { name: 'ایستگاه قیطریه', line: 'خط ۱', minutes: 5 },
-    { name: 'ایستگاه شهید حقانی', line: 'خط ۱', minutes: 7 },
-    { name: 'ایستگاه میرداماد', line: 'خط ۱', minutes: 9 },
-    { name: 'ایستگاه شریعتی', line: 'خط ۱', minutes: 12 },
-    { name: 'ایستگاه هفت تیر', line: 'خط ۱', minutes: 14 },
-    { name: 'ایستگاه مفتح', line: 'خط ۱', minutes: 17 },
-    { name: 'ایستگاه طالقانی', line: 'خط ۱', minutes: 20 },
-    { name: 'ایستگاه دروازه دولت', line: 'خط ۱', minutes: 22 },
-    { name: 'ایستگاه سعدی', line: 'خط ۱', minutes: 25 },
-    { name: 'ایستگاه امام خمینی', line: 'خط ۱', minutes: 28 },
-    { name: 'ایستگاه پانزده خرداد', line: 'خط ۱', minutes: 31 },
-    { name: 'ایستگاه خیام', line: 'خط ۱', minutes: 34 },
-    { name: 'ایستگاه مولوی', line: 'خط ۱', minutes: 37 },
-    { name: 'ایستگاه شوش', line: 'خط ۱', minutes: 40 },
-    { name: 'ایستگاه پایانه جنوب', line: 'خط ۱', minutes: 42 },
-    { name: 'ایستگاه شهرری', line: 'خط ۱', minutes: 45 },
-    { name: 'ایستگاه جوانمرد قصاب', line: 'خط ۱', minutes: 48 },
-    { name: 'ایستگاه حرم مطهر', line: 'خط ۱', minutes: 52 },
-    { name: 'ایستگاه کهریزک', line: 'خط ۱', minutes: 55 },
-    { name: 'ایستگاه صادقیه', line: 'خط ۲', minutes: 3 },
-    { name: 'ایستگاه تهران صادقیه', line: 'خط ۲', minutes: 6 },
-    { name: 'ایستگاه دانشگاه شریف', line: 'خط ۲', minutes: 9 },
-    { name: 'ایستگاه میدان صنعت', line: 'خط ۲', minutes: 12 },
-    { name: 'ایستگاه شهرک غرب', line: 'خط ۲', minutes: 15 },
-    { name: 'ایستگاه ایران زمین', line: 'خط ۲', minutes: 18 },
-    { name: 'ایستگاه دانشگاه تربیت مدرس', line: 'خط ۲', minutes: 21 },
-    { name: 'ایستگاه دانشگاه تهران', line: 'خط ۲', minutes: 24 },
-    { name: 'ایستگاه فردوسی', line: 'خط ۲', minutes: 27 },
-    { name: 'ایستگاه ایستگاه توحید', line: 'خط ۲', minutes: 30 }
+    { name: 'ایستگاه گل‌سرخ', line: 'خط ۱', minutes: 2 },
+    { name: 'ایستگاه شهید دستغیب', line: 'خط ۱', minutes: 5 },
+    { name: 'ایستگاه شهید دوران', line: 'خط ۱', minutes: 8 },
+    { name: 'ایستگاه فرصت شیرازی', line: 'خط ۱', minutes: 11 },
+    { name: 'ایستگاه جانبازان پودنک', line: 'خط ۱', minutes: 14 },
+    { name: 'ایستگاه غدیر', line: 'خط ۱', minutes: 17 },
+    { name: 'ایستگاه رازی', line: 'خط ۱', minutes: 20 },
+    { name: 'ایستگاه فضیلت', line: 'خط ۱', minutes: 23 },
+    { name: 'ایستگاه کاوه', line: 'خط ۱', minutes: 26 },
+    { name: 'ایستگاه میدان ولیعصر', line: 'خط ۱', minutes: 29 },
+    { name: 'ایستگاه وکیل', line: 'خط ۱', minutes: 32 },
+    { name: 'ایستگاه زندیه', line: 'خط ۱', minutes: 35 },
+    { name: 'ایستگاه امام حسین (ع)', line: 'خط ۱', minutes: 38 },
+    { name: 'ایستگاه نمازی', line: 'خط ۱', minutes: 41 },
+    { name: 'ایستگاه شهید آوینی', line: 'خط ۱', minutes: 44 },
+    { name: 'ایستگاه شهید مطهری', line: 'خط ۱', minutes: 47 },
+    { name: 'ایستگاه قصر دشت', line: 'خط ۱', minutes: 50 },
+    { name: 'ایستگاه شاهد', line: 'خط ۱', minutes: 53 },
+    { name: 'ایستگاه میرزای شیرازی', line: 'خط ۱', minutes: 56 },
+    { name: 'ایستگاه دکتر شریعتی', line: 'خط ۱', minutes: 59 },
+    { name: 'ایستگاه احسان', line: 'خط ۱', minutes: 62 }
   ];
 
   let html = '<div class="station-card">';
-  html += '<div class="station-name">ایستگاه‌ها و زمان رسیدن قطار</div>';
+  html += '<div class="station-name">مترو شیراز — خط ۱ (ایستگاه‌ها و زمان رسیدن قطار)</div>';
   html += '<ul class="station-list">';
   stations.forEach(function(s){
     const cls = s.minutes <= 5 ? 'soon' : '';
     html += '<li class="station-item"><span class="name">' + s.name + ' <small style="color:#8888aa">(' + s.line + ')</small></span><span class="time ' + cls + '">' + s.minutes + ' دقیقه دیگر</span></li>';
   });
   html += '</ul>';
-  html += '<div style="font-size:.72rem;color:#8888aa;margin-top:10px;text-align:center">🚇 هر ۲ دقیقه به‌روزرسانی می‌شه</div>';
+  html += '<div style="font-size:.72rem;color:#8888aa;margin-top:10px;text-align:center">🚇 ساعات کار: ۶ صبح تا ۲۲ | سر فاصله: هر ۱۵ دقیقه</div>';
   html += '</div>';
   return html;
 }
 
-/* ============ ساخت پاسخ نشان ============ */
+/* ================================================================
+   پاسخ نشان
+   ================================================================ */
 function buildNeshanReply(text){
   let intro = '🗺️ سایت نشان رو برات باز می‌کنم:\n\n';
   if (isMetroRequest(text)){
@@ -489,12 +510,30 @@ function buildNeshanReply(text){
   return intro + NESHAN_URL + '\n\n📌 می‌تونی مسیر، زمان‌بندی و ایستگاه‌ها رو اونجا ببینی.';
 }
 
-/* ============ ساخت پاسخ هواپیما ============ */
-function buildFlightReply(text){
+/* ================================================================
+   پاسخ هواپیما
+   ================================================================ */
+function buildFlightReply(){
   return '✈️ سایت FlightRadar24 (ردیابی پروازها) رو برات باز می‌کنم:\n\n' + FLIGHTRADAR_URL + '\n\n📌 می‌تونی پروازهای زنده، فرودگاه‌ها و مسیرها رو اونجا ببینی.';
 }
 
-/* ============ تشخیص درخواست تمرین ============ */
+/* ================================================================
+   پاسخ عکس (DeepSeek)
+   ================================================================ */
+function buildDeepSeekReply(){
+  return '🤖 برای تحلیل و جواب دادن به این عکس، سایت هوش مصنوعی سام (DeepSeek) رو برات باز می‌کنم:\n\n' + DEEPSEEK_URL + '\n\n📌 می‌تونی عکس رو اونجا آپلود کنی و جواب کامل بگیری.';
+}
+
+/* ================================================================
+   پاسخ سایت همیار
+   ================================================================ */
+function buildHamyarSiteReply(){
+  return '📚 سایت همیار رو برات باز می‌کنم:\n\n' + HAMYAR_URL + '\n\n📌 می‌تونی جواب تمرین‌ها و گام‌به‌گام دروس رو اونجا ببینی.';
+}
+
+/* ================================================================
+   تشخیص درخواست تمرین (متنی)
+   ================================================================ */
 function isHomeworkRequest(text){
   if (!text) return false;
   const t = text.toLowerCase();
@@ -505,13 +544,12 @@ function isHomeworkRequest(text){
   if (/صفحه\s*\d+/.test(t) && /(ریاضی|عربی|فارسی|علوم|قرآن|مطالعات|زبان|املا|تفکر|فناوری|هنر|ورزش|پیام|درس)/i.test(t)) return true;
   if (/درس\s+\S+\s+صفحه/i.test(t)) return true;
   if (/تمرین\s*\d+/i.test(t)) return true;
-  if (/(تحلیل\s*کن|تحلیلش\s*کن).*(جواب|پاسخ|حل)/i.test(t)) return true;
-  if (/(جواب|پاسخ|حل).*(تحلیل|بررسی)/i.test(t)) return true;
-  if (/(این\s*(امتحان|آزمون|تمرین|سوال|سؤال|فعالیت))/i.test(t) && /(جواب|حل|پاسخ|بده)/i.test(t)) return true;
   return false;
 }
 
-/* ============ ساخت پاسخ همیار ============ */
+/* ================================================================
+   ساخت پاسخ همیار (برای تمرین متنی)
+   ================================================================ */
 function buildHamyarReply(text){
   const t = (text || '').toLowerCase();
   let intro = '📚 برای جواب این تمرین، سایت همیار رو برات باز می‌کنم:\n\n';
@@ -525,7 +563,9 @@ function buildHamyarReply(text){
   return intro + HAMYAR_URL;
 }
 
-/* ============ پیش‌بارگذاری ============ */
+/* ================================================================
+   پیش‌بارگذاری تصویر
+   ================================================================ */
 function preloadImg(url, t){
   t = t || 25000;
   return new Promise(function(r){
@@ -537,7 +577,9 @@ function preloadImg(url, t){
   });
 }
 
-/* ============ سرویس پایه ============ */
+/* ================================================================
+   سرویس پایه Pollinations
+   ================================================================ */
 async function fetchPoll(prompt, model, timeout){
   timeout = timeout || 25000;
   try{
@@ -553,7 +595,9 @@ async function fetchPoll(prompt, model, timeout){
   return null;
 }
 
-/* ============ چت متنی ============ */
+/* ================================================================
+   چت متنی — چند سرویس
+   ================================================================ */
 async function chatText(userText){
   const sys = 'تو «هوش مصنوعی سام» هستی — دستیار هوشمند فارسی. مدیریت: محمد سام ملک زاده.\nپاسخ‌ها را کامل، دقیق و مفید بده.\n\nسوال کاربر: ' + userText;
   const models = ['openai', 'deepseek', 'mistral', 'gemini', 'llama', 'openai-fast'];
@@ -569,7 +613,9 @@ async function chatText(userText){
   return pick(results);
 }
 
-/* ============ پیام‌ها ============ */
+/* ================================================================
+   پیام‌ها
+   ================================================================ */
 function addMsg(role, text, imgUrl, customHTML){
   const div = document.createElement('div');
   div.className = 'msg ' + (role === 'user' ? 'u' : 'ai');
@@ -603,7 +649,9 @@ function removeTyping(){
   if (el) el.remove();
 }
 
-/* ============ پیوست فایل ============ */
+/* ================================================================
+   پیوست فایل
+   ================================================================ */
 function attachFile(){
   const input = document.createElement('input');
   input.type = 'file'; input.accept = 'image/*';
@@ -640,7 +688,9 @@ function removeFile(){
   fpImg.src = '';
 }
 
-/* ============ پاسخ برنامه کلاسی ============ */
+/* ================================================================
+   پاسخ برنامه کلاسی
+   ================================================================ */
 function getScheduleAnswer(userText){
   const t = (userText || '').toLowerCase();
   const today = getToday();
@@ -676,7 +726,9 @@ function getScheduleAnswer(userText){
   return null;
 }
 
-/* ============ ارسال پیام ============ */
+/* ================================================================
+   ارسال پیام
+   ================================================================ */
 async function sendMsg(){
   if (isGen) return;
   const text = ci.value.trim();
@@ -698,39 +750,60 @@ async function sendMsg(){
   sb.classList.remove('active');
   isGen = true;
 
-  // ۱. سلام
-  if (isGreeting(text) && !attached){
-    addMsg('ai', greetingReply());
+  /* ============================================================
+     ⭐ اولویت ۱: اگر عکس فرستاده شد → سایت DeepSeek
+     ============================================================ */
+  if (attached && attached.type === 'image'){
+    addMsg('ai', buildDeepSeekReply());
+    setTimeout(function(){ window.open(DEEPSEEK_URL, '_blank'); }, 300);
     isGen = false;
     return;
   }
 
-  // ۲. پاسخ آفلاین
-  const offline = offlineReply(text);
-  if (offline && !attached){
-    addMsg('ai', offline);
-    isGen = false;
-    return;
-  }
-
-  // ۳. اگر عکس فرستاده شد یا درخواست تمرین → سایت همیار
-  if (attached || isHomeworkRequest(text)){
-    let reply;
-    if (attached && !isHomeworkRequest(text)){
-      reply = '📚 برای جواب این تصویر، سایت همیار رو برات باز می‌کنم:\n\n' + HAMYAR_URL;
-    } else {
-      reply = buildHamyarReply(text);
-    }
-    addMsg('ai', reply);
+  /* ============================================================
+     ⭐ اولویت ۲: "سایت همیار" → سایت همیار باز شه
+     ============================================================ */
+  if (isHamyarSiteRequest(text)){
+    addMsg('ai', buildHamyarSiteReply());
     setTimeout(function(){ window.open(HAMYAR_URL, '_blank'); }, 300);
     isGen = false;
     return;
   }
 
-  // ۴. زمان‌بندی مترو → کارت ایستگاه‌ها
+  /* ============================================================
+     اولویت ۳: سلام
+     ============================================================ */
+  if (isGreeting(text)){
+    addMsg('ai', greetingReply());
+    isGen = false;
+    return;
+  }
+
+  /* ============================================================
+     اولویت ۴: پاسخ‌های آفلاین
+     ============================================================ */
+  const offline = offlineReply(text);
+  if (offline){
+    addMsg('ai', offline);
+    isGen = false;
+    return;
+  }
+
+  /* ============================================================
+     اولویت ۵: درخواست تمرین متنی → سایت همیار
+     ============================================================ */
+  if (isHomeworkRequest(text)){
+    addMsg('ai', buildHamyarReply(text));
+    setTimeout(function(){ window.open(HAMYAR_URL, '_blank'); }, 300);
+    isGen = false;
+    return;
+  }
+
+  /* ============================================================
+     اولویت ۶: زمان‌بندی مترو → کارت ایستگاه‌های شیراز
+     ============================================================ */
   if (isMetroScheduleRequest(text)){
-    addMsg('ai', '🚇 زمان‌بندی مترو:\n', null, null);
-    // اضافه کردن کارت ایستگاه‌ها
+    addMsg('ai', '🚇 زمان‌بندی مترو شیراز (خط ۱):\n');
     const div = document.createElement('div');
     div.className = 'msg ai';
     div.innerHTML = '<div class="av ai">م</div><div class="mc"><div class="mb">' + buildMetroScheduleHTML() + '</div></div>';
@@ -740,15 +813,19 @@ async function sendMsg(){
     return;
   }
 
-  // ۵. هواپیما → FlightRadar24
+  /* ============================================================
+     اولویت ۷: هواپیما → FlightRadar24
+     ============================================================ */
   if (isAirplaneRequest(text)){
-    addMsg('ai', buildFlightReply(text));
+    addMsg('ai', buildFlightReply());
     setTimeout(function(){ window.open(FLIGHTRADAR_URL, '_blank'); }, 300);
     isGen = false;
     return;
   }
 
-  // ۶. مترو یا اتوبوس → سایت نشان
+  /* ============================================================
+     اولویت ۸: مترو یا اتوبوس → نشان
+     ============================================================ */
   if (isMetroRequest(text) || isBusRequest(text)){
     addMsg('ai', buildNeshanReply(text));
     setTimeout(function(){ window.open(NESHAN_URL, '_blank'); }, 300);
@@ -756,7 +833,9 @@ async function sendMsg(){
     return;
   }
 
-  // ۷. برنامه کلاسی
+  /* ============================================================
+     اولویت ۹: برنامه کلاسی
+     ============================================================ */
   if (/(برنامه|زنگ|کلاس|درس|معلم|فردا|امروز|بیدار)/i.test(text)){
     const scheduleAnswer = getScheduleAnswer(text);
     if (scheduleAnswer){
@@ -766,7 +845,9 @@ async function sendMsg(){
     }
   }
 
-  // ۸. تولید عکس
+  /* ============================================================
+     اولویت ۱۰: تولید عکس
+     ============================================================ */
   if (/(عکس|تصویر|نقاشی|بکش|طراحی|draw|image|picture|paint)/i.test(text)){
     addTyping();
     let prompt = text.replace(/(عکس|تصویر|نقاشی|بکش|طراحی|بساز|برام|درست کن|یه|یک|از|of|draw|image|picture|generate|create|paint)/gi, ' ').replace(/\s+/g, ' ').trim();
@@ -791,7 +872,9 @@ async function sendMsg(){
     return;
   }
 
-  // ۹. چت متنی
+  /* ============================================================
+     اولویت ۱۱: چت متنی (پیش‌فرض)
+     ============================================================ */
   addTyping();
   try{
     const r = await chatText(text);
@@ -808,7 +891,9 @@ async function sendMsg(){
   isGen = false;
 }
 
-/* ============ گفتگوی جدید ============ */
+/* ================================================================
+   گفتگوی جدید
+   ================================================================ */
 function newChat(){
   chat.innerHTML = '';
   isFirst = true;
@@ -821,7 +906,9 @@ function newChat(){
   toast('✨ گفتگوی جدید');
 }
 
-/* ============ رویدادها ============ */
+/* ================================================================
+   رویدادها
+   ================================================================ */
 ci.addEventListener('input', function(){
   sb.classList.toggle('active', !!this.value.trim() || !!file);
 });
@@ -832,7 +919,9 @@ ci.addEventListener('keydown', function(e){
   }
 });
 
-/* ============ تب‌ها ============ */
+/* ================================================================
+   تب‌ها
+   ================================================================ */
 function showTab(tab, el){
   document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
   if (el) el.classList.add('active');
@@ -886,7 +975,9 @@ function updateReminder(){
   updateScheduleView();
 }
 
-/* ============ راه‌اندازی ============ */
+/* ================================================================
+   راه‌اندازی
+   ================================================================ */
 window.addEventListener('DOMContentLoaded', function(){
   createParticles();
   ci.focus();
