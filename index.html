@@ -2,989 +2,1479 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>هوش مصنوعی سام — محمد سام ملک زاده</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صفحه من</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Tahoma,sans-serif;background:#000;color:#fff;display:flex;flex-direction:column;height:100vh;overflow:hidden;position:relative}
-.rgb-border{position:fixed;inset:0;z-index:9999;pointer-events:none;padding:3px;background:linear-gradient(90deg,#f00,#f70,#ff0,#0f0,#0ff,#00f,#80f,#f0f,#f00);background-size:400% 400%;animation:rgb 4s linear infinite;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;border-radius:2px}
-@keyframes rgb{0%{background-position:0% 50%}100%{background-position:200% 50%}}
-.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 20% 15%,rgba(66,133,244,.2) 0%,transparent 45%),radial-gradient(circle at 80% 20%,rgba(155,114,203,.2) 0%,transparent 45%),radial-gradient(circle at 50% 85%,rgba(217,101,112,.15) 0%,transparent 50%),radial-gradient(circle at 85% 90%,rgba(242,166,0,.12) 0%,transparent 45%),linear-gradient(180deg,#000 0%,#050510 40%,#0a1a2e 70%,#0e2545 100%)}
-.particles{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
-.particle{position:absolute;border-radius:50%;animation:fup linear infinite}
-@keyframes fup{0%{transform:translate3d(0,100vh,0) scale(0);opacity:0}10%{opacity:.9}90%{opacity:.9}100%{transform:translate3d(0,-80px,0) scale(1.5);opacity:0}}
-.header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;flex-shrink:0;z-index:10;position:relative;backdrop-filter:blur(20px);background:linear-gradient(180deg,rgba(0,0,0,.8) 0%,rgba(0,0,0,.3) 100%);border-bottom:1px solid rgba(255,255,255,.06)}
-.hl{display:flex;align-items:center;gap:8px}
-.hr{display:flex;align-items:center;gap:8px}
-.menu-btn,.compose-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#e3e3e3;transition:.25s}
-.menu-btn:hover,.compose-btn:hover{background:rgba(255,255,255,.14);border-color:rgba(66,133,244,.5);transform:scale(1.05)}
-.menu-btn::before{content:'';position:absolute;top:6px;right:8px;width:7px;height:7px;border-radius:50%;background:#4285f4;box-shadow:0 0 10px #4285f4;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.menu-btn svg,.compose-btn svg{width:20px;height:20px}
-.badge{display:flex;align-items:center;gap:10px;padding:8px 16px;border-radius:26px;background:linear-gradient(135deg,rgba(66,133,244,.15),rgba(155,114,203,.15),rgba(217,101,112,.15));border:1px solid rgba(255,255,255,.1);position:relative;overflow:hidden;cursor:pointer}
-.badge::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);animation:shine 5s infinite}
-@keyframes shine{0%,50%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-.dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#9b72cb,#d96570,#f2a600);background-size:200% 200%;box-shadow:0 0 14px rgba(66,133,244,.8);animation:gs 4s infinite;flex-shrink:0}
-@keyframes gs{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.badge-text{font-size:.98rem;font-weight:600;background:linear-gradient(90deg,#fff,#a8c7fa,#fff);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:sh 5s linear infinite;white-space:nowrap}
-@keyframes sh{to{background-position:200% center}}
-.h-title{font-size:.78rem;color:#9aa0a6;font-weight:500;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;padding:6px 16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
-@media(max-width:600px){.h-title{display:none}}
-.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#9b72cb,#d96570,#f2a600);background-size:200% 200%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;cursor:pointer;border:2px solid rgba(255,255,255,.2);box-shadow:0 0 20px rgba(155,114,203,.5);animation:gs 5s infinite}
-.tabs{display:flex;gap:8px;padding:12px 16px;z-index:10;position:relative;max-width:900px;margin:0 auto;width:100%;flex-wrap:wrap;justify-content:center;flex-shrink:0}
-.tab{padding:10px 18px;border-radius:22px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#9aa0a6;font-size:.82rem;font-family:inherit;font-weight:600;cursor:pointer;transition:.25s}
-.tab:hover{background:rgba(66,133,244,.15);color:#e3e3e3}
-.tab.active{background:linear-gradient(135deg,rgba(66,133,244,.25),rgba(155,114,203,.25));border-color:rgba(66,133,244,.5);color:#fff}
-.welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;z-index:5;text-align:center}
-.welcome.hidden{display:none}
-.orbit{width:160px;height:160px;margin-bottom:26px;position:relative;display:flex;align-items:center;justify-content:center}
-.ring{position:absolute;border-radius:50%;border:2px solid transparent;animation:spin linear infinite}
-.ring.r1{width:100%;height:100%;border-top-color:#4285f4;border-right-color:#9b72cb;animation-duration:9s}
-.ring.r2{width:72%;height:72%;border-top-color:#d96570;border-left-color:#f2a600;animation-duration:7s;animation-direction:reverse}
-.ring.r3{width:45%;height:45%;border-top-color:#00d9c0;border-right-color:#a8c7fa;animation-duration:5s}
-@keyframes spin{to{transform:rotate(360deg)}}
-.core{width:56px;height:56px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#a8c7fa 45%,#4285f4 75%,#9b72cb 100%);box-shadow:0 0 40px rgba(168,199,250,.8),0 0 80px rgba(66,133,244,.5);animation:pulse2 2.5s ease-in-out infinite}
-@keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-.hello{font-size:2.2rem;font-weight:700;line-height:1.3;margin-bottom:8px;background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570,#f2a600,#4285f4);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:sh 7s linear infinite}
-.myname{font-size:1.5rem;font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#a8c7fa 0%,#fff 50%,#a8c7fa 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:sh 4s linear infinite}
-.sub{font-size:.92rem;color:#9aa0a6;padding:8px 20px;border-radius:22px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:8px}
-.sub::before{content:'✨';animation:sp 2.5s infinite}
-@keyframes sp{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
-.chat{flex:1;overflow-y:auto;padding:16px 16px 180px;display:none;scroll-behavior:smooth;z-index:5;position:relative;overscroll-behavior:contain}
-.chat.active{display:block}
-.chat::-webkit-scrollbar{width:5px}
-.chat::-webkit-scrollbar-thumb{background:rgba(66,133,244,.4);border-radius:5px}
-.msg{display:flex;gap:10px;margin-bottom:20px;animation:mi .35s ease-out;max-width:100%}
-@keyframes mi{from{opacity:0;transform:translate3d(0,15px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
-.msg.u{flex-direction:row-reverse}
-.av{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
-.av.ai{background:linear-gradient(135deg,#4285f4,#9b72cb,#d96570);background-size:200% 200%;color:#fff;box-shadow:0 0 22px rgba(66,133,244,.6);animation:gs 6s infinite}
-.av.usr{background:linear-gradient(135deg,#d96570,#f2a600);color:#fff;box-shadow:0 0 22px rgba(217,101,112,.6)}
-.mc{flex:1;max-width:84%}
-.msg.u .mc{display:flex;flex-direction:column;align-items:flex-end}
-.mb{background:rgba(28,30,35,.92);backdrop-filter:blur(12px);border-radius:20px;padding:14px 18px;font-size:.93rem;line-height:1.85;color:#e3e3e3;word-wrap:break-word;border:1px solid rgba(255,255,255,.06);box-shadow:0 6px 24px rgba(0,0,0,.4);white-space:pre-wrap}
-.msg.u .mb{background:linear-gradient(135deg,#0b57d0 0%,#1a73e8 60%,#4285f4 100%);color:#fff;border-bottom-right-radius:5px;border:none}
-.msg.ai .mb{border-bottom-left-radius:5px;position:relative;overflow:hidden}
-.msg.ai .mb::before{content:'';position:absolute;top:14px;bottom:14px;right:0;width:3px;background:linear-gradient(180deg,#4285f4,#9b72cb,#d96570,#f2a600);border-radius:3px}
-.mb img{max-width:100%;border-radius:14px;margin-top:12px;display:block;box-shadow:0 8px 30px rgba(0,0,0,.5)}
-.mb pre{background:#0a0a0a;padding:14px 16px;border-radius:12px;margin:12px 0;overflow-x:auto;direction:ltr;text-align:left;font-family:'SF Mono',Monaco,monospace;font-size:.82rem;line-height:1.6;border:1px solid rgba(66,133,244,.25)}
-.mb code{background:rgba(66,133,244,.18);padding:3px 8px;border-radius:6px;font-family:'SF Mono',Monaco,monospace;font-size:.85em;direction:ltr;display:inline-block;color:#a8c7fa}
-.mb a{color:#a8c7fa;text-decoration:none;font-weight:700;border-bottom:1px dashed #a8c7fa;padding-bottom:1px}
-.station-card{background:linear-gradient(135deg,rgba(66,133,244,.15),rgba(155,114,203,.15));border:1px solid rgba(66,133,244,.3);border-radius:14px;padding:12px 14px;margin-top:10px}
-.station-name{font-size:.92rem;font-weight:700;color:#a8c7fa;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.station-name::before{content:'🚇';font-size:1rem}
-.station-list{list-style:none;padding:0;margin:0}
-.station-item{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(255,255,255,.04);border-radius:10px;margin-bottom:6px;font-size:.85rem}
-.station-item .name{color:#e3e3e3;font-weight:500}
-.station-item .time{color:#00d97e;font-weight:700;font-size:.82rem}
-.station-item .time.soon{color:#ff6b6b;animation:pulse3 1.5s infinite}
-@keyframes pulse3{0%,100%{opacity:1}50%{opacity:.5}}
-.typing{display:flex;gap:6px;padding:6px 0}
-.td{width:9px;height:9px;border-radius:50%;animation:tb 1.3s infinite ease-in-out}
-.td:nth-child(1){background:#4285f4}
-.td:nth-child(2){animation-delay:.15s;background:#9b72cb}
-.td:nth-child(3){animation-delay:.3s;background:#f2a600}
-@keyframes tb{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-8px);opacity:1}}
-.schedule-panel{display:none;padding:16px;z-index:5;position:relative;max-width:900px;margin:0 auto;width:100%;overflow-y:auto;flex:1}
-.schedule-panel.active{display:block}
-.st{width:100%;border-collapse:collapse;background:rgba(20,22,28,.85);backdrop-filter:blur(10px);border-radius:16px;overflow:hidden;border:1px solid rgba(66,133,244,.25);box-shadow:0 10px 40px rgba(0,0,0,.5)}
-.st th{background:linear-gradient(135deg,#4285f4,#9b72cb);padding:14px 8px;font-size:.85rem;font-weight:700;color:#fff;text-align:center;border:1px solid rgba(255,255,255,.1)}
-.st td{padding:12px 8px;text-align:center;font-size:.82rem;color:#e3e3e3;border:1px solid rgba(255,255,255,.06);vertical-align:middle;line-height:1.5}
-.st td.period{background:linear-gradient(135deg,rgba(66,133,244,.2),rgba(155,114,203,.2));font-weight:700;font-size:.8rem;color:#a8c7fa}
-.st .teacher{font-size:.72rem;color:#9aa0a6;display:block;margin-top:3px}
-.reminder-panel{display:none;padding:16px;z-index:5;position:relative;max-width:900px;margin:0 auto;width:100%;overflow-y:auto;flex:1}
-.reminder-panel.active{display:block}
-.rc{background:rgba(20,22,28,.85);backdrop-filter:blur(10px);border-radius:16px;padding:20px;border:1px solid rgba(66,133,244,.25);box-shadow:0 10px 40px rgba(0,0,0,.5);margin-bottom:16px}
-.rt{font-size:1rem;font-weight:700;margin-bottom:12px;background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.rtx{font-size:.9rem;color:#e3e3e3;line-height:2.1}
-.hl{color:#f2a600;font-weight:700}
-.input-wrap{position:fixed;bottom:0;left:0;right:0;padding:12px 16px 20px;background:linear-gradient(to top,rgba(10,26,46,.98) 0%,rgba(7,18,35,.9) 60%,transparent 100%);z-index:50}
-.ib{display:flex;align-items:center;background:rgba(28,30,35,.95);backdrop-filter:blur(20px);border-radius:30px;padding:8px 10px;gap:8px;min-height:60px;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);max-width:900px;margin:0 auto;transition:.3s}
-.ib:focus-within{border-color:rgba(66,133,244,.55);box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 30px rgba(66,133,244,.35)}
-.icb{width:44px;height:44px;border-radius:50%;border:none;background:transparent;color:#e3e3e3;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.25s;font-family:inherit}
-.icb:hover{background:rgba(66,133,244,.2);color:#a8c7fa}
-.icb svg{width:20px;height:20px}
-.ci{flex:1;background:transparent;border:none;color:#e3e3e3;font-size:.95rem;font-family:inherit;outline:none;padding:10px 8px;min-width:0;direction:rtl}
-.ci::placeholder{color:#8e918f}
-.sb{width:46px;height:46px;border-radius:50%;border:none;background:#2b2d2f;color:#5f6368;cursor:not-allowed;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.3s;font-family:inherit}
-.sb.active{background:linear-gradient(135deg,#4285f4,#1a73e8,#9b72cb,#d96570);color:#fff;cursor:pointer;box-shadow:0 6px 24px rgba(66,133,244,.6)}
-.sb svg{width:22px;height:22px}
-.fp{position:fixed;bottom:100px;right:16px;background:rgba(28,30,35,.97);backdrop-filter:blur(14px);border-radius:16px;padding:10px;display:none;align-items:center;gap:10px;max-width:300px;z-index:60;border:1px solid rgba(66,133,244,.4);box-shadow:0 10px 40px rgba(0,0,0,.6)}
-.fp.show{display:flex}
-.fp img{width:50px;height:50px;border-radius:10px;object-fit:cover}
-.fi{flex:1;min-width:0;font-size:.78rem;color:#e3e3e3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rf{background:rgba(255,80,80,.15);border:none;color:#ff6b6b;cursor:pointer;font-size:1.3rem;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(28,30,35,.97);backdrop-filter:blur(14px);color:#e3e3e3;padding:12px 24px;border-radius:24px;font-size:.85rem;font-weight:500;opacity:0;transition:.3s;pointer-events:none;z-index:300;max-width:90%;text-align:center;border:1px solid rgba(66,133,244,.35);box-shadow:0 10px 40px rgba(0,0,0,.6)}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:500px){
-  .hello{font-size:1.7rem}
-  .myname{font-size:1.2rem}
-  .orbit{width:130px;height:130px}
-  .core{width:48px;height:48px}
-  .mb{font-size:.88rem}
-  .mc{max-width:88%}
-  .st th,.st td{padding:8px 4px;font-size:.72rem}
-}
+body{font-family:Tahoma,sans-serif;max-width:900px;margin:30px auto;padding:20px;line-height:2;background:#fff;color:#222}
+h1{color:#1769aa}
 </style>
 </head>
 <body>
-
-<div class="rgb-border"></div>
-<div class="bg"></div>
-<div class="particles" id="particles"></div>
-
-<header class="header">
-  <div class="hl">
-    <button class="menu-btn" onclick="newChat()" title="گفتگوی جدید">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <line x1="3" y1="6" x2="21" y2="6"/>
-        <line x1="3" y1="12" x2="21" y2="12"/>
-        <line x1="3" y1="18" x2="21" y2="18"/>
-      </svg>
-    </button>
-    <div class="badge" onclick="toast('مدیریت: محمد سام ملک زاده')">
-      <span class="dot"></span>
-      <span class="badge-text">محمد سام ملک زاده</span>
-    </div>
-  </div>
-  <div class="h-title">مدیریت و مسئولیت: ملک زاده</div>
-  <div class="hr">
-    <button class="compose-btn" onclick="newChat()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 20h9"/>
-        <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
-      </svg>
-    </button>
-    <div class="avatar" onclick="toast('مدیریت: ملک زاده')">م</div>
-  </div>
-</header>
-
-<div class="tabs">
-  <button class="tab active" onclick="showTab('chat', this)">💬 چت هوشمند</button>
-  <button class="tab" onclick="showTab('schedule', this)">📅 برنامه کلاسی</button>
-  <button class="tab" onclick="showTab('reminder', this)">🔔 یادآور</button>
-</div>
-
-<div class="welcome" id="welcome">
-  <div class="orbit">
-    <div class="ring r1"></div>
-    <div class="ring r2"></div>
-    <div class="ring r3"></div>
-    <div class="core"></div>
-  </div>
-  <div class="hello">سلام 👋</div>
-  <div class="myname">من هوش مصنوعی سام هستم</div>
-  <div class="sub">مدیریت: محمد سام ملک زاده</div>
-</div>
-
-<div class="chat" id="chat"></div>
-
-<div class="schedule-panel" id="schedulePanel">
-  <table class="st">
-    <thead>
-      <tr>
-        <th>زنگ / روز</th>
-        <th>شنبه</th>
-        <th>یک‌شنبه</th>
-        <th>دوشنبه</th>
-        <th>سه‌شنبه</th>
-        <th>چهارشنبه</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="period">زنگ اول</td>
-        <td>ورزش<span class="teacher">(آقای شهاب)</span></td>
-        <td>علوم<span class="teacher">(آقای توکلی)</span></td>
-        <td>فارسی<span class="teacher">(آقای غلامی)</span></td>
-        <td>املا<span class="teacher">(آقای شیری)</span></td>
-        <td>پیام آسمانی<span class="teacher">(آقای کلانی)</span></td>
-      </tr>
-      <tr>
-        <td class="period">زنگ دوم</td>
-        <td>مطالعات<span class="teacher">(آقای بهزادی)</span></td>
-        <td>ریاضی<span class="teacher">(آقای رسولی)</span></td>
-        <td>هنر<span class="teacher">(آقای شمس)</span></td>
-        <td>علوم<span class="teacher">(آقای توکلی)</span></td>
-        <td>قرآن<span class="teacher">(آقای شعاع)</span></td>
-      </tr>
-      <tr>
-        <td class="period">زنگ سوم</td>
-        <td>زبان<span class="teacher">(آقای فهندژ)</span></td>
-        <td>عربی<span class="teacher">(آقای زارعی)</span></td>
-        <td>فناوری<span class="teacher">(آقای غلامی)</span></td>
-        <td>تفکر<span class="teacher">(آقای شمس)</span></td>
-        <td>ریاضی<span class="teacher">(آقای رسولی)</span></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="reminder-panel" id="reminderPanel">
-  <div class="rc">
-    <div class="rt">📅 درس‌های فردا</div>
-    <div class="rtx" id="tomorrowLessons">در حال محاسبه...</div>
-  </div>
-  <div class="rc">
-    <div class="rt">⏰ زنگ بیدارباش</div>
-    <div class="rtx" id="wakeUpTime">در حال محاسبه...</div>
-  </div>
-</div>
-
-<div class="fp" id="fp">
-  <img id="fpImg" src="" alt="">
-  <div class="fi" id="fi"></div>
-  <button class="rf" onclick="removeFile()">×</button>
-</div>
-
-<div class="input-wrap" id="inputWrap">
-  <div class="ib">
-    <button class="icb" onclick="attachFile()" title="پیوست عکس">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <line x1="12" y1="5" x2="12" y2="19"/>
-        <line x1="5" y1="12" x2="19" y2="12"/>
-      </svg>
-    </button>
-    <input type="text" class="ci" id="ci" placeholder="سلام! من هوش مصنوعی سام هستم..." autocomplete="off">
-    <button class="sb" id="sb" onclick="sendMsg()" title="ارسال">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="12" y1="19" x2="12" y2="5"/>
-        <polyline points="5 12 12 5 19 12"/>
-      </svg>
-    </button>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-'use strict';
-
-let isFirst = true;
-let isGen = false;
-let file = null;
-const MAX = 200 * 1024 * 1024;
-
-/* ================================================================
-   لینک‌های ثابت
-   ================================================================ */
-const HAMYAR_URL      = 'https://hamyar.me/topics/پایه-هفتم/';
-const NESHAN_URL      = 'https://neshan.org/maps';
-const FLIGHTRADAR_URL = 'https://www.flightradar24.com/';
-const DEEPSEEK_URL    = 'https://chat.deepseek.com/';
-
-const chat = document.getElementById('chat');
-const ci = document.getElementById('ci');
-const sb = document.getElementById('sb');
-const welcome = document.getElementById('welcome');
-const fp = document.getElementById('fp');
-const fpImg = document.getElementById('fpImg');
-const fi = document.getElementById('fi');
-const schedulePanel = document.getElementById('schedulePanel');
-const reminderPanel = document.getElementById('reminderPanel');
-const inputWrap = document.getElementById('inputWrap');
-
-/* ================================================================
-   برنامه کلاسی
-   ================================================================ */
-const SCHEDULE = {
-  'شنبه': [
-    { subject: 'ورزش', teacher: 'آقای شهاب' },
-    { subject: 'مطالعات', teacher: 'آقای بهزادی' },
-    { subject: 'زبان', teacher: 'آقای فهندژ' }
-  ],
-  'یک‌شنبه': [
-    { subject: 'علوم', teacher: 'آقای توکلی' },
-    { subject: 'ریاضی', teacher: 'آقای رسولی' },
-    { subject: 'عربی', teacher: 'آقای زارعی' }
-  ],
-  'دوشنبه': [
-    { subject: 'فارسی', teacher: 'آقای غلامی' },
-    { subject: 'هنر', teacher: 'آقای شمس' },
-    { subject: 'فناوری', teacher: 'آقای غلامی' }
-  ],
-  'سه‌شنبه': [
-    { subject: 'املا', teacher: 'آقای شیری' },
-    { subject: 'علوم', teacher: 'آقای توکلی' },
-    { subject: 'تفکر', teacher: 'آقای شمس' }
-  ],
-  'چهارشنبه': [
-    { subject: 'پیام آسمانی', teacher: 'آقای کلانی' },
-    { subject: 'قرآن', teacher: 'آقای شعاع' },
-    { subject: 'ریاضی', teacher: 'آقای رسولی' }
-  ]
-};
-
-const DAYS_FA = ['یک‌شنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنج‌شنبه','جمعه','شنبه'];
-function getToday(){ return DAYS_FA[new Date().getDay()]; }
-function getTomorrow(){ return DAYS_FA[(new Date().getDay() + 1) % 7]; }
-
-/* ================================================================
-   ذرات
-   ================================================================ */
-function createParticles(){
-  const c = document.getElementById('particles');
-  if (!c) return;
-  c.innerHTML = '';
-  const colors = ['#4285f4','#9b72cb','#d96570','#f2a600','#a8c7fa','#00d9c0'];
-  const isMob = window.innerWidth < 600;
-  const count = isMob ? 20 : 35;
-  for (let i = 0; i < count; i++){
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const col = colors[(Math.random() * colors.length) | 0];
-    p.style.left = (Math.random() * 100) + '%';
-    p.style.background = col;
-    p.style.boxShadow = '0 0 8px ' + col;
-    p.style.animationDelay = (Math.random() * 12) + 's';
-    p.style.animationDuration = (10 + Math.random() * 8) + 's';
-    const s = (1.5 + Math.random() * 2.5) + 'px';
-    p.style.width = s;
-    p.style.height = s;
-    c.appendChild(p);
-  }
-}
-
-/* ================================================================
-   توابع کمکی
-   ================================================================ */
-function toast(msg, dur){
-  dur = dur || 2200;
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._t);
-  t._t = setTimeout(function(){ t.classList.remove('show'); }, dur);
-}
-function esc(t){
-  const d = document.createElement('div');
-  d.textContent = t;
-  return d.innerHTML;
-}
-function scrollBottom(){
-  requestAnimationFrame(function(){ chat.scrollTop = chat.scrollHeight; });
-}
-function pick(a){ return a[(Math.random() * a.length) | 0]; }
-
-/* ================================================================
-   تشخیص سلام
-   ================================================================ */
-function isGreeting(text){
-  const t = (text || '').toLowerCase().trim();
-  const clean = t.replace(/[^\u0600-\u06FF\s]/g, '').trim();
-  if (/^(سلام|سلم|درود|های|هی|hi|hello|hey|yo)/i.test(clean)) return true;
-  if (/^(صبح بخیر|شب بخیر|عصر بخیر|ظهر بخیر|روز بخیر)/i.test(clean)) return true;
-  if (clean === 'سلام' || clean === 'درود' || clean === 'سلام علیکم' || clean === 'سلام علیک') return true;
-  if (clean.startsWith('سلام ') || clean.startsWith('درود ')) return true;
-  if (/^س+لام/i.test(clean)) return true;
-  return false;
-}
-function greetingReply(){
-  return pick([
-    'سلام! 👋','سلام رفیق! 😊','درود! 🌟','سلام! چطوری؟',
-    'هی سلام! 👋','سلام عزیز! 🌟','درود بر تو! 😊','سلام! خوش اومدی.'
-  ]);
-}
-
-/* ================================================================
-   پاسخ آفلاین
-   ================================================================ */
-function offlineReply(text){
-  const t = (text || '').toLowerCase().trim();
-  const clean = t.replace(/[^\u0600-\u06FF\s]/g, '').trim();
-  if (isGreeting(text)) return greetingReply();
-  if (/(خداحافظ|بای|bye|خدانگهدار|فعلا|فعلاً|خدا نگهدار)/i.test(clean)){
-    return pick(['خداحافظ! 🌟','بای بای! 👋','خدانگهدار! 😊','فعلاً! 🌟']);
-  }
-  if (/(چطوری|حالت چطوره|خوبی|چخبر|چه خبر|چه خبرا|خوب هستی)/i.test(clean)){
-    return pick(['خوبم! 😄 تو چطوری؟','من که همیشه سرحالم! 😎','خوبم ممنون! 🌸 تو چه خبر؟','عالی! ⚡ تو بگو.']);
-  }
-  if (/(ممنون|مرسی|تشکر|سپاس|دستت درد نکنه)/i.test(clean)){
-    return pick(['خواهش! 🙏','قابلی نداشت! 😊','همیشه در خدمتم 🌟','خواهش می‌کنم!']);
-  }
-  if (/(کی هستی|اسمت چیه|تو کی ای|اسم شما|شما کی هستید)/i.test(clean)){
-    return 'من هوش مصنوعی سام هستم 🤖 دستیار فارسی‌زبان شما که توسط محمد سام ملک زاده ساخته شده‌ام.';
-  }
-  return null;
-}
-
-/* ================================================================
-   ⭐ تشخیص درخواست سایت همیار (جدید)
-   ================================================================ */
-function isHamyarSiteRequest(text){
-  if (!text) return false;
-  const t = text.toLowerCase().trim();
-  const clean = t.replace(/[^\u0600-\u06FF\s]/g, '').trim();
-  // "سایت همیار" یا "همیار" یا "سایت همیار باز شه" یا "همیار باز کن"
-  return /(سایت\s*همیار|همیار|همیار\.me|hamyar)/i.test(clean);
-}
-
-/* ================================================================
-   تشخیص درخواست هواپیما
-   ================================================================ */
-function isAirplaneRequest(text){
-  if (!text) return false;
-  const t = text.toLowerCase();
-  return /(هواپیما|هواپیمایی|فرودگاه|پرواز|airplane|flight|airport)/i.test(t);
-}
-
-/* ================================================================
-   تشخیص درخواست مترو
-   ================================================================ */
-function isMetroRequest(text){
-  if (!text) return false;
-  const t = text.toLowerCase();
-  return /(مترو|قطار\s*شهری|subway|metro|متروی|ایستگاه\s*مترو)/i.test(t);
-}
-
-/* ================================================================
-   تشخیص درخواست اتوبوس
-   ================================================================ */
-function isBusRequest(text){
-  if (!text) return false;
-  const t = text.toLowerCase();
-  return /(اتوبوس|بی\s*آر\s*تی|\bbrt\b|bus|اتوبوسرانی|ایستگاه\s*اتوبوس|ایستگاه\s*بی\s*آر\s*تی)/i.test(t);
-}
-
-/* ================================================================
-   تشخیص درخواست زمان‌بندی مترو
-   ================================================================ */
-function isMetroScheduleRequest(text){
-  if (!text) return false;
-  const t = text.toLowerCase();
-  return /(زمان\s*بندی\s*مترو|زمانبندی\s*مترو|برنامه\s*مترو|ساعت\s*مترو)/i.test(t);
-}
-
-/* ================================================================
-   کارت زمان‌بندی مترو شیراز (خط ۱)
-   ================================================================ */
-function buildMetroScheduleHTML(){
-  const stations = [
-    { name: 'ایستگاه گل‌سرخ', line: 'خط ۱', minutes: 2 },
-    { name: 'ایستگاه شهید دستغیب', line: 'خط ۱', minutes: 5 },
-    { name: 'ایستگاه شهید دوران', line: 'خط ۱', minutes: 8 },
-    { name: 'ایستگاه فرصت شیرازی', line: 'خط ۱', minutes: 11 },
-    { name: 'ایستگاه جانبازان پودنک', line: 'خط ۱', minutes: 14 },
-    { name: 'ایستگاه غدیر', line: 'خط ۱', minutes: 17 },
-    { name: 'ایستگاه رازی', line: 'خط ۱', minutes: 20 },
-    { name: 'ایستگاه فضیلت', line: 'خط ۱', minutes: 23 },
-    { name: 'ایستگاه کاوه', line: 'خط ۱', minutes: 26 },
-    { name: 'ایستگاه میدان ولیعصر', line: 'خط ۱', minutes: 29 },
-    { name: 'ایستگاه وکیل', line: 'خط ۱', minutes: 32 },
-    { name: 'ایستگاه زندیه', line: 'خط ۱', minutes: 35 },
-    { name: 'ایستگاه امام حسین (ع)', line: 'خط ۱', minutes: 38 },
-    { name: 'ایستگاه نمازی', line: 'خط ۱', minutes: 41 },
-    { name: 'ایستگاه شهید آوینی', line: 'خط ۱', minutes: 44 },
-    { name: 'ایستگاه شهید مطهری', line: 'خط ۱', minutes: 47 },
-    { name: 'ایستگاه قصر دشت', line: 'خط ۱', minutes: 50 },
-    { name: 'ایستگاه شاهد', line: 'خط ۱', minutes: 53 },
-    { name: 'ایستگاه میرزای شیرازی', line: 'خط ۱', minutes: 56 },
-    { name: 'ایستگاه دکتر شریعتی', line: 'خط ۱', minutes: 59 },
-    { name: 'ایستگاه احسان', line: 'خط ۱', minutes: 62 }
-  ];
-
-  let html = '<div class="station-card">';
-  html += '<div class="station-name">مترو شیراز — خط ۱ (ایستگاه‌ها و زمان رسیدن قطار)</div>';
-  html += '<ul class="station-list">';
-  stations.forEach(function(s){
-    const cls = s.minutes <= 5 ? 'soon' : '';
-    html += '<li class="station-item"><span class="name">' + s.name + ' <small style="color:#8888aa">(' + s.line + ')</small></span><span class="time ' + cls + '">' + s.minutes + ' دقیقه دیگر</span></li>';
-  });
-  html += '</ul>';
-  html += '<div style="font-size:.72rem;color:#8888aa;margin-top:10px;text-align:center">🚇 ساعات کار: ۶ صبح تا ۲۲ | سر فاصله: هر ۱۵ دقیقه</div>';
-  html += '</div>';
-  return html;
-}
-
-/* ================================================================
-   پاسخ نشان
-   ================================================================ */
-function buildNeshanReply(text){
-  let intro = '🗺️ سایت نشان رو برات باز می‌کنم:\n\n';
-  if (isMetroRequest(text)){
-    intro = '🚇 سایت نشان (مسیریابی مترو) رو برات باز می‌کنم:\n\n';
-  } else if (isBusRequest(text)){
-    intro = '🚌 سایت نشان (مسیریابی اتوبوس) رو برات باز می‌کنم:\n\n';
-  }
-  return intro + NESHAN_URL + '\n\n📌 می‌تونی مسیر، زمان‌بندی و ایستگاه‌ها رو اونجا ببینی.';
-}
-
-/* ================================================================
-   پاسخ هواپیما
-   ================================================================ */
-function buildFlightReply(){
-  return '✈️ سایت FlightRadar24 (ردیابی پروازها) رو برات باز می‌کنم:\n\n' + FLIGHTRADAR_URL + '\n\n📌 می‌تونی پروازهای زنده، فرودگاه‌ها و مسیرها رو اونجا ببینی.';
-}
-
-/* ================================================================
-   پاسخ عکس (DeepSeek)
-   ================================================================ */
-function buildDeepSeekReply(){
-  return '🤖 برای تحلیل و جواب دادن به این عکس، سایت هوش مصنوعی سام (DeepSeek) رو برات باز می‌کنم:\n\n' + DEEPSEEK_URL + '\n\n📌 می‌تونی عکس رو اونجا آپلود کنی و جواب کامل بگیری.';
-}
-
-/* ================================================================
-   پاسخ سایت همیار
-   ================================================================ */
-function buildHamyarSiteReply(){
-  return '📚 سایت همیار رو برات باز می‌کنم:\n\n' + HAMYAR_URL + '\n\n📌 می‌تونی جواب تمرین‌ها و گام‌به‌گام دروس رو اونجا ببینی.';
-}
-
-/* ================================================================
-   تشخیص درخواست تمرین (متنی)
-   ================================================================ */
-function isHomeworkRequest(text){
-  if (!text) return false;
-  const t = text.toLowerCase();
-  if (/(حل\s*تمرین|جواب\s*تمرین|پاسخ\s*تمرین|حل\s*فعالیت|جواب\s*فعالیت|گام\s*به\s*گام|پاسخ\s*ده|جواب\s*بده|جوابشو|جوابش\s*رو)/i.test(t)) return true;
-  if (/جواب\s*صفحه\s*\d+/i.test(t)) return true;
-  if (/حل\s*صفحه\s*\d+/i.test(t)) return true;
-  if (/پاسخ\s*صفحه\s*\d+/i.test(t)) return true;
-  if (/صفحه\s*\d+/.test(t) && /(ریاضی|عربی|فارسی|علوم|قرآن|مطالعات|زبان|املا|تفکر|فناوری|هنر|ورزش|پیام|درس)/i.test(t)) return true;
-  if (/درس\s+\S+\s+صفحه/i.test(t)) return true;
-  if (/تمرین\s*\d+/i.test(t)) return true;
-  return false;
-}
-
-/* ================================================================
-   ساخت پاسخ همیار (برای تمرین متنی)
-   ================================================================ */
-function buildHamyarReply(text){
-  const t = (text || '').toLowerCase();
-  let intro = '📚 برای جواب این تمرین، سایت همیار رو برات باز می‌کنم:\n\n';
-  const subjects = ['ریاضی','عربی','فارسی','علوم','قرآن','مطالعات','زبان','املا','تفکر','فناوری','هنر','ورزش','پیام'];
-  for (const s of subjects){
-    if (t.includes(s)){
-      intro = '📚 برای جواب تمرین ' + s + '، سایت همیار رو برات باز می‌کنم:\n\n';
-      break;
-    }
-  }
-  return intro + HAMYAR_URL;
-}
-
-/* ================================================================
-   پیش‌بارگذاری تصویر
-   ================================================================ */
-function preloadImg(url, t){
-  t = t || 25000;
-  return new Promise(function(r){
-    const i = new Image();
-    const to = setTimeout(function(){ i.src = ''; r(false); }, t);
-    i.onload = function(){ clearTimeout(to); r(true); };
-    i.onerror = function(){ clearTimeout(to); r(false); };
-    i.src = url;
-  });
-}
-
-/* ================================================================
-   سرویس پایه Pollinations
-   ================================================================ */
-async function fetchPoll(prompt, model, timeout){
-  timeout = timeout || 25000;
-  try{
-    const url = 'https://text.pollinations.ai/' + encodeURIComponent(prompt) + '?model=' + model + '&seed=' + Date.now() + '&nologo=true';
-    const ctrl = new AbortController();
-    const to = setTimeout(function(){ ctrl.abort(); }, timeout);
-    const res = await fetch(url, { signal: ctrl.signal });
-    clearTimeout(to);
-    if (!res.ok) return null;
-    const txt = (await res.text()).trim();
-    if (txt && txt.length > 1 && !/^\s*error/i.test(txt) && !/rate.?limit/i.test(txt) && !/^\s*<html/i.test(txt)) return txt;
-  }catch(e){}
-  return null;
-}
-
-/* ================================================================
-   چت متنی — چند سرویس
-   ================================================================ */
-async function chatText(userText){
-  const sys = 'تو «هوش مصنوعی سام» هستی — دستیار هوشمند فارسی. مدیریت: محمد سام ملک زاده.\nپاسخ‌ها را کامل، دقیق و مفید بده.\n\nسوال کاربر: ' + userText;
-  const models = ['openai', 'deepseek', 'mistral', 'gemini', 'llama', 'openai-fast'];
-  const attempts = models.map(function(m){ return fetchPoll(sys, m, 25000); });
-  const settled = await Promise.allSettled(attempts);
-  const results = [];
-  settled.forEach(function(r){
-    if (r.status === 'fulfilled' && r.value && r.value.length > 2){
-      results.push(r.value);
-    }
-  });
-  if (results.length === 0) return null;
-  return pick(results);
-}
-
-/* ================================================================
-   پیام‌ها
-   ================================================================ */
-function addMsg(role, text, imgUrl, customHTML){
-  const div = document.createElement('div');
-  div.className = 'msg ' + (role === 'user' ? 'u' : 'ai');
-  const av = role === 'user' ? 'usr' : 'ai';
-
-  let content = '';
-  if (customHTML){
-    content = customHTML;
-  } else {
-    content = esc(text || '');
-    content = content.replace(/```(\w+)?\n?([\s\S]*?)```/g, '<pre>$2</pre>');
-    content = content.replace(/`([^`]+)`/g, '<code>$1</code>');
-    content = content.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
-  }
-
-  let media = '';
-  if (imgUrl) media = '<img src="' + imgUrl + '" alt="تصویر" loading="lazy">';
-
-  div.innerHTML = '<div class="av ' + av + '">م</div><div class="mc"><div class="mb">' + content + media + '</div></div>';
-  chat.appendChild(div);
-  scrollBottom();
-}
-function addTyping(){
-  const m = document.createElement('div');
-  m.className = 'msg ai'; m.id = 'typing';
-  m.innerHTML = '<div class="av ai">م</div><div class="mc"><div class="mb"><div class="typing"><div class="td"></div><div class="td"></div><div class="td"></div></div></div></div>';
-  chat.appendChild(m); scrollBottom();
-}
-function removeTyping(){
-  const el = document.getElementById('typing');
-  if (el) el.remove();
-}
-
-/* ================================================================
-   پیوست فایل
-   ================================================================ */
-function attachFile(){
-  const input = document.createElement('input');
-  input.type = 'file'; input.accept = 'image/*';
-  input.onchange = async function(e){
-    const f = e.target.files[0];
-    if (!f) return;
-    if (f.size > MAX){ toast('❌ حداکثر ۲۰۰MB'); return; }
-    try{
-      const dataUrl = await readFile(f);
-      file = { type: 'image', dataUrl: dataUrl, name: f.name };
-      showFP();
-      toast('✅ عکس آماده است');
-    }catch(err){ toast('❌ خطا در خواندن فایل'); }
-  };
-  input.click();
-}
-function readFile(f){
-  return new Promise(function(r, j){
-    const rd = new FileReader();
-    rd.onload = function(){ r(rd.result); };
-    rd.onerror = j;
-    rd.readAsDataURL(f);
-  });
-}
-function showFP(){
-  if (!file) return;
-  fp.classList.add('show');
-  fpImg.src = file.dataUrl;
-  fi.textContent = file.name;
-}
-function removeFile(){
-  file = null;
-  fp.classList.remove('show');
-  fpImg.src = '';
-}
-
-/* ================================================================
-   پاسخ برنامه کلاسی
-   ================================================================ */
-function getScheduleAnswer(userText){
-  const t = (userText || '').toLowerCase();
-  const today = getToday();
-  const tomorrow = getTomorrow();
-  if (/(فردا|tomorrow)/i.test(t) && SCHEDULE[tomorrow]){
-    let reply = '📅 برنامه فردا (' + tomorrow + '):\n\n';
-    SCHEDULE[tomorrow].forEach(function(l, i){
-      reply += '📚 زنگ ' + (i + 1) + ': ' + l.subject + ' (' + l.teacher + ')\n';
-    });
-    reply += '\n⏰ ساعت ۶:۳۰ بیدار شو!';
-    return reply;
-  }
-  if (/(امروز|today)/i.test(t) && SCHEDULE[today]){
-    let reply = '📅 برنامه امروز (' + today + '):\n\n';
-    SCHEDULE[today].forEach(function(l, i){
-      reply += '📚 زنگ ' + (i + 1) + ': ' + l.subject + ' (' + l.teacher + ')\n';
-    });
-    return reply;
-  }
-  if (/(برنامه|زنگ|کلاس|درس)/i.test(t)){
-    let reply = '📅 برنامه هفتگی:\n\n';
-    for (const day in SCHEDULE){
-      reply += '• ' + day + ': ' + SCHEDULE[day].map(function(l){ return l.subject; }).join(' | ') + '\n\n';
-    }
-    return reply;
-  }
-  if (/(بیدار)/i.test(t)){
-    if (SCHEDULE[tomorrow]){
-      return '⏰ برای زنگ اول فردا ساعت ۶:۳۰ بیدار شو.\n📚 زنگ اول: ' + SCHEDULE[tomorrow][0].subject;
-    }
-    return 'فردا تعطیله! 😴';
-  }
-  return null;
-}
-
-/* ================================================================
-   ارسال پیام
-   ================================================================ */
-async function sendMsg(){
-  if (isGen) return;
-  const text = ci.value.trim();
-  if (!text && !file) return;
-
-  if (isFirst){
-    welcome.classList.add('hidden');
-    chat.classList.add('active');
-    isFirst = false;
-  }
-
-  const userMsg = text || '[عکس]';
-  const userImg = file ? file.dataUrl : null;
-  addMsg('user', userMsg, userImg);
-
-  const attached = file;
-  removeFile();
-  ci.value = '';
-  sb.classList.remove('active');
-  isGen = true;
-
-  /* ============================================================
-     ⭐ اولویت ۱: اگر عکس فرستاده شد → سایت DeepSeek
-     ============================================================ */
-  if (attached && attached.type === 'image'){
-    addMsg('ai', buildDeepSeekReply());
-    setTimeout(function(){ window.open(DEEPSEEK_URL, '_blank'); }, 300);
-    isGen = false;
-    return;
-  }
-
-  /* ============================================================
-     ⭐ اولویت ۲: "سایت همیار" → سایت همیار باز شه
-     ============================================================ */
-  if (isHamyarSiteRequest(text)){
-    addMsg('ai', buildHamyarSiteReply());
-    setTimeout(function(){ window.open(HAMYAR_URL, '_blank'); }, 300);
-    isGen = false;
-    return;
-  }
-
-  /* ============================================================
-     اولویت ۳: سلام
-     ============================================================ */
-  if (isGreeting(text)){
-    addMsg('ai', greetingReply());
-    isGen = false;
-    return;
-  }
-
-  /* ============================================================
-     اولویت ۴: پاسخ‌های آفلاین
-     ============================================================ */
-  const offline = offlineReply(text);
-  if (offline){
-    addMsg('ai', offline);
-    isGen = false;
-    return;
-  }
-
-  /* ============================================================
-     اولویت ۵: درخواست تمرین متنی → سایت همیار
-     ============================================================ */
-  if (isHomeworkRequest(text)){
-    addMsg('ai', buildHamyarReply(text));
-    setTimeout(function(){ window.open(HAMYAR_URL, '_blank'); }, 300);
-    isGen = false;
-    return;
-  }
-
-  /* ============================================================
-     اولویت ۶: زمان‌بندی مترو → کارت ایستگاه‌های شیراز
-     ============================================================ */
-  if (isMetroScheduleRequest(text)){
-    addMsg('ai', '🚇 زمان‌بندی مترو شیراز (خط ۱):\n');
-    const div = document.createElement('div');
-    div.className = 'msg ai';
-    div.innerHTML = '<div class="av ai">م</div><div class="mc"><div class="mb">' + buildMetroScheduleHTML() + '</div></div>';
-    chat.appendChild(div);
-    scrollBottom();
-    isGen = false;
-    return;
-  }
-
-  /* ============================================================
-     اولویت ۷: هواپیما → FlightRadar24
-     ============================================================ */
-  if (isAirplaneRequest(text)){
-    addMsg('ai', buildFlightReply());
-    setTimeout(function(){ window.open(FLIGHTRADAR_URL, '_blank'); }, 300);
-    isGen = false;
-    return;
-  }
-
-  /* ============================================================
-     اولویت ۸: مترو یا اتوبوس → نشان
-     ============================================================ */
-  if (isMetroRequest(text) || isBusRequest(text)){
-    addMsg('ai', buildNeshanReply(text));
-    setTimeout(function(){ window.open(NESHAN_URL, '_blank'); }, 300);
-    isGen = false;
-    return;
-  }
-
-  /* ============================================================
-     اولویت ۹: برنامه کلاسی
-     ============================================================ */
-  if (/(برنامه|زنگ|کلاس|درس|معلم|فردا|امروز|بیدار)/i.test(text)){
-    const scheduleAnswer = getScheduleAnswer(text);
-    if (scheduleAnswer){
-      addMsg('ai', scheduleAnswer);
-      isGen = false;
-      return;
-    }
-  }
-
-  /* ============================================================
-     اولویت ۱۰: تولید عکس
-     ============================================================ */
-  if (/(عکس|تصویر|نقاشی|بکش|طراحی|draw|image|picture|paint)/i.test(text)){
-    addTyping();
-    let prompt = text.replace(/(عکس|تصویر|نقاشی|بکش|طراحی|بساز|برام|درست کن|یه|یک|از|of|draw|image|picture|generate|create|paint)/gi, ' ').replace(/\s+/g, ' ').trim();
-    if (prompt.length < 2) prompt = 'منظره زیبای سینمایی';
-    const models = ['flux', 'flux-pro', 'turbo'];
-    const results = [];
-    await Promise.all(models.map(async function(m){
-      try{
-        const seed = (Math.random() * 1e6) | 0;
-        const url = 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt) + '?width=1024&height=1024&seed=' + seed + '&nologo=true&model=' + m + '&enhance=true';
-        if (await preloadImg(url, 45000)) results.push(url);
-      }catch(e){}
-    }));
-    removeTyping();
-    if (results.length === 0){
-      addMsg('ai', '⚠️ نتونستم عکس بسازم. دوباره امتحان کن.');
-    } else {
-      addMsg('ai', '🎨 ' + results.length + ' عکس:');
-      results.forEach(function(u){ addMsg('ai', '🎨', u); });
-    }
-    isGen = false;
-    return;
-  }
-
-  /* ============================================================
-     اولویت ۱۱: چت متنی (پیش‌فرض)
-     ============================================================ */
-  addTyping();
-  try{
-    const r = await chatText(text);
-    removeTyping();
-    if (r){
-      addMsg('ai', r);
-    } else {
-      addMsg('ai', '⚠️ سرورها الان پاسخ نمی‌دن. چند ثانیه صبر کن و دوباره بفرست.');
-    }
-  }catch(err){
-    removeTyping();
-    addMsg('ai', '⚠️ خطا. دوباره امتحان کن.');
-  }
-  isGen = false;
-}
-
-/* ================================================================
-   گفتگوی جدید
-   ================================================================ */
-function newChat(){
-  chat.innerHTML = '';
-  isFirst = true;
-  isGen = false;
-  removeFile();
-  ci.value = '';
-  sb.classList.remove('active');
-  welcome.classList.remove('hidden');
-  chat.classList.remove('active');
-  toast('✨ گفتگوی جدید');
-}
-
-/* ================================================================
-   رویدادها
-   ================================================================ */
-ci.addEventListener('input', function(){
-  sb.classList.toggle('active', !!this.value.trim() || !!file);
-});
-ci.addEventListener('keydown', function(e){
-  if (e.key === 'Enter' && !e.shiftKey){
-    e.preventDefault();
-    if (this.value.trim() || file) sendMsg();
-  }
-});
-
-/* ================================================================
-   تب‌ها
-   ================================================================ */
-function showTab(tab, el){
-  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
-  if (el) el.classList.add('active');
-  chat.classList.remove('active');
-  schedulePanel.classList.remove('active');
-  reminderPanel.classList.remove('active');
-  welcome.classList.add('hidden');
-  inputWrap.style.display = 'none';
-  if (tab === 'chat'){
-    chat.classList.add('active');
-    inputWrap.style.display = 'block';
-    if (isFirst){
-      welcome.classList.remove('hidden');
-      chat.classList.remove('active');
-    }
-  } else if (tab === 'schedule'){
-    schedulePanel.classList.add('active');
-    updateScheduleView();
-  } else if (tab === 'reminder'){
-    reminderPanel.classList.add('active');
-    updateReminder();
-  }
-}
-
-function updateScheduleView(){
-  const today = getToday();
-  document.querySelectorAll('.st th').forEach(function(th){
-    th.style.background = '';
-    if (th.textContent.trim() === today){
-      th.style.background = 'linear-gradient(135deg,#f2a600,#d96570)';
-    }
-  });
-}
-
-function updateReminder(){
-  const tomorrow = getTomorrow();
-  const tomorrowEl = document.getElementById('tomorrowLessons');
-  const wakeEl = document.getElementById('wakeUpTime');
-  if (SCHEDULE[tomorrow]){
-    const lessons = SCHEDULE[tomorrow];
-    let text = '<span class="hl">' + tomorrow + '</span> (فردا) — ' + lessons.length + ' زنگ:<br>';
-    lessons.forEach(function(l, i){
-      text += '<br>📚 زنگ ' + (i + 1) + ': <span class="hl">' + l.subject + '</span> (' + l.teacher + ')';
-    });
-    tomorrowEl.innerHTML = text;
-    wakeEl.innerHTML = 'برای زنگ اول فردا ساعت <span class="hl">۶:۳۰</span> بیدار شو.<br>زنگ اول: <span class="hl">' + SCHEDULE[tomorrow][0].subject + '</span>';
-  } else {
-    tomorrowEl.innerHTML = 'فردا <span class="hl">' + tomorrow + '</span> — تعطیل! 🎉';
-    wakeEl.innerHTML = 'فردا تعطیل است! 😴';
-  }
-  updateScheduleView();
-}
-
-/* ================================================================
-   راه‌اندازی
-   ================================================================ */
-window.addEventListener('DOMContentLoaded', function(){
-  createParticles();
-  ci.focus();
-  updateReminder();
-  setInterval(updateReminder, 60000);
-  console.log('%c✅ هوش مصنوعی سام آماده است', 'color:#4285f4;font-size:14px;font-weight:bold');
-});
-</script>
+<h1>صفحه من</h1>
+<div>&lt;!DOCTYPE html&gt;<br>
+&lt;html lang=&quot;fa&quot; dir=&quot;rtl&quot;&gt;<br>
+&lt;head&gt;<br>
+&lt;meta charset=&quot;UTF-8&quot;&gt;<br>
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot;&gt;<br>
+&lt;title&gt;هوش مصنوعی سام — محمد سام ملک زاده&lt;/title&gt;<br>
+&lt;style&gt;<br>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}<br>
+html,body{height:100%;overflow:hidden}<br>
+body{font-family:-apple-system,BlinkMacSystemFont,&#39;Segoe UI&#39;,Roboto,Tahoma,sans-serif;background:#000;color:#fff;display:flex;flex-direction:column;height:100vh;overflow:hidden;position:relative}<br>
+.rgb-border{position:fixed;inset:0;z-index:9999;pointer-events:none;padding:3px;background:linear-gradient(90deg,#f00,#f70,#ff0,#0f0,#0ff,#00f,#80f,#f0f,#f00);background-size:400% 400%;animation:rgb 4s linear infinite;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;border-radius:2px}<br>
+@keyframes rgb{0%{background-position:0% 50%}100%{background-position:200% 50%}}<br>
+.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(circle at 20% 15%,rgba(66,133,244,.2) 0%,transparent 45%),radial-gradient(circle at 80% 20%,rgba(155,114,203,.2) 0%,transparent 45%),radial-gradient(circle at 50% 85%,rgba(217,101,112,.15) 0%,transparent 50%),radial-gradient(circle at 85% 90%,rgba(242,166,0,.12) 0%,transparent 45%),linear-gradient(180deg,#000 0%,#050510 40%,#0a1a2e 70%,#0e2545 100%)}<br>
+.particles{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}<br>
+.particle{position:absolute;border-radius:50%;animation:fup linear infinite}<br>
+@keyframes fup{0%{transform:translate3d(0,100vh,0) scale(0);opacity:0}10%{opacity:.9}90%{opacity:.9}100%{transform:translate3d(0,-80px,0) scale(1.5);opacity:0}}<br>
+.header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;flex-shrink:0;z-index:10;position:relative;backdrop-filter:blur(20px);background:linear-gradient(180deg,rgba(0,0,0,.8) 0%,rgba(0,0,0,.3) 100%);border-bottom:1px solid rgba(255,255,255,.06)}<br>
+.hl{display:flex;align-items:center;gap:8px}<br>
+.hr{display:flex;align-items:center;gap:8px}<br>
+.menu-btn,.compose-btn,.theme-toggle{width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;position:relative;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#e3e3e3;transition:.25s;font-family:inherit;font-size:1rem}<br>
+.menu-btn:hover,.compose-btn:hover,.theme-toggle:hover{background:rgba(255,255,255,.14);border-color:rgba(66,133,244,.5);transform:scale(1.05)}<br>
+.menu-btn::before{content:&#39;&#39;;position:absolute;top:6px;right:8px;width:7px;height:7px;border-radius:50%;background:#4285f4;box-shadow:0 0 10px #4285f4;animation:pulse 2s infinite}<br>
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}<br>
+.menu-btn svg,.compose-btn svg{width:20px;height:20px}<br>
+.badge{display:flex;align-items:center;gap:10px;padding:8px 16px;border-radius:26px;background:linear-gradient(135deg,rgba(66,133,244,.15),rgba(155,114,203,.15),rgba(217,101,112,.15));border:1px solid rgba(255,255,255,.1);position:relative;overflow:hidden;cursor:pointer}<br>
+.badge::before{content:&#39;&#39;;position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);animation:shine 5s infinite}<br>
+@keyframes shine{0%,50%{transform:translateX(-100%)}100%{transform:translateX(100%)}}<br>
+.dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#9b72cb,#d96570,#f2a600);background-size:200% 200%;box-shadow:0 0 14px rgba(66,133,244,.8);animation:gs 4s infinite;flex-shrink:0}<br>
+@keyframes gs{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}<br>
+.badge-text{font-size:.98rem;font-weight:600;background:linear-gradient(90deg,#fff,#a8c7fa,#fff);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:sh 5s linear infinite;white-space:nowrap}<br>
+@keyframes sh{to{background-position:200% center}}<br>
+.h-title{font-size:.78rem;color:#9aa0a6;font-weight:500;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;padding:6px 16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}<br>
+@media(max-width:750px){.h-title{display:none}}<br>
+.header-clock{font-size:.75rem;color:#a8c7fa;font-weight:600;padding:6px 12px;border-radius:14px;background:rgba(66,133,244,.12);border:1px solid rgba(66,133,244,.25);font-variant-numeric:tabular-nums}<br>
+.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#9b72cb,#d96570,#f2a600);background-size:200% 200%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;cursor:pointer;border:2px solid rgba(255,255,255,.2);box-shadow:0 0 20px rgba(155,114,203,.5);animation:gs 5s infinite}<br>
+.tabs{display:flex;gap:8px;padding:12px 16px;z-index:10;position:relative;max-width:900px;margin:0 auto;width:100%;flex-wrap:wrap;justify-content:center;flex-shrink:0}<br>
+.tab{padding:10px 18px;border-radius:22px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#9aa0a6;font-size:.82rem;font-family:inherit;font-weight:600;cursor:pointer;transition:.25s}<br>
+.tab:hover{background:rgba(66,133,244,.15);color:#e3e3e3}<br>
+.tab.active{background:linear-gradient(135deg,rgba(66,133,244,.25),rgba(155,114,203,.25));border-color:rgba(66,133,244,.5);color:#fff}<br>
+.welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;z-index:5;text-align:center;overflow-y:auto}<br>
+.welcome.hidden{display:none}<br>
+.orbit{width:160px;height:160px;margin-bottom:26px;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0}<br>
+.ring{position:absolute;border-radius:50%;border:2px solid transparent;animation:spin linear infinite}<br>
+.ring.r1{width:100%;height:100%;border-top-color:#4285f4;border-right-color:#9b72cb;animation-duration:9s}<br>
+.ring.r2{width:72%;height:72%;border-top-color:#d96570;border-left-color:#f2a600;animation-duration:7s;animation-direction:reverse}<br>
+.ring.r3{width:45%;height:45%;border-top-color:#00d9c0;border-right-color:#a8c7fa;animation-duration:5s}<br>
+@keyframes spin{to{transform:rotate(360deg)}}<br>
+.core{width:56px;height:56px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#a8c7fa 45%,#4285f4 75%,#9b72cb 100%);box-shadow:0 0 40px rgba(168,199,250,.8),0 0 80px rgba(66,133,244,.5);animation:pulse2 2.5s ease-in-out infinite}<br>
+@keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}<br>
+.hello{font-size:2.2rem;font-weight:700;line-height:1.3;margin-bottom:8px;background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570,#f2a600,#4285f4);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:sh 7s linear infinite}<br>
+.myname{font-size:1.5rem;font-weight:800;margin-bottom:16px;background:linear-gradient(135deg,#a8c7fa 0%,#fff 50%,#a8c7fa 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:sh 4s linear infinite}<br>
+.sub{font-size:.92rem;color:#9aa0a6;padding:8px 20px;border-radius:22px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:8px}<br>
+.sub::before{content:&#39;✨&#39;;animation:sp 2.5s infinite}<br>
+@keyframes sp{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}<br>
+.quick-suggestions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px;max-width:640px;padding:0 16px}<br>
+.quick-chip{padding:8px 14px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#a8c7fa;font-size:.78rem;font-family:inherit;cursor:pointer;transition:.25s}<br>
+.quick-chip:hover{background:rgba(66,133,244,.2);transform:translateY(-2px);color:#fff}<br>
+.chat{flex:1;overflow-y:auto;padding:16px 16px 180px;display:none;scroll-behavior:smooth;z-index:5;position:relative;overscroll-behavior:contain}<br>
+.chat.active{display:block}<br>
+.chat::-webkit-scrollbar{width:5px}<br>
+.chat::-webkit-scrollbar-thumb{background:rgba(66,133,244,.4);border-radius:5px}<br>
+.msg{display:flex;gap:10px;margin-bottom:20px;animation:mi .35s ease-out;max-width:100%}<br>
+@keyframes mi{from{opacity:0;transform:translate3d(0,15px,0)}to{opacity:1;transform:translate3d(0,0,0)}}<br>
+.msg.u{flex-direction:row-reverse}<br>
+.av{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}<br>
+.av.ai{background:linear-gradient(135deg,#4285f4,#9b72cb,#d96570);background-size:200% 200%;color:#fff;box-shadow:0 0 22px rgba(66,133,244,.6);animation:gs 6s infinite}<br>
+.av.usr{background:linear-gradient(135deg,#d96570,#f2a600);color:#fff;box-shadow:0 0 22px rgba(217,101,112,.6)}<br>
+.mc{flex:1;max-width:84%}<br>
+.msg.u .mc{display:flex;flex-direction:column;align-items:flex-end}<br>
+.mb{background:rgba(28,30,35,.92);backdrop-filter:blur(12px);border-radius:20px;padding:14px 18px;font-size:.93rem;line-height:1.85;color:#e3e3e3;word-wrap:break-word;border:1px solid rgba(255,255,255,.06);box-shadow:0 6px 24px rgba(0,0,0,.4);white-space:pre-wrap}<br>
+.msg.u .mb{background:linear-gradient(135deg,#0b57d0 0%,#1a73e8 60%,#4285f4 100%);color:#fff;border-bottom-right-radius:5px;border:none}<br>
+.msg.ai .mb{border-bottom-left-radius:5px;position:relative;overflow:hidden}<br>
+.msg.ai .mb::before{content:&#39;&#39;;position:absolute;top:14px;bottom:14px;right:0;width:3px;background:linear-gradient(180deg,#4285f4,#9b72cb,#d96570,#f2a600);border-radius:3px}<br>
+.mb img{max-width:100%;border-radius:14px;margin-top:12px;display:block;box-shadow:0 8px 30px rgba(0,0,0,.5)}<br>
+.mb pre{background:#0a0a0a;padding:14px 16px;border-radius:12px;margin:12px 0;overflow-x:auto;direction:ltr;text-align:left;font-family:&#39;SF Mono&#39;,Monaco,monospace;font-size:.82rem;line-height:1.6;border:1px solid rgba(66,133,244,.25)}<br>
+.mb code{background:rgba(66,133,244,.18);padding:3px 8px;border-radius:6px;font-family:&#39;SF Mono&#39;,Monaco,monospace;font-size:.85em;direction:ltr;display:inline-block;color:#a8c7fa}<br>
+.mb a{color:#a8c7fa;text-decoration:none;font-weight:700;border-bottom:1px dashed #a8c7fa;padding-bottom:1px}<br>
+.chat-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}<br>
+.chat-actions button{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#a8c7fa;font-family:inherit;font-size:.72rem;padding:5px 10px;border-radius:12px;cursor:pointer;transition:.2s}<br>
+.chat-actions button:hover{background:rgba(66,133,244,.2);border-color:rgba(66,133,244,.5);color:#fff}<br>
+/* ══════════ کارت‌های مترو (سیستم جدید) ══════════ */<br>
+.metro-wrap{background:linear-gradient(135deg,rgba(66,133,244,.13),rgba(155,114,203,.13));border:1px solid rgba(66,133,244,.3);border-radius:14px;padding:12px 14px;margin-top:10px}<br>
+.metro-title{font-size:.95rem;font-weight:800;color:#a8c7fa;margin-bottom:6px;display:flex;align-items:center;gap:8px}<br>
+.metro-title::before{content:&#39;🚇&#39;;font-size:1.1rem}<br>
+.metro-sub{font-size:.75rem;color:#8e9aa8;margin-bottom:10px;text-align:center;background:rgba(0,0,0,.2);padding:6px 10px;border-radius:10px;font-variant-numeric:tabular-nums}<br>
+.metro-live-clock{color:#00d97e;font-weight:800}<br>
+.metro-stations-list{list-style:none;padding:0;margin:0}<br>
+.metro-station-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:rgba(255,255,255,.04);border-radius:10px;margin-bottom:6px;font-size:.85rem;cursor:pointer;transition:.25s;border:1px solid transparent}<br>
+.metro-station-row:hover{background:rgba(66,133,244,.18);border-color:rgba(66,133,244,.45);transform:translateX(-3px)}<br>
+.metro-station-num{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#4285f4,#9b72cb);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex-shrink:0;margin-left:8px}<br>
+.metro-station-name{flex:1;color:#e3e3e3;font-weight:600;text-align:right}<br>
+.metro-station-arrow{color:#5f6368;font-size:1.1rem;margin-right:6px}<br>
+/* صفحه جزئیات ایستگاه */<br>
+.metro-detail{background:linear-gradient(135deg,rgba(66,133,244,.15),rgba(155,114,203,.15));border:1px solid rgba(66,133,244,.35);border-radius:14px;padding:14px;margin-top:10px}<br>
+.metro-detail-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed rgba(255,255,255,.15)}<br>
+.metro-detail-name{font-size:1rem;font-weight:800;color:#a8c7fa;display:flex;align-items:center;gap:8px}<br>
+.metro-detail-name::before{content:&#39;📍&#39;;font-size:1.1rem}<br>
+.metro-back-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#a8c7fa;font-family:inherit;font-size:.75rem;padding:6px 12px;border-radius:10px;cursor:pointer;transition:.2s;font-weight:600}<br>
+.metro-back-btn:hover{background:rgba(66,133,244,.25);color:#fff}<br>
+.metro-now{text-align:center;font-size:.8rem;color:#00d97e;font-weight:700;background:rgba(0,217,126,.08);border:1px solid rgba(0,217,126,.25);padding:8px;border-radius:10px;margin-bottom:12px;font-variant-numeric:tabular-nums}<br>
+.metro-dir{background:rgba(0,0,0,.25);border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid rgba(255,255,255,.06)}<br>
+.metro-dir-title{font-size:.88rem;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:8px}<br>
+.metro-dir.down .metro-dir-title{color:#4285f4}<br>
+.metro-dir.up .metro-dir-title{color:#f2a600}<br>
+.metro-dir-title::before{content:&#39;⬅️&#39;;font-size:1rem}<br>
+.metro-dir.up .metro-dir-title::before{content:&#39;➡️&#39;}<br>
+.metro-dir-sub{font-size:.72rem;color:#8e9aa8;margin-right:26px;margin-bottom:8px}<br>
+.metro-times{display:flex;flex-direction:column;gap:6px}<br>
+.metro-time-row{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:rgba(255,255,255,.04);border-radius:8px;font-size:.82rem}<br>
+.metro-time-row.past{opacity:.45}<br>
+.metro-time-row.past .metro-time-label{color:#8e9aa8;text-decoration:line-through}<br>
+.metro-time-row.next{border:1px solid rgba(0,217,126,.5);background:rgba(0,217,126,.08);box-shadow:0 0 14px rgba(0,217,126,.2)}<br>
+.metro-time-label{color:#e3e3e3;font-weight:600}<br>
+.metro-time-row.next .metro-time-label{color:#00d97e;font-weight:800}<br>
+.metro-time-val{font-variant-numeric:tabular-nums;font-weight:700;color:#a8c7fa}<br>
+.metro-time-row.next .metro-time-val{color:#00d97e}<br>
+.metro-countdown{font-size:.72rem;color:#8e9aa8;margin-right:6px}<br>
+.metro-time-row.next .metro-countdown{color:#00d97e;font-weight:700}<br>
+.metro-empty{text-align:center;color:#8e9aa8;font-size:.8rem;padding:14px;font-style:italic}<br>
+.metro-footer-note{font-size:.7rem;color:#8e9aa8;margin-top:10px;text-align:center;line-height:1.6}<br>
+/* ══════════ پایان مترو ══════════ */<br>
+.station-card{background:linear-gradient(135deg,rgba(66,133,244,.15),rgba(155,114,203,.15));border:1px solid rgba(66,133,244,.3);border-radius:14px;padding:12px 14px;margin-top:10px}<br>
+.station-name{font-size:.92rem;font-weight:700;color:#a8c7fa;margin-bottom:8px;display:flex;align-items:center;gap:8px}<br>
+.station-name::before{content:&#39;🚇&#39;;font-size:1rem}<br>
+.station-list{list-style:none;padding:0;margin:0}<br>
+.station-item{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(255,255,255,.04);border-radius:10px;margin-bottom:6px;font-size:.85rem}<br>
+.station-item .name{color:#e3e3e3;font-weight:500}<br>
+.station-item .time{color:#00d97e;font-weight:700;font-size:.82rem}<br>
+.typing{display:flex;gap:6px;padding:6px 0}<br>
+.td{width:9px;height:9px;border-radius:50%;animation:tb 1.3s infinite ease-in-out}<br>
+.td:nth-child(1){background:#4285f4}<br>
+.td:nth-child(2){animation-delay:.15s;background:#9b72cb}<br>
+.td:nth-child(3){animation-delay:.3s;background:#f2a600}<br>
+@keyframes tb{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-8px);opacity:1}}<br>
+.schedule-panel{display:none;padding:16px;z-index:5;position:relative;max-width:900px;margin:0 auto;width:100%;overflow-y:auto;flex:1}<br>
+.schedule-panel.active{display:block}<br>
+.st{width:100%;border-collapse:collapse;background:rgba(20,22,28,.85);backdrop-filter:blur(10px);border-radius:16px;overflow:hidden;border:1px solid rgba(66,133,244,.25);box-shadow:0 10px 40px rgba(0,0,0,.5)}<br>
+.st th{background:linear-gradient(135deg,#4285f4,#9b72cb);padding:14px 8px;font-size:.85rem;font-weight:700;color:#fff;text-align:center;border:1px solid rgba(255,255,255,.1)}<br>
+.st td{padding:12px 8px;text-align:center;font-size:.82rem;color:#e3e3e3;border:1px solid rgba(255,255,255,.06);vertical-align:middle;line-height:1.5}<br>
+.st td.period{background:linear-gradient(135deg,rgba(66,133,244,.2),rgba(155,114,203,.2));font-weight:700;font-size:.8rem;color:#a8c7fa}<br>
+.st .teacher{font-size:.72rem;color:#9aa0a6;display:block;margin-top:3px}<br>
+.reminder-panel{display:none;padding:16px;z-index:5;position:relative;max-width:900px;margin:0 auto;width:100%;overflow-y:auto;flex:1}<br>
+.reminder-panel.active{display:block}<br>
+.rc{background:rgba(20,22,28,.85);backdrop-filter:blur(10px);border-radius:16px;padding:20px;border:1px solid rgba(66,133,244,.25);box-shadow:0 10px 40px rgba(0,0,0,.5);margin-bottom:16px}<br>
+.rt{font-size:1rem;font-weight:700;margin-bottom:12px;background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}<br>
+.rtx{font-size:.9rem;color:#e3e3e3;line-height:2.1}<br>
+.hl{color:#f2a600;font-weight:700}<br>
+.input-wrap{position:fixed;bottom:0;left:0;right:0;padding:12px 16px 20px;background:linear-gradient(to top,rgba(10,26,46,.98) 0%,rgba(7,18,35,.9) 60%,transparent 100%);z-index:50}<br>
+.ib{display:flex;align-items:center;background:rgba(28,30,35,.95);backdrop-filter:blur(20px);border-radius:30px;padding:8px 10px;gap:6px;min-height:60px;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);max-width:900px;margin:0 auto;transition:.3s;position:relative}<br>
+.ib:focus-within{border-color:rgba(66,133,244,.55);box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 30px rgba(66,133,244,.35)}<br>
+.icb{width:44px;height:44px;border-radius:50%;border:none;background:transparent;color:#e3e3e3;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.25s;font-family:inherit}<br>
+.icb:hover{background:rgba(66,133,244,.2);color:#a8c7fa}<br>
+.icb svg{width:20px;height:20px}<br>
+.mic-btn.recording{background:linear-gradient(135deg,#d96570,#f2a600);color:#fff;animation:pulse 1s infinite}<br>
+.ci{flex:1;background:transparent;border:none;color:#e3e3e3;font-size:.95rem;font-family:inherit;outline:none;padding:10px 8px;min-width:0;direction:rtl}<br>
+.ci::placeholder{color:#8e918f}<br>
+.char-counter{position:absolute;bottom:4px;left:24px;font-size:.65rem;color:#5f6368;pointer-events:none}<br>
+.sb{width:46px;height:46px;border-radius:50%;border:none;background:#2b2d2f;color:#5f6368;cursor:not-allowed;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.3s;font-family:inherit}<br>
+.sb.active{background:linear-gradient(135deg,#4285f4,#1a73e8,#9b72cb,#d96570);color:#fff;cursor:pointer;box-shadow:0 6px 24px rgba(66,133,244,.6)}<br>
+.sb svg{width:22px;height:22px}<br>
+.fp{position:fixed;bottom:100px;right:16px;background:rgba(28,30,35,.97);backdrop-filter:blur(14px);border-radius:16px;padding:10px;display:none;align-items:center;gap:10px;max-width:300px;z-index:60;border:1px solid rgba(66,133,244,.4);box-shadow:0 10px 40px rgba(0,0,0,.6)}<br>
+.fp.show{display:flex}<br>
+.fp img{width:50px;height:50px;border-radius:10px;object-fit:cover}<br>
+.fi{flex:1;min-width:0;font-size:.78rem;color:#e3e3e3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}<br>
+.rf{background:rgba(255,80,80,.15);border:none;color:#ff6b6b;cursor:pointer;font-size:1.3rem;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}<br>
+.toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(28,30,35,.97);backdrop-filter:blur(14px);color:#e3e3e3;padding:12px 24px;border-radius:24px;font-size:.85rem;font-weight:500;opacity:0;transition:.3s;pointer-events:none;z-index:300;max-width:90%;text-align:center;border:1px solid rgba(66,133,244,.35);box-shadow:0 10px 40px rgba(0,0,0,.6)}<br>
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}<br>
+@media(max-width:500px){<br>
+  .hello{font-size:1.7rem}<br>
+  .myname{font-size:1.2rem}<br>
+  .orbit{width:130px;height:130px}<br>
+  .core{width:48px;height:48px}<br>
+  .mb{font-size:.88rem}<br>
+  .mc{max-width:88%}<br>
+  .st th,.st td{padding:8px 4px;font-size:.72rem}<br>
+  .header-clock{display:none}<br>
+}<br>
+body.light-mode{background:#f5f6fa;color:#202124}<br>
+body.light-mode .bg{background:linear-gradient(180deg,#fff 0%,#e8f0fe 50%,#d2e3fc 100%)}<br>
+body.light-mode .header{background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.6))}<br>
+body.light-mode .badge-text{background:linear-gradient(90deg,#1a73e8,#9b72cb,#1a73e8);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent}<br>
+body.light-mode .h-title{background:rgba(0,0,0,.04);color:#5f6368}<br>
+body.light-mode .mb{background:#fff;color:#202124;border-color:rgba(0,0,0,.08)}<br>
+body.light-mode .msg.u .mb{background:linear-gradient(135deg,#1a73e8,#4285f4);color:#fff}<br>
+body.light-mode .msg.ai .mb code{background:rgba(26,115,232,.12);color:#1a73e8}<br>
+body.light-mode .ib{background:#fff;border-color:rgba(0,0,0,.1)}<br>
+body.light-mode .ci{color:#202124}<br>
+body.light-mode .ci::placeholder{color:#80868b}<br>
+body.light-mode .hello,body.light-mode .myname{color:#1a73e8}<br>
+body.light-mode .theme-toggle,body.light-mode .menu-btn,body.light-mode .compose-btn{background:rgba(0,0,0,.05);color:#202124}<br>
+body.light-mode .tab{background:rgba(0,0,0,.04);color:#5f6368;border-color:rgba(0,0,0,.08)}<br>
+body.light-mode .st{background:rgba(255,255,255,.95)}<br>
+body.light-mode .st td{color:#202124}<br>
+body.light-mode .rc{background:rgba(255,255,255,.95)}<br>
+body.light-mode .rtx{color:#202124}<br>
+body.light-mode .quick-chip{background:rgba(0,0,0,.04);color:#1a73e8;border-color:rgba(0,0,0,.08)}<br>
+body.light-mode .input-wrap{background:linear-gradient(to top,#f5f6fa 0%,rgba(245,246,250,.9) 60%,transparent 100%)}<br>
+body.light-mode .metro-station-row{background:rgba(0,0,0,.03)}<br>
+body.light-mode .metro-station-name{color:#202124}<br>
+body.light-mode .metro-dir{background:rgba(0,0,0,.03)}<br>
+body.light-mode .metro-time-row{background:rgba(0,0,0,.03)}<br>
+body.light-mode .metro-time-label{color:#202124}<br>
+body.light-mode .metro-sub{background:rgba(0,0,0,.05);color:#5f6368}<br>
+&lt;/style&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+<br>
+&lt;div class=&quot;rgb-border&quot;&gt;&lt;/div&gt;<br>
+&lt;div class=&quot;bg&quot;&gt;&lt;/div&gt;<br>
+&lt;div class=&quot;particles&quot; id=&quot;particles&quot;&gt;&lt;/div&gt;<br>
+<br>
+&lt;header class=&quot;header&quot;&gt;<br>
+  &lt;div class=&quot;hl&quot;&gt;<br>
+    &lt;button class=&quot;menu-btn&quot; onclick=&quot;newChat()&quot; title=&quot;گفتگوی جدید&quot;&gt;<br>
+      &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;&gt;<br>
+        &lt;line x1=&quot;3&quot; y1=&quot;6&quot; x2=&quot;21&quot; y2=&quot;6&quot;/&gt;<br>
+        &lt;line x1=&quot;3&quot; y1=&quot;12&quot; x2=&quot;21&quot; y2=&quot;12&quot;/&gt;<br>
+        &lt;line x1=&quot;3&quot; y1=&quot;18&quot; x2=&quot;21&quot; y2=&quot;18&quot;/&gt;<br>
+      &lt;/svg&gt;<br>
+    &lt;/button&gt;<br>
+    &lt;div class=&quot;badge&quot; onclick=&quot;toast(&#39;مدیریت: محمد سام ملک زاده&#39;)&quot;&gt;<br>
+      &lt;span class=&quot;dot&quot;&gt;&lt;/span&gt;<br>
+      &lt;span class=&quot;badge-text&quot;&gt;محمد سام ملک زاده&lt;/span&gt;<br>
+    &lt;/div&gt;<br>
+  &lt;/div&gt;<br>
+  &lt;div class=&quot;h-title&quot;&gt;مدیریت و مسئولیت: ملک زاده&lt;/div&gt;<br>
+  &lt;div class=&quot;hr&quot;&gt;<br>
+    &lt;span class=&quot;header-clock&quot; id=&quot;headerClock&quot;&gt;--:--&lt;/span&gt;<br>
+    &lt;button class=&quot;theme-toggle&quot; onclick=&quot;toggleTheme()&quot; title=&quot;حالت روشن/تاریک&quot;&gt;🌙&lt;/button&gt;<br>
+    &lt;button class=&quot;theme-toggle&quot; onclick=&quot;clearChat()&quot; title=&quot;پاک کردن چت&quot;&gt;🗑️&lt;/button&gt;<br>
+    &lt;button class=&quot;compose-btn&quot; onclick=&quot;newChat()&quot;&gt;<br>
+      &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;&gt;<br>
+        &lt;path d=&quot;M12 20h9&quot;/&gt;<br>
+        &lt;path d=&quot;M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z&quot;/&gt;<br>
+      &lt;/svg&gt;<br>
+    &lt;/button&gt;<br>
+    &lt;div class=&quot;avatar&quot; onclick=&quot;toast(&#39;مدیریت: ملک زاده&#39;)&quot;&gt;م&lt;/div&gt;<br>
+  &lt;/div&gt;<br>
+&lt;/header&gt;<br>
+<br>
+&lt;div class=&quot;tabs&quot;&gt;<br>
+  &lt;button class=&quot;tab active&quot; onclick=&quot;showTab(&#39;chat&#39;, this)&quot;&gt;💬 چت هوشمند&lt;/button&gt;<br>
+  &lt;button class=&quot;tab&quot; onclick=&quot;showTab(&#39;schedule&#39;, this)&quot;&gt;📅 برنامه کلاسی&lt;/button&gt;<br>
+  &lt;button class=&quot;tab&quot; onclick=&quot;showTab(&#39;reminder&#39;, this)&quot;&gt;🔔 یادآور&lt;/button&gt;<br>
+&lt;/div&gt;<br>
+<br>
+&lt;div class=&quot;welcome&quot; id=&quot;welcome&quot;&gt;<br>
+  &lt;div class=&quot;orbit&quot;&gt;<br>
+    &lt;div class=&quot;ring r1&quot;&gt;&lt;/div&gt;<br>
+    &lt;div class=&quot;ring r2&quot;&gt;&lt;/div&gt;<br>
+    &lt;div class=&quot;ring r3&quot;&gt;&lt;/div&gt;<br>
+    &lt;div class=&quot;core&quot;&gt;&lt;/div&gt;<br>
+  &lt;/div&gt;<br>
+  &lt;div class=&quot;hello&quot;&gt;سلام 👋&lt;/div&gt;<br>
+  &lt;div class=&quot;myname&quot;&gt;من هوش مصنوعی سام هستم&lt;/div&gt;<br>
+  &lt;div class=&quot;sub&quot;&gt;مدیریت: محمد سام ملک زاده&lt;/div&gt;<br>
+  &lt;div class=&quot;quick-suggestions&quot;&gt;<br>
+    &lt;button class=&quot;quick-chip&quot; onclick=&quot;quickAsk(&#39;برنامه فردا چیه؟&#39;)&quot;&gt;📅 برنامه فردا&lt;/button&gt;<br>
+    &lt;button class=&quot;quick-chip&quot; onclick=&quot;quickAsk(&#39;سلام&#39;)&quot;&gt;👋 سلام&lt;/button&gt;<br>
+    &lt;button class=&quot;quick-chip&quot; onclick=&quot;quickAsk(&#39;زمان‌بندی مترو&#39;)&quot;&gt;🚇 مترو&lt;/button&gt;<br>
+    &lt;button class=&quot;quick-chip&quot; onclick=&quot;quickAsk(&#39;سایت همیار&#39;)&quot;&gt;📚 همیار&lt;/button&gt;<br>
+    &lt;button class=&quot;quick-chip&quot; onclick=&quot;quickAsk(&#39;اسنپ&#39;)&quot;&gt;🚗 اسنپ&lt;/button&gt;<br>
+    &lt;button class=&quot;quick-chip&quot; onclick=&quot;quickAsk(&#39;تلوبیون&#39;)&quot;&gt;📺 تلوبیون&lt;/button&gt;<br>
+    &lt;button class=&quot;quick-chip&quot; onclick=&quot;quickAsk(&#39;ترافیک&#39;)&quot;&gt;🚦 ترافیک&lt;/button&gt;<br>
+    &lt;button class=&quot;quick-chip&quot; onclick=&quot;quickAsk(&#39;یه عکس گربه بکش&#39;)&quot;&gt;🎨 عکس&lt;/button&gt;<br>
+  &lt;/div&gt;<br>
+&lt;/div&gt;<br>
+<br>
+&lt;div class=&quot;chat&quot; id=&quot;chat&quot;&gt;&lt;/div&gt;<br>
+<br>
+&lt;div class=&quot;schedule-panel&quot; id=&quot;schedulePanel&quot;&gt;<br>
+  &lt;table class=&quot;st&quot;&gt;<br>
+    &lt;thead&gt;<br>
+      &lt;tr&gt;<br>
+        &lt;th&gt;زنگ / روز&lt;/th&gt;<br>
+        &lt;th&gt;شنبه&lt;/th&gt;<br>
+        &lt;th&gt;یک‌شنبه&lt;/th&gt;<br>
+        &lt;th&gt;دوشنبه&lt;/th&gt;<br>
+        &lt;th&gt;سه‌شنبه&lt;/th&gt;<br>
+        &lt;th&gt;چهارشنبه&lt;/th&gt;<br>
+      &lt;/tr&gt;<br>
+    &lt;/thead&gt;<br>
+    &lt;tbody&gt;<br>
+      &lt;tr&gt;<br>
+        &lt;td class=&quot;period&quot;&gt;زنگ اول&lt;/td&gt;<br>
+        &lt;td&gt;ورزش&lt;span class=&quot;teacher&quot;&gt;(آقای شهاب)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;علوم&lt;span class=&quot;teacher&quot;&gt;(آقای توکلی)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;فارسی&lt;span class=&quot;teacher&quot;&gt;(آقای غلامی)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;املا&lt;span class=&quot;teacher&quot;&gt;(آقای شیری)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;پیام آسمانی&lt;span class=&quot;teacher&quot;&gt;(آقای کلانی)&lt;/span&gt;&lt;/td&gt;<br>
+      &lt;/tr&gt;<br>
+      &lt;tr&gt;<br>
+        &lt;td class=&quot;period&quot;&gt;زنگ دوم&lt;/td&gt;<br>
+        &lt;td&gt;مطالعات&lt;span class=&quot;teacher&quot;&gt;(آقای بهزادی)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;ریاضی&lt;span class=&quot;teacher&quot;&gt;(آقای رسولی)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;هنر&lt;span class=&quot;teacher&quot;&gt;(آقای شمس)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;علوم&lt;span class=&quot;teacher&quot;&gt;(آقای توکلی)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;قرآن&lt;span class=&quot;teacher&quot;&gt;(آقای شعاع)&lt;/span&gt;&lt;/td&gt;<br>
+      &lt;/tr&gt;<br>
+      &lt;tr&gt;<br>
+        &lt;td class=&quot;period&quot;&gt;زنگ سوم&lt;/td&gt;<br>
+        &lt;td&gt;زبان&lt;span class=&quot;teacher&quot;&gt;(آقای فهندژ)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;عربی&lt;span class=&quot;teacher&quot;&gt;(آقای زارعی)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;فناوری&lt;span class=&quot;teacher&quot;&gt;(آقای غلامی)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;تفکر&lt;span class=&quot;teacher&quot;&gt;(آقای شمس)&lt;/span&gt;&lt;/td&gt;<br>
+        &lt;td&gt;ریاضی&lt;span class=&quot;teacher&quot;&gt;(آقای رسولی)&lt;/span&gt;&lt;/td&gt;<br>
+      &lt;/tr&gt;<br>
+    &lt;/tbody&gt;<br>
+  &lt;/table&gt;<br>
+&lt;/div&gt;<br>
+<br>
+&lt;div class=&quot;reminder-panel&quot; id=&quot;reminderPanel&quot;&gt;<br>
+  &lt;div class=&quot;rc&quot;&gt;<br>
+    &lt;div class=&quot;rt&quot;&gt;📅 درس‌های فردا&lt;/div&gt;<br>
+    &lt;div class=&quot;rtx&quot; id=&quot;tomorrowLessons&quot;&gt;در حال محاسبه...&lt;/div&gt;<br>
+  &lt;/div&gt;<br>
+  &lt;div class=&quot;rc&quot;&gt;<br>
+    &lt;div class=&quot;rt&quot;&gt;⏰ زنگ بیدارباش&lt;/div&gt;<br>
+    &lt;div class=&quot;rtx&quot; id=&quot;wakeUpTime&quot;&gt;در حال محاسبه...&lt;/div&gt;<br>
+  &lt;/div&gt;<br>
+&lt;/div&gt;<br>
+<br>
+&lt;div class=&quot;fp&quot; id=&quot;fp&quot;&gt;<br>
+  &lt;img id=&quot;fpImg&quot; src=&quot;&quot; alt=&quot;&quot;&gt;<br>
+  &lt;div class=&quot;fi&quot; id=&quot;fi&quot;&gt;&lt;/div&gt;<br>
+  &lt;button class=&quot;rf&quot; onclick=&quot;removeFile()&quot;&gt;×&lt;/button&gt;<br>
+&lt;/div&gt;<br>
+<br>
+&lt;div class=&quot;input-wrap&quot; id=&quot;inputWrap&quot;&gt;<br>
+  &lt;div class=&quot;ib&quot;&gt;<br>
+    &lt;button class=&quot;icb&quot; onclick=&quot;attachFile()&quot; title=&quot;پیوست عکس&quot;&gt;<br>
+      &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;&gt;<br>
+        &lt;line x1=&quot;12&quot; y1=&quot;5&quot; x2=&quot;12&quot; y2=&quot;19&quot;/&gt;<br>
+        &lt;line x1=&quot;5&quot; y1=&quot;12&quot; x2=&quot;19&quot; y2=&quot;12&quot;/&gt;<br>
+      &lt;/svg&gt;<br>
+    &lt;/button&gt;<br>
+    &lt;button class=&quot;icb mic-btn&quot; id=&quot;micBtn&quot; onclick=&quot;toggleMic()&quot; title=&quot;ضبط صدا&quot;&gt;<br>
+      &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;&gt;<br>
+        &lt;path d=&quot;M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z&quot;/&gt;<br>
+        &lt;path d=&quot;M19 10v2a7 7 0 0 1-14 0v-2&quot;/&gt;<br>
+        &lt;line x1=&quot;12&quot; y1=&quot;19&quot; x2=&quot;12&quot; y2=&quot;23&quot;/&gt;<br>
+        &lt;line x1=&quot;8&quot; y1=&quot;23&quot; x2=&quot;16&quot; y2=&quot;23&quot;/&gt;<br>
+      &lt;/svg&gt;<br>
+    &lt;/button&gt;<br>
+    &lt;input type=&quot;text&quot; class=&quot;ci&quot; id=&quot;ci&quot; placeholder=&quot;سلام! من هوش مصنوعی سام هستم...&quot; autocomplete=&quot;off&quot;&gt;<br>
+    &lt;span class=&quot;char-counter&quot; id=&quot;charCounter&quot;&gt;&lt;/span&gt;<br>
+    &lt;button class=&quot;sb&quot; id=&quot;sb&quot; onclick=&quot;sendMsg()&quot; title=&quot;ارسال&quot;&gt;<br>
+      &lt;svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;<br>
+        &lt;line x1=&quot;12&quot; y1=&quot;19&quot; x2=&quot;12&quot; y2=&quot;5&quot;/&gt;<br>
+        &lt;polyline points=&quot;5 12 12 5 19 12&quot;/&gt;<br>
+      &lt;/svg&gt;<br>
+    &lt;/button&gt;<br>
+  &lt;/div&gt;<br>
+&lt;/div&gt;<br>
+<br>
+&lt;div class=&quot;toast&quot; id=&quot;toast&quot;&gt;&lt;/div&gt;<br>
+<br>
+&lt;script&gt;<br>
+&#39;use strict&#39;;<br>
+<br>
+let isFirst = true;<br>
+let isGen = false;<br>
+let file = null;<br>
+let recognition = null;<br>
+let isRecording = false;<br>
+let theme = localStorage.getItem(&#39;sam_theme&#39;) || &#39;dark&#39;;<br>
+const MAX = 200 * 1024 * 1024;<br>
+<br>
+/* ================================================================<br>
+   لینک‌های ثابت<br>
+   ================================================================ */<br>
+const HAMYAR_URL        = &#39;https://hamyar.me/topics/پایه-هفتم/&#39;;<br>
+const NESHAN_URL        = &#39;https://neshan.org/maps&#39;;<br>
+const FLIGHTRADAR_URL   = &#39;https://www.flightradar24.com/&#39;;<br>
+const DEEPSEEK_URL      = &#39;https://chat.deepseek.com/&#39;;<br>
+const SNAPP_URL         = &#39;https://snapp.ir/&#39;;<br>
+const TELEWEBION_URL    = &#39;https://telewebion.net/&#39;;<br>
+const TRAFFICVISION_URL = &#39;https://trafficvision.live/&#39;;<br>
+<br>
+const chat = document.getElementById(&#39;chat&#39;);<br>
+const ci = document.getElementById(&#39;ci&#39;);<br>
+const sb = document.getElementById(&#39;sb&#39;);<br>
+const welcome = document.getElementById(&#39;welcome&#39;);<br>
+const fp = document.getElementById(&#39;fp&#39;);<br>
+const fpImg = document.getElementById(&#39;fpImg&#39;);<br>
+const fi = document.getElementById(&#39;fi&#39;);<br>
+const schedulePanel = document.getElementById(&#39;schedulePanel&#39;);<br>
+const reminderPanel = document.getElementById(&#39;reminderPanel&#39;);<br>
+const inputWrap = document.getElementById(&#39;inputWrap&#39;);<br>
+<br>
+/* ================================================================<br>
+   برنامه کلاسی<br>
+   ================================================================ */<br>
+const SCHEDULE = {<br>
+  &#39;شنبه&#39;: [<br>
+    { subject: &#39;ورزش&#39;, teacher: &#39;آقای شهاب&#39; },<br>
+    { subject: &#39;مطالعات&#39;, teacher: &#39;آقای بهزادی&#39; },<br>
+    { subject: &#39;زبان&#39;, teacher: &#39;آقای فهندژ&#39; }<br>
+  ],<br>
+  &#39;یک‌شنبه&#39;: [<br>
+    { subject: &#39;علوم&#39;, teacher: &#39;آقای توکلی&#39; },<br>
+    { subject: &#39;ریاضی&#39;, teacher: &#39;آقای رسولی&#39; },<br>
+    { subject: &#39;عربی&#39;, teacher: &#39;آقای زارعی&#39; }<br>
+  ],<br>
+  &#39;دوشنبه&#39;: [<br>
+    { subject: &#39;فارسی&#39;, teacher: &#39;آقای غلامی&#39; },<br>
+    { subject: &#39;هنر&#39;, teacher: &#39;آقای شمس&#39; },<br>
+    { subject: &#39;فناوری&#39;, teacher: &#39;آقای غلامی&#39; }<br>
+  ],<br>
+  &#39;سه‌شنبه&#39;: [<br>
+    { subject: &#39;املا&#39;, teacher: &#39;آقای شیری&#39; },<br>
+    { subject: &#39;علوم&#39;, teacher: &#39;آقای توکلی&#39; },<br>
+    { subject: &#39;تفکر&#39;, teacher: &#39;آقای شمس&#39; }<br>
+  ],<br>
+  &#39;چهارشنبه&#39;: [<br>
+    { subject: &#39;پیام آسمانی&#39;, teacher: &#39;آقای کلانی&#39; },<br>
+    { subject: &#39;قرآن&#39;, teacher: &#39;آقای شعاع&#39; },<br>
+    { subject: &#39;ریاضی&#39;, teacher: &#39;آقای رسولی&#39; }<br>
+  ]<br>
+};<br>
+<br>
+const DAYS_FA = [&#39;یک‌شنبه&#39;,&#39;دوشنبه&#39;,&#39;سه‌شنبه&#39;,&#39;چهارشنبه&#39;,&#39;پنج‌شنبه&#39;,&#39;جمعه&#39;,&#39;شنبه&#39;];<br>
+function getToday(){ return DAYS_FA[new Date().getDay()]; }<br>
+function getTomorrow(){ return DAYS_FA[(new Date().getDay() + 1) % 7]; }<br>
+<br>
+/* ================================================================<br>
+   ⭐ دیتای مترو شیراز — خط ۱ (بر اساس زمان‌بندی ارسالی)<br>
+   ================================================================ */<br>
+const METRO_STATIONS_ORDER = [<br>
+  &#39;احسان&#39;,<br>
+  &#39;دکتر شریعتی&#39;,<br>
+  &#39;میرزای شیرازی&#39;,<br>
+  &#39;شاهد&#39;,<br>
+  &#39;قصردشت&#39;,<br>
+  &#39;شهید مطهری&#39;,<br>
+  &#39;شهید آوینی&#39;,<br>
+  &#39;نمازی&#39;,<br>
+  &#39;امام حسین (ع)&#39;,<br>
+  &#39;زندیه&#39;,<br>
+  &#39;وکیل الرعایا&#39;,<br>
+  &#39;ولیعصر (عج)&#39;,<br>
+  &#39;کاوه&#39;,<br>
+  &#39;فضیلت&#39;,<br>
+  &#39;غدیر&#39;,<br>
+  &#39;رازی&#39;,<br>
+  &#39;جانبازان&#39;,<br>
+  &#39;شهید دوران&#39;,<br>
+  &#39;فرصت شیرازی&#39;,<br>
+  &#39;شهید دستغیب&#39;<br>
+];<br>
+<br>
+/* زمان‌بندی هر ایستگاه: به سمت دستغیب (down) و به سمت احسان (up) */<br>
+const METRO_TIMES = {<br>
+  &#39;احسان&#39;: {<br>
+    down: [&#39;5:35&#39;,&#39;5:50&#39;,&#39;6:05&#39;,&#39;6:20&#39;,&#39;6:35&#39;,&#39;6:50&#39;,&#39;7:05&#39;,&#39;7:20&#39;,&#39;7:35&#39;,&#39;7:50&#39;,&#39;8:05&#39;,&#39;8:20&#39;,&#39;8:35&#39;,&#39;8:50&#39;,&#39;9:05&#39;,&#39;9:20&#39;,&#39;9:35&#39;,&#39;9:50&#39;,&#39;10:05&#39;,&#39;10:20&#39;,&#39;10:35&#39;,&#39;10:50&#39;,&#39;11:05&#39;,&#39;11:20&#39;,&#39;11:35&#39;,&#39;11:50&#39;,&#39;12:05&#39;,&#39;12:20&#39;,&#39;12:35&#39;,&#39;12:50&#39;,&#39;13:05&#39;,&#39;13:20&#39;,&#39;13:35&#39;,&#39;13:50&#39;,&#39;14:05&#39;,&#39;14:20&#39;,&#39;14:35&#39;,&#39;14:50&#39;,&#39;15:05&#39;,&#39;15:20&#39;,&#39;15:35&#39;,&#39;15:50&#39;,&#39;16:05&#39;,&#39;16:20&#39;,&#39;16:35&#39;,&#39;16:50&#39;,&#39;17:05&#39;,&#39;17:20&#39;,&#39;17:35&#39;,&#39;17:50&#39;,&#39;18:05&#39;,&#39;18:20&#39;,&#39;18:35&#39;,&#39;18:50&#39;,&#39;19:05&#39;,&#39;19:20&#39;,&#39;19:35&#39;,&#39;19:50&#39;,&#39;20:05&#39;,&#39;20:20&#39;,&#39;20:35&#39;,&#39;20:50&#39;,&#39;21:05&#39;,&#39;21:20&#39;,&#39;21:35&#39;,&#39;21:50&#39;,&#39;22:05&#39;],<br>
+    up: []<br>
+  },<br>
+  &#39;دکتر شریعتی&#39;: {<br>
+    down: [&#39;5:37&#39;,&#39;5:52&#39;,&#39;6:07&#39;,&#39;6:22&#39;,&#39;6:37&#39;,&#39;6:52&#39;,&#39;7:07&#39;,&#39;7:22&#39;,&#39;7:37&#39;,&#39;7:52&#39;,&#39;8:07&#39;,&#39;8:22&#39;,&#39;8:37&#39;,&#39;8:52&#39;,&#39;9:07&#39;,&#39;9:22&#39;,&#39;9:37&#39;,&#39;9:52&#39;,&#39;10:07&#39;,&#39;10:22&#39;,&#39;10:37&#39;,&#39;10:52&#39;,&#39;11:07&#39;,&#39;11:22&#39;,&#39;11:37&#39;,&#39;11:52&#39;,&#39;12:07&#39;,&#39;12:22&#39;,&#39;12:37&#39;,&#39;12:52&#39;,&#39;13:07&#39;,&#39;13:22&#39;,&#39;13:37&#39;,&#39;13:52&#39;,&#39;14:07&#39;,&#39;14:22&#39;,&#39;14:37&#39;,&#39;14:52&#39;,&#39;15:07&#39;,&#39;15:22&#39;,&#39;15:37&#39;,&#39;15:52&#39;,&#39;16:07&#39;,&#39;16:22&#39;,&#39;16:37&#39;,&#39;16:52&#39;,&#39;17:07&#39;,&#39;17:22&#39;,&#39;17:37&#39;,&#39;17:52&#39;,&#39;18:07&#39;,&#39;18:22&#39;,&#39;18:37&#39;,&#39;18:52&#39;,&#39;19:07&#39;,&#39;19:22&#39;,&#39;19:37&#39;,&#39;19:52&#39;,&#39;20:07&#39;,&#39;20:22&#39;,&#39;20:37&#39;,&#39;20:52&#39;,&#39;21:07&#39;,&#39;21:22&#39;,&#39;21:37&#39;,&#39;21:52&#39;,&#39;22:07&#39;],<br>
+    up: [&#39;6:21&#39;,&#39;6:36&#39;,&#39;6:51&#39;,&#39;7:06&#39;,&#39;7:21&#39;,&#39;7:36&#39;,&#39;7:51&#39;,&#39;8:06&#39;,&#39;8:21&#39;,&#39;8:36&#39;,&#39;8:51&#39;,&#39;9:06&#39;,&#39;9:21&#39;,&#39;9:36&#39;,&#39;9:51&#39;,&#39;10:06&#39;,&#39;10:21&#39;,&#39;10:36&#39;,&#39;10:51&#39;,&#39;11:06&#39;,&#39;11:21&#39;,&#39;11:36&#39;,&#39;11:51&#39;,&#39;12:06&#39;,&#39;12:21&#39;,&#39;12:36&#39;,&#39;12:51&#39;,&#39;13:06&#39;,&#39;13:21&#39;,&#39;13:36&#39;,&#39;13:51&#39;,&#39;14:06&#39;,&#39;14:21&#39;,&#39;14:36&#39;,&#39;14:51&#39;,&#39;15:06&#39;,&#39;15:21&#39;,&#39;15:36&#39;,&#39;15:51&#39;,&#39;16:06&#39;,&#39;16:21&#39;,&#39;16:36&#39;,&#39;16:51&#39;,&#39;17:06&#39;,&#39;17:21&#39;,&#39;17:36&#39;,&#39;17:51&#39;,&#39;18:06&#39;,&#39;18:21&#39;,&#39;18:36&#39;,&#39;18:51&#39;,&#39;19:06&#39;,&#39;19:21&#39;,&#39;19:36&#39;,&#39;19:51&#39;,&#39;20:06&#39;,&#39;20:21&#39;,&#39;20:36&#39;,&#39;20:51&#39;,&#39;21:06&#39;,&#39;21:21&#39;,&#39;21:36&#39;,&#39;21:51&#39;,&#39;22:06&#39;,&#39;22:21&#39;,&#39;22:36&#39;,&#39;22:51&#39;]<br>
+  },<br>
+  &#39;میرزای شیرازی&#39;: {<br>
+    down: [&#39;5:39&#39;,&#39;5:54&#39;,&#39;6:09&#39;,&#39;6:24&#39;,&#39;6:39&#39;,&#39;6:54&#39;,&#39;7:09&#39;,&#39;7:24&#39;,&#39;7:39&#39;,&#39;7:54&#39;,&#39;8:09&#39;,&#39;8:24&#39;,&#39;8:39&#39;,&#39;8:54&#39;,&#39;9:09&#39;,&#39;9:24&#39;,&#39;9:39&#39;,&#39;9:54&#39;,&#39;10:09&#39;,&#39;10:24&#39;,&#39;10:39&#39;,&#39;10:54&#39;,&#39;11:09&#39;,&#39;11:24&#39;,&#39;11:39&#39;,&#39;11:54&#39;,&#39;12:09&#39;,&#39;12:24&#39;,&#39;12:39&#39;,&#39;12:54&#39;,&#39;13:09&#39;,&#39;13:24&#39;,&#39;13:39&#39;,&#39;13:54&#39;,&#39;14:09&#39;,&#39;14:24&#39;,&#39;14:39&#39;,&#39;14:54&#39;,&#39;15:09&#39;,&#39;15:24&#39;,&#39;15:39&#39;,&#39;15:54&#39;,&#39;16:09&#39;,&#39;16:24&#39;,&#39;16:39&#39;,&#39;16:54&#39;,&#39;17:09&#39;,&#39;17:24&#39;,&#39;17:39&#39;,&#39;17:54&#39;,&#39;18:09&#39;,&#39;18:24&#39;,&#39;18:39&#39;,&#39;18:54&#39;,&#39;19:09&#39;,&#39;19:24&#39;,&#39;19:39&#39;,&#39;19:54&#39;,&#39;20:09&#39;,&#39;20:24&#39;,&#39;20:39&#39;,&#39;20:54&#39;,&#39;21:09&#39;,&#39;21:24&#39;,&#39;21:39&#39;,&#39;21:54&#39;,&#39;22:09&#39;],<br>
+    up: [&#39;6:19&#39;,&#39;6:34&#39;,&#39;6:49&#39;,&#39;7:04&#39;,&#39;7:19&#39;,&#39;7:34&#39;,&#39;7:49&#39;,&#39;8:04&#39;,&#39;8:19&#39;,&#39;8:34&#39;,&#39;8:49&#39;,&#39;9:04&#39;,&#39;9:19&#39;,&#39;9:34&#39;,&#39;9:49&#39;,&#39;10:04&#39;,&#39;10:19&#39;,&#39;10:34&#39;,&#39;10:49&#39;,&#39;11:04&#39;,&#39;11:19&#39;,&#39;11:34&#39;,&#39;11:49&#39;,&#39;12:04&#39;,&#39;12:19&#39;,&#39;12:34&#39;,&#39;12:49&#39;,&#39;13:04&#39;,&#39;13:19&#39;,&#39;13:34&#39;,&#39;13:49&#39;,&#39;14:04&#39;,&#39;14:19&#39;,&#39;14:34&#39;,&#39;14:49&#39;,&#39;15:04&#39;,&#39;15:19&#39;,&#39;15:34&#39;,&#39;15:49&#39;,&#39;16:04&#39;,&#39;16:19&#39;,&#39;16:34&#39;,&#39;16:49&#39;,&#39;17:04&#39;,&#39;17:19&#39;,&#39;17:34&#39;,&#39;17:49&#39;,&#39;18:04&#39;,&#39;18:19&#39;,&#39;18:34&#39;,&#39;18:49&#39;,&#39;19:04&#39;,&#39;19:19&#39;,&#39;19:34&#39;,&#39;19:49&#39;,&#39;20:04&#39;,&#39;20:19&#39;,&#39;20:34&#39;,&#39;20:49&#39;,&#39;21:04&#39;,&#39;21:19&#39;,&#39;21:34&#39;,&#39;21:49&#39;,&#39;22:04&#39;,&#39;22:19&#39;,&#39;22:34&#39;,&#39;22:49&#39;]<br>
+  },<br>
+  &#39;شاهد&#39;: {<br>
+    down: [&#39;5:43&#39;,&#39;5:58&#39;,&#39;6:13&#39;,&#39;6:28&#39;,&#39;6:43&#39;,&#39;6:58&#39;,&#39;7:13&#39;,&#39;7:28&#39;,&#39;7:43&#39;,&#39;7:58&#39;,&#39;8:13&#39;,&#39;8:28&#39;,&#39;8:43&#39;,&#39;8:58&#39;,&#39;9:13&#39;,&#39;9:28&#39;,&#39;9:43&#39;,&#39;9:58&#39;,&#39;10:13&#39;,&#39;10:28&#39;,&#39;10:43&#39;,&#39;10:58&#39;,&#39;11:13&#39;,&#39;11:28&#39;,&#39;11:43&#39;,&#39;11:58&#39;,&#39;12:13&#39;,&#39;12:28&#39;,&#39;12:43&#39;,&#39;12:58&#39;,&#39;13:13&#39;,&#39;13:28&#39;,&#39;13:43&#39;,&#39;13:58&#39;,&#39;14:13&#39;,&#39;14:28&#39;,&#39;14:43&#39;,&#39;14:58&#39;,&#39;15:13&#39;,&#39;15:28&#39;,&#39;15:43&#39;,&#39;15:58&#39;,&#39;16:13&#39;,&#39;16:28&#39;,&#39;16:43&#39;,&#39;16:58&#39;,&#39;17:13&#39;,&#39;17:28&#39;,&#39;17:43&#39;,&#39;17:58&#39;,&#39;18:13&#39;,&#39;18:28&#39;,&#39;18:43&#39;,&#39;18:58&#39;,&#39;19:13&#39;,&#39;19:28&#39;,&#39;19:43&#39;,&#39;19:58&#39;,&#39;20:13&#39;,&#39;20:28&#39;,&#39;20:43&#39;,&#39;20:58&#39;,&#39;21:13&#39;,&#39;21:28&#39;,&#39;21:43&#39;,&#39;21:58&#39;,&#39;22:13&#39;],<br>
+    up: [&#39;6:15&#39;,&#39;6:30&#39;,&#39;6:45&#39;,&#39;7:00&#39;,&#39;7:15&#39;,&#39;7:30&#39;,&#39;7:45&#39;,&#39;8:00&#39;,&#39;8:15&#39;,&#39;8:30&#39;,&#39;8:45&#39;,&#39;9:00&#39;,&#39;9:15&#39;,&#39;9:30&#39;,&#39;9:45&#39;,&#39;10:00&#39;,&#39;10:15&#39;,&#39;10:30&#39;,&#39;10:45&#39;,&#39;11:00&#39;,&#39;11:15&#39;,&#39;11:30&#39;,&#39;11:45&#39;,&#39;12:00&#39;,&#39;12:15&#39;,&#39;12:30&#39;,&#39;12:45&#39;,&#39;13:00&#39;,&#39;13:15&#39;,&#39;13:30&#39;,&#39;13:45&#39;,&#39;14:00&#39;,&#39;14:15&#39;,&#39;14:30&#39;,&#39;14:45&#39;,&#39;15:00&#39;,&#39;15:15&#39;,&#39;15:30&#39;,&#39;15:45&#39;,&#39;16:00&#39;,&#39;16:15&#39;,&#39;16:30&#39;,&#39;16:45&#39;,&#39;17:00&#39;,&#39;17:15&#39;,&#39;17:30&#39;,&#39;17:45&#39;,&#39;18:00&#39;,&#39;18:15&#39;,&#39;18:30&#39;,&#39;18:45&#39;,&#39;19:00&#39;,&#39;19:15&#39;,&#39;19:30&#39;,&#39;19:45&#39;,&#39;20:00&#39;,&#39;20:15&#39;,&#39;20:30&#39;,&#39;20:45&#39;,&#39;21:00&#39;,&#39;21:15&#39;,&#39;21:30&#39;,&#39;21:45&#39;,&#39;22:00&#39;,&#39;22:15&#39;,&#39;22:30&#39;,&#39;22:45&#39;]<br>
+  },<br>
+  &#39;قصردشت&#39;: {<br>
+    down: [&#39;5:45&#39;,&#39;6:00&#39;,&#39;6:15&#39;,&#39;6:30&#39;,&#39;6:45&#39;,&#39;7:00&#39;,&#39;7:15&#39;,&#39;7:30&#39;,&#39;7:45&#39;,&#39;8:00&#39;,&#39;8:15&#39;,&#39;8:30&#39;,&#39;8:45&#39;,&#39;9:00&#39;,&#39;9:15&#39;,&#39;9:30&#39;,&#39;9:45&#39;,&#39;10:00&#39;,&#39;10:15&#39;,&#39;10:30&#39;,&#39;10:45&#39;,&#39;11:00&#39;,&#39;11:15&#39;,&#39;11:30&#39;,&#39;11:45&#39;,&#39;12:00&#39;,&#39;12:15&#39;,&#39;12:30&#39;,&#39;12:45&#39;,&#39;13:00&#39;,&#39;13:15&#39;,&#39;13:30&#39;,&#39;13:45&#39;,&#39;14:00&#39;,&#39;14:15&#39;,&#39;14:30&#39;,&#39;14:45&#39;,&#39;15:00&#39;,&#39;15:15&#39;,&#39;15:30&#39;,&#39;15:45&#39;,&#39;16:00&#39;,&#39;16:15&#39;,&#39;16:30&#39;,&#39;16:45&#39;,&#39;17:00&#39;,&#39;17:15&#39;,&#39;17:30&#39;,&#39;17:45&#39;,&#39;18:00&#39;,&#39;18:15&#39;,&#39;18:30&#39;,&#39;18:45&#39;,&#39;19:00&#39;,&#39;19:15&#39;,&#39;19:30&#39;,&#39;19:45&#39;,&#39;20:00&#39;,&#39;20:15&#39;,&#39;20:30&#39;,&#39;20:45&#39;,&#39;21:00&#39;,&#39;21:15&#39;,&#39;21:30&#39;,&#39;21:45&#39;,&#39;22:00&#39;,&#39;22:15&#39;],<br>
+    up: [&#39;6:12&#39;,&#39;6:27&#39;,&#39;6:42&#39;,&#39;6:57&#39;,&#39;7:12&#39;,&#39;7:27&#39;,&#39;7:42&#39;,&#39;7:57&#39;,&#39;8:12&#39;,&#39;8:27&#39;,&#39;8:42&#39;,&#39;8:57&#39;,&#39;9:12&#39;,&#39;9:27&#39;,&#39;9:42&#39;,&#39;9:57&#39;,&#39;10:12&#39;,&#39;10:27&#39;,&#39;10:42&#39;,&#39;10:57&#39;,&#39;11:12&#39;,&#39;11:27&#39;,&#39;11:42&#39;,&#39;11:57&#39;,&#39;12:12&#39;,&#39;12:27&#39;,&#39;12:42&#39;,&#39;12:57&#39;,&#39;13:12&#39;,&#39;13:27&#39;,&#39;13:42&#39;,&#39;13:57&#39;,&#39;14:12&#39;,&#39;14:27&#39;,&#39;14:42&#39;,&#39;14:57&#39;,&#39;15:12&#39;,&#39;15:27&#39;,&#39;15:42&#39;,&#39;15:57&#39;,&#39;16:12&#39;,&#39;16:27&#39;,&#39;16:42&#39;,&#39;16:57&#39;,&#39;17:12&#39;,&#39;17:27&#39;,&#39;17:42&#39;,&#39;17:57&#39;,&#39;18:12&#39;,&#39;18:27&#39;,&#39;18:42&#39;,&#39;18:57&#39;,&#39;19:12&#39;,&#39;19:27&#39;,&#39;19:42&#39;,&#39;19:57&#39;,&#39;20:12&#39;,&#39;20:27&#39;,&#39;20:42&#39;,&#39;20:57&#39;,&#39;21:12&#39;,&#39;21:27&#39;,&#39;21:42&#39;,&#39;21:57&#39;,&#39;22:12&#39;,&#39;22:27&#39;,&#39;22:42&#39;]<br>
+  },<br>
+  &#39;شهید مطهری&#39;: {<br>
+    down: [&#39;5:48&#39;,&#39;6:03&#39;,&#39;6:18&#39;,&#39;6:33&#39;,&#39;6:48&#39;,&#39;7:03&#39;,&#39;7:18&#39;,&#39;7:33&#39;,&#39;7:48&#39;,&#39;8:03&#39;,&#39;8:18&#39;,&#39;8:33&#39;,&#39;8:48&#39;,&#39;9:03&#39;,&#39;9:18&#39;,&#39;9:33&#39;,&#39;9:48&#39;,&#39;10:03&#39;,&#39;10:18&#39;,&#39;10:33&#39;,&#39;10:48&#39;,&#39;11:03&#39;,&#39;11:18&#39;,&#39;11:33&#39;,&#39;11:48&#39;,&#39;12:03&#39;,&#39;12:18&#39;,&#39;12:33&#39;,&#39;12:48&#39;,&#39;13:03&#39;,&#39;13:18&#39;,&#39;13:33&#39;,&#39;13:48&#39;,&#39;14:03&#39;,&#39;14:18&#39;,&#39;14:33&#39;,&#39;14:48&#39;,&#39;15:03&#39;,&#39;15:18&#39;,&#39;15:33&#39;,&#39;15:48&#39;,&#39;16:03&#39;,&#39;16:18&#39;,&#39;16:33&#39;,&#39;16:48&#39;,&#39;17:03&#39;,&#39;17:18&#39;,&#39;17:33&#39;,&#39;17:48&#39;,&#39;18:03&#39;,&#39;18:18&#39;,&#39;18:33&#39;,&#39;18:48&#39;,&#39;19:03&#39;,&#39;19:18&#39;,&#39;19:33&#39;,&#39;19:48&#39;,&#39;20:03&#39;,&#39;20:18&#39;,&#39;20:33&#39;,&#39;20:48&#39;,&#39;21:03&#39;,&#39;21:18&#39;,&#39;21:33&#39;,&#39;21:48&#39;,&#39;22:03&#39;,&#39;22:18&#39;],<br>
+    up: [&#39;6:08&#39;,&#39;6:23&#39;,&#39;6:38&#39;,&#39;6:53&#39;,&#39;7:08&#39;,&#39;7:23&#39;,&#39;7:38&#39;,&#39;7:53&#39;,&#39;8:08&#39;,&#39;8:23&#39;,&#39;8:38&#39;,&#39;8:53&#39;,&#39;9:08&#39;,&#39;9:23&#39;,&#39;9:38&#39;,&#39;9:53&#39;,&#39;10:08&#39;,&#39;10:23&#39;,&#39;10:38&#39;,&#39;10:53&#39;,&#39;11:08&#39;,&#39;11:23&#39;,&#39;11:38&#39;,&#39;11:53&#39;,&#39;12:08&#39;,&#39;12:23&#39;,&#39;12:38&#39;,&#39;12:53&#39;,&#39;13:08&#39;,&#39;13:23&#39;,&#39;13:38&#39;,&#39;13:53&#39;,&#39;14:08&#39;,&#39;14:23&#39;,&#39;14:38&#39;,&#39;14:53&#39;,&#39;15:08&#39;,&#39;15:23&#39;,&#39;15:38&#39;,&#39;15:53&#39;,&#39;16:08&#39;,&#39;16:23&#39;,&#39;16:38&#39;,&#39;16:53&#39;,&#39;17:08&#39;,&#39;17:23&#39;,&#39;17:38&#39;,&#39;17:53&#39;,&#39;18:08&#39;,&#39;18:23&#39;,&#39;18:38&#39;,&#39;18:53&#39;,&#39;19:08&#39;,&#39;19:23&#39;,&#39;19:38&#39;,&#39;19:53&#39;,&#39;20:08&#39;,&#39;20:23&#39;,&#39;20:38&#39;,&#39;20:53&#39;,&#39;21:08&#39;,&#39;21:23&#39;,&#39;21:38&#39;,&#39;21:53&#39;,&#39;22:08&#39;,&#39;22:23&#39;,&#39;22:38&#39;]<br>
+  },<br>
+  &#39;شهید آوینی&#39;: {<br>
+    down: [&#39;5:51&#39;,&#39;6:06&#39;,&#39;6:21&#39;,&#39;6:36&#39;,&#39;6:51&#39;,&#39;7:06&#39;,&#39;7:21&#39;,&#39;7:36&#39;,&#39;7:51&#39;,&#39;8:06&#39;,&#39;8:21&#39;,&#39;8:36&#39;,&#39;8:51&#39;,&#39;9:06&#39;,&#39;9:21&#39;,&#39;9:36&#39;,&#39;9:51&#39;,&#39;10:06&#39;,&#39;10:21&#39;,&#39;10:36&#39;,&#39;10:51&#39;,&#39;11:06&#39;,&#39;11:21&#39;,&#39;11:36&#39;,&#39;11:51&#39;,&#39;12:06&#39;,&#39;12:21&#39;,&#39;12:36&#39;,&#39;12:51&#39;,&#39;13:06&#39;,&#39;13:21&#39;,&#39;13:36&#39;,&#39;13:51&#39;,&#39;14:06&#39;,&#39;14:21&#39;,&#39;14:36&#39;,&#39;14:51&#39;,&#39;15:06&#39;,&#39;15:21&#39;,&#39;15:36&#39;,&#39;15:51&#39;,&#39;16:06&#39;,&#39;16:21&#39;,&#39;16:36&#39;,&#39;16:51&#39;,&#39;17:06&#39;,&#39;17:21&#39;,&#39;17:36&#39;,&#39;17:51&#39;,&#39;18:06&#39;,&#39;18:21&#39;,&#39;18:36&#39;,&#39;18:51&#39;,&#39;19:06&#39;,&#39;19:21&#39;,&#39;19:36&#39;,&#39;19:51&#39;,&#39;20:06&#39;,&#39;20:21&#39;,&#39;20:36&#39;,&#39;20:51&#39;,&#39;21:06&#39;,&#39;21:21&#39;,&#39;21:36&#39;,&#39;21:51&#39;,&#39;22:06&#39;,&#39;22:21&#39;],<br>
+    up: [&#39;6:06&#39;,&#39;6:21&#39;,&#39;6:36&#39;,&#39;6:51&#39;,&#39;7:06&#39;,&#39;7:21&#39;,&#39;7:36&#39;,&#39;7:51&#39;,&#39;8:06&#39;,&#39;8:21&#39;,&#39;8:36&#39;,&#39;8:51&#39;,&#39;9:06&#39;,&#39;9:21&#39;,&#39;9:36&#39;,&#39;9:51&#39;,&#39;10:06&#39;,&#39;10:21&#39;,&#39;10:36&#39;,&#39;10:51&#39;,&#39;11:06&#39;,&#39;11:21&#39;,&#39;11:36&#39;,&#39;11:51&#39;,&#39;12:06&#39;,&#39;12:21&#39;,&#39;12:36&#39;,&#39;12:51&#39;,&#39;13:06&#39;,&#39;13:21&#39;,&#39;13:36&#39;,&#39;13:51&#39;,&#39;14:06&#39;,&#39;14:21&#39;,&#39;14:36&#39;,&#39;14:51&#39;,&#39;15:06&#39;,&#39;15:21&#39;,&#39;15:36&#39;,&#39;15:51&#39;,&#39;16:06&#39;,&#39;16:21&#39;,&#39;16:36&#39;,&#39;16:51&#39;,&#39;17:06&#39;,&#39;17:21&#39;,&#39;17:36&#39;,&#39;17:51&#39;,&#39;18:06&#39;,&#39;18:21&#39;,&#39;18:36&#39;,&#39;18:51&#39;,&#39;19:06&#39;,&#39;19:21&#39;,&#39;19:36&#39;,&#39;19:51&#39;,&#39;20:06&#39;,&#39;20:21&#39;,&#39;20:36&#39;,&#39;20:51&#39;,&#39;21:06&#39;,&#39;21:21&#39;,&#39;21:36&#39;,&#39;21:51&#39;,&#39;22:06&#39;,&#39;22:21&#39;,&#39;22:36&#39;]<br>
+  },<br>
+  &#39;نمازی&#39;: {<br>
+    down: [&#39;5:53&#39;,&#39;6:08&#39;,&#39;6:23&#39;,&#39;6:38&#39;,&#39;6:53&#39;,&#39;7:08&#39;,&#39;7:23&#39;,&#39;7:38&#39;,&#39;7:53&#39;,&#39;8:08&#39;,&#39;8:23&#39;,&#39;8:38&#39;,&#39;8:53&#39;,&#39;9:08&#39;,&#39;9:23&#39;,&#39;9:38&#39;,&#39;9:53&#39;,&#39;10:08&#39;,&#39;10:23&#39;,&#39;10:38&#39;,&#39;10:53&#39;,&#39;11:08&#39;,&#39;11:23&#39;,&#39;11:38&#39;,&#39;11:53&#39;,&#39;12:08&#39;,&#39;12:23&#39;,&#39;12:38&#39;,&#39;12:53&#39;,&#39;13:08&#39;,&#39;13:23&#39;,&#39;13:38&#39;,&#39;13:53&#39;,&#39;14:08&#39;,&#39;14:23&#39;,&#39;14:38&#39;,&#39;14:53&#39;,&#39;15:08&#39;,&#39;15:23&#39;,&#39;15:38&#39;,&#39;15:53&#39;,&#39;16:08&#39;,&#39;16:23&#39;,&#39;16:38&#39;,&#39;16:53&#39;,&#39;17:08&#39;,&#39;17:23&#39;,&#39;17:38&#39;,&#39;17:53&#39;,&#39;18:08&#39;,&#39;18:23&#39;,&#39;18:38&#39;,&#39;18:53&#39;,&#39;19:08&#39;,&#39;19:23&#39;,&#39;19:38&#39;,&#39;19:53&#39;,&#39;20:08&#39;,&#39;20:23&#39;,&#39;20:38&#39;,&#39;20:53&#39;,&#39;21:08&#39;,&#39;21:23&#39;,&#39;21:38&#39;,&#39;21:53&#39;,&#39;22:08&#39;,&#39;22:23&#39;],<br>
+    up: [&#39;6:04&#39;,&#39;6:19&#39;,&#39;6:34&#39;,&#39;6:49&#39;,&#39;7:04&#39;,&#39;7:19&#39;,&#39;7:34&#39;,&#39;7:49&#39;,&#39;8:04&#39;,&#39;8:19&#39;,&#39;8:34&#39;,&#39;8:49&#39;,&#39;9:04&#39;,&#39;9:19&#39;,&#39;9:34&#39;,&#39;9:49&#39;,&#39;10:04&#39;,&#39;10:19&#39;,&#39;10:34&#39;,&#39;10:49&#39;,&#39;11:04&#39;,&#39;11:19&#39;,&#39;11:34&#39;,&#39;11:49&#39;,&#39;12:04&#39;,&#39;12:19&#39;,&#39;12:34&#39;,&#39;12:49&#39;,&#39;13:04&#39;,&#39;13:19&#39;,&#39;13:34&#39;,&#39;13:49&#39;,&#39;14:04&#39;,&#39;14:19&#39;,&#39;14:34&#39;,&#39;14:49&#39;,&#39;15:04&#39;,&#39;15:19&#39;,&#39;15:34&#39;,&#39;15:49&#39;,&#39;16:04&#39;,&#39;16:19&#39;,&#39;16:34&#39;,&#39;16:49&#39;,&#39;17:04&#39;,&#39;17:19&#39;,&#39;17:34&#39;,&#39;17:49&#39;,&#39;18:04&#39;,&#39;18:19&#39;,&#39;18:34&#39;,&#39;18:49&#39;,&#39;19:04&#39;,&#39;19:19&#39;,&#39;19:34&#39;,&#39;19:49&#39;,&#39;20:04&#39;,&#39;20:19&#39;,&#39;20:34&#39;,&#39;20:49&#39;,&#39;21:04&#39;,&#39;21:19&#39;,&#39;21:34&#39;,&#39;21:49&#39;,&#39;22:04&#39;,&#39;22:19&#39;,&#39;22:34&#39;]<br>
+  },<br>
+  &#39;امام حسین (ع)&#39;: {<br>
+    down: [&#39;5:56&#39;,&#39;6:11&#39;,&#39;6:26&#39;,&#39;6:41&#39;,&#39;6:56&#39;,&#39;7:11&#39;,&#39;7:26&#39;,&#39;7:41&#39;,&#39;7:56&#39;,&#39;8:11&#39;,&#39;8:26&#39;,&#39;8:41&#39;,&#39;8:56&#39;,&#39;9:11&#39;,&#39;9:26&#39;,&#39;9:41&#39;,&#39;9:56&#39;,&#39;10:11&#39;,&#39;10:26&#39;,&#39;10:41&#39;,&#39;10:56&#39;,&#39;11:11&#39;,&#39;11:26&#39;,&#39;11:41&#39;,&#39;11:56&#39;,&#39;12:11&#39;,&#39;12:26&#39;,&#39;12:41&#39;,&#39;12:56&#39;,&#39;13:11&#39;,&#39;13:26&#39;,&#39;13:41&#39;,&#39;13:56&#39;,&#39;14:11&#39;,&#39;14:26&#39;,&#39;14:41&#39;,&#39;14:56&#39;,&#39;15:11&#39;,&#39;15:26&#39;,&#39;15:41&#39;,&#39;15:56&#39;,&#39;16:11&#39;,&#39;16:26&#39;,&#39;16:41&#39;,&#39;16:56&#39;,&#39;17:11&#39;,&#39;17:26&#39;,&#39;17:41&#39;,&#39;17:56&#39;,&#39;18:11&#39;,&#39;18:26&#39;,&#39;18:41&#39;,&#39;18:56&#39;,&#39;19:11&#39;,&#39;19:26&#39;,&#39;19:41&#39;,&#39;19:56&#39;,&#39;20:11&#39;,&#39;20:26&#39;,&#39;20:41&#39;,&#39;20:56&#39;,&#39;21:11&#39;,&#39;21:26&#39;,&#39;21:41&#39;,&#39;21:56&#39;,&#39;22:11&#39;,&#39;22:26&#39;],<br>
+    up: [&#39;6:02&#39;,&#39;6:17&#39;,&#39;6:32&#39;,&#39;6:47&#39;,&#39;7:02&#39;,&#39;7:17&#39;,&#39;7:32&#39;,&#39;7:47&#39;,&#39;8:02&#39;,&#39;8:17&#39;,&#39;8:32&#39;,&#39;8:47&#39;,&#39;9:02&#39;,&#39;9:17&#39;,&#39;9:32&#39;,&#39;9:47&#39;,&#39;10:02&#39;,&#39;10:17&#39;,&#39;10:32&#39;,&#39;10:47&#39;,&#39;11:02&#39;,&#39;11:17&#39;,&#39;11:32&#39;,&#39;11:47&#39;,&#39;12:02&#39;,&#39;12:17&#39;,&#39;12:32&#39;,&#39;12:47&#39;,&#39;13:02&#39;,&#39;13:17&#39;,&#39;13:32&#39;,&#39;13:47&#39;,&#39;14:02&#39;,&#39;14:17&#39;,&#39;14:32&#39;,&#39;14:47&#39;,&#39;15:02&#39;,&#39;15:17&#39;,&#39;15:32&#39;,&#39;15:47&#39;,&#39;16:02&#39;,&#39;16:17&#39;,&#39;16:32&#39;,&#39;16:47&#39;,&#39;17:02&#39;,&#39;17:17&#39;,&#39;17:32&#39;,&#39;17:47&#39;,&#39;18:02&#39;,&#39;18:17&#39;,&#39;18:32&#39;,&#39;18:47&#39;,&#39;19:02&#39;,&#39;19:17&#39;,&#39;19:32&#39;,&#39;19:47&#39;,&#39;20:02&#39;,&#39;20:17&#39;,&#39;20:32&#39;,&#39;20:47&#39;,&#39;21:02&#39;,&#39;21:17&#39;,&#39;21:32&#39;,&#39;21:47&#39;,&#39;22:02&#39;,&#39;22:17&#39;,&#39;22:32&#39;]<br>
+  },<br>
+  &#39;زندیه&#39;: {<br>
+    down: [&#39;5:58&#39;,&#39;6:13&#39;,&#39;6:28&#39;,&#39;6:43&#39;,&#39;6:58&#39;,&#39;7:13&#39;,&#39;7:28&#39;,&#39;7:43&#39;,&#39;7:58&#39;,&#39;8:13&#39;,&#39;8:28&#39;,&#39;8:43&#39;,&#39;8:58&#39;,&#39;9:13&#39;,&#39;9:28&#39;,&#39;9:43&#39;,&#39;9:58&#39;,&#39;10:13&#39;,&#39;10:28&#39;,&#39;10:43&#39;,&#39;10:58&#39;,&#39;11:13&#39;,&#39;11:28&#39;,&#39;11:43&#39;,&#39;11:58&#39;,&#39;12:13&#39;,&#39;12:28&#39;,&#39;12:43&#39;,&#39;12:58&#39;,&#39;13:13&#39;,&#39;13:28&#39;,&#39;13:43&#39;,&#39;13:58&#39;,&#39;14:13&#39;,&#39;14:28&#39;,&#39;14:43&#39;,&#39;14:58&#39;,&#39;15:13&#39;,&#39;15:28&#39;,&#39;15:43&#39;,&#39;15:58&#39;,&#39;16:13&#39;,&#39;16:28&#39;,&#39;16:43&#39;,&#39;16:58&#39;,&#39;17:13&#39;,&#39;17:28&#39;,&#39;17:43&#39;,&#39;17:58&#39;,&#39;18:13&#39;,&#39;18:28&#39;,&#39;18:43&#39;,&#39;18:58&#39;,&#39;19:13&#39;,&#39;19:28&#39;,&#39;19:43&#39;,&#39;19:58&#39;,&#39;20:13&#39;,&#39;20:28&#39;,&#39;20:43&#39;,&#39;20:58&#39;,&#39;21:13&#39;,&#39;21:28&#39;,&#39;21:43&#39;,&#39;21:58&#39;,&#39;22:13&#39;,&#39;22:28&#39;],<br>
+    up: [&#39;6:00&#39;,&#39;6:15&#39;,&#39;6:30&#39;,&#39;6:45&#39;,&#39;7:00&#39;,&#39;7:15&#39;,&#39;7:30&#39;,&#39;7:45&#39;,&#39;8:00&#39;,&#39;8:15&#39;,&#39;8:30&#39;,&#39;8:45&#39;,&#39;9:00&#39;,&#39;9:15&#39;,&#39;9:30&#39;,&#39;9:45&#39;,&#39;10:00&#39;,&#39;10:15&#39;,&#39;10:30&#39;,&#39;10:45&#39;,&#39;11:00&#39;,&#39;11:15&#39;,&#39;11:30&#39;,&#39;11:45&#39;,&#39;12:00&#39;,&#39;12:15&#39;,&#39;12:30&#39;,&#39;12:45&#39;,&#39;13:00&#39;,&#39;13:15&#39;,&#39;13:30&#39;,&#39;13:45&#39;,&#39;14:00&#39;,&#39;14:15&#39;,&#39;14:30&#39;,&#39;14:45&#39;,&#39;15:00&#39;,&#39;15:15&#39;,&#39;15:30&#39;,&#39;15:45&#39;,&#39;16:00&#39;,&#39;16:15&#39;,&#39;16:30&#39;,&#39;16:45&#39;,&#39;17:00&#39;,&#39;17:15&#39;,&#39;17:30&#39;,&#39;17:45&#39;,&#39;18:00&#39;,&#39;18:15&#39;,&#39;18:30&#39;,&#39;18:45&#39;,&#39;19:00&#39;,&#39;19:15&#39;,&#39;19:30&#39;,&#39;19:45&#39;,&#39;20:00&#39;,&#39;20:15&#39;,&#39;20:30&#39;,&#39;20:45&#39;,&#39;21:00&#39;,&#39;21:15&#39;,&#39;21:30&#39;,&#39;21:45&#39;,&#39;22:00&#39;,&#39;22:15&#39;,&#39;22:30&#39;]<br>
+  },<br>
+  &#39;وکیل الرعایا&#39;: {<br>
+    down: [&#39;6:00&#39;,&#39;6:15&#39;,&#39;6:30&#39;,&#39;6:45&#39;,&#39;7:00&#39;,&#39;7:15&#39;,&#39;7:30&#39;,&#39;7:45&#39;,&#39;8:00&#39;,&#39;8:15&#39;,&#39;8:30&#39;,&#39;8:45&#39;,&#39;9:00&#39;,&#39;9:15&#39;,&#39;9:30&#39;,&#39;9:45&#39;,&#39;10:00&#39;,&#39;10:15&#39;,&#39;10:30&#39;,&#39;10:45&#39;,&#39;11:00&#39;,&#39;11:15&#39;,&#39;11:30&#39;,&#39;11:45&#39;,&#39;12:00&#39;,&#39;12:15&#39;,&#39;12:30&#39;,&#39;12:45&#39;,&#39;13:00&#39;,&#39;13:15&#39;,&#39;13:30&#39;,&#39;13:45&#39;,&#39;14:00&#39;,&#39;14:15&#39;,&#39;14:30&#39;,&#39;14:45&#39;,&#39;15:00&#39;,&#39;15:15&#39;,&#39;15:30&#39;,&#39;15:45&#39;,&#39;16:00&#39;,&#39;16:15&#39;,&#39;16:30&#39;,&#39;16:45&#39;,&#39;17:00&#39;,&#39;17:15&#39;,&#39;17:30&#39;,&#39;17:45&#39;,&#39;18:00&#39;,&#39;18:15&#39;,&#39;18:30&#39;,&#39;18:45&#39;,&#39;19:00&#39;,&#39;19:15&#39;,&#39;19:30&#39;,&#39;19:45&#39;,&#39;20:00&#39;,&#39;20:15&#39;,&#39;20:30&#39;,&#39;20:45&#39;,&#39;21:00&#39;,&#39;21:15&#39;,&#39;21:30&#39;,&#39;21:45&#39;,&#39;22:00&#39;,&#39;22:15&#39;,&#39;22:30&#39;],<br>
+    up: [&#39;5:58&#39;,&#39;6:13&#39;,&#39;6:28&#39;,&#39;6:43&#39;,&#39;6:58&#39;,&#39;7:13&#39;,&#39;7:28&#39;,&#39;7:43&#39;,&#39;7:58&#39;,&#39;8:13&#39;,&#39;8:28&#39;,&#39;8:43&#39;,&#39;8:58&#39;,&#39;9:13&#39;,&#39;9:28&#39;,&#39;9:43&#39;,&#39;9:58&#39;,&#39;10:13&#39;,&#39;10:28&#39;,&#39;10:43&#39;,&#39;10:58&#39;,&#39;11:13&#39;,&#39;11:28&#39;,&#39;11:43&#39;,&#39;11:58&#39;,&#39;12:13&#39;,&#39;12:28&#39;,&#39;12:43&#39;,&#39;12:58&#39;,&#39;13:13&#39;,&#39;13:28&#39;,&#39;13:43&#39;,&#39;13:58&#39;,&#39;14:13&#39;,&#39;14:28&#39;,&#39;14:43&#39;,&#39;14:58&#39;,&#39;15:13&#39;,&#39;15:28&#39;,&#39;15:43&#39;,&#39;15:58&#39;,&#39;16:13&#39;,&#39;16:28&#39;,&#39;16:43&#39;,&#39;16:58&#39;,&#39;17:13&#39;,&#39;17:28&#39;,&#39;17:43&#39;,&#39;17:58&#39;,&#39;18:13&#39;,&#39;18:28&#39;,&#39;18:43&#39;,&#39;18:58&#39;,&#39;19:13&#39;,&#39;19:28&#39;,&#39;19:43&#39;,&#39;19:58&#39;,&#39;20:13&#39;,&#39;20:28&#39;,&#39;20:43&#39;,&#39;20:58&#39;,&#39;21:13&#39;,&#39;21:28&#39;,&#39;21:43&#39;,&#39;21:58&#39;,&#39;22:13&#39;,&#39;22:28&#39;]<br>
+  },<br>
+  &#39;ولیعصر (عج)&#39;: {<br>
+    down: [&#39;6:02&#39;,&#39;6:17&#39;,&#39;6:32&#39;,&#39;6:47&#39;,&#39;7:02&#39;,&#39;7:17&#39;,&#39;7:32&#39;,&#39;7:47&#39;,&#39;8:02&#39;,&#39;8:17&#39;,&#39;8:32&#39;,&#39;8:47&#39;,&#39;9:02&#39;,&#39;9:17&#39;,&#39;9:32&#39;,&#39;9:47&#39;,&#39;10:02&#39;,&#39;10:17&#39;,&#39;10:32&#39;,&#39;10:47&#39;,&#39;11:02&#39;,&#39;11:17&#39;,&#39;11:32&#39;,&#39;11:47&#39;,&#39;12:02&#39;,&#39;12:17&#39;,&#39;12:32&#39;,&#39;12:47&#39;,&#39;13:02&#39;,&#39;13:17&#39;,&#39;13:32&#39;,&#39;13:47&#39;,&#39;14:02&#39;,&#39;14:17&#39;,&#39;14:32&#39;,&#39;14:47&#39;,&#39;15:02&#39;,&#39;15:17&#39;,&#39;15:32&#39;,&#39;15:47&#39;,&#39;16:02&#39;,&#39;16:17&#39;,&#39;16:32&#39;,&#39;16:47&#39;,&#39;17:02&#39;,&#39;17:17&#39;,&#39;17:32&#39;,&#39;17:47&#39;,&#39;18:02&#39;,&#39;18:17&#39;,&#39;18:32&#39;,&#39;18:47&#39;,&#39;19:02&#39;,&#39;19:17&#39;,&#39;19:32&#39;,&#39;19:47&#39;,&#39;20:02&#39;,&#39;20:17&#39;,&#39;20:32&#39;,&#39;20:47&#39;,&#39;21:02&#39;,&#39;21:17&#39;,&#39;21:32&#39;,&#39;21:47&#39;,&#39;22:02&#39;,&#39;22:17&#39;,&#39;22:32&#39;],<br>
+    up: [&#39;5:56&#39;,&#39;6:11&#39;,&#39;6:26&#39;,&#39;6:41&#39;,&#39;6:56&#39;,&#39;7:11&#39;,&#39;7:26&#39;,&#39;7:41&#39;,&#39;7:56&#39;,&#39;8:11&#39;,&#39;8:26&#39;,&#39;8:41&#39;,&#39;8:56&#39;,&#39;9:11&#39;,&#39;9:26&#39;,&#39;9:41&#39;,&#39;9:56&#39;,&#39;10:11&#39;,&#39;10:26&#39;,&#39;10:41&#39;,&#39;10:56&#39;,&#39;11:11&#39;,&#39;11:26&#39;,&#39;11:41&#39;,&#39;11:56&#39;,&#39;12:11&#39;,&#39;12:26&#39;,&#39;12:41&#39;,&#39;12:56&#39;,&#39;13:11&#39;,&#39;13:26&#39;,&#39;13:41&#39;,&#39;13:56&#39;,&#39;14:11&#39;,&#39;14:26&#39;,&#39;14:41&#39;,&#39;14:56&#39;,&#39;15:11&#39;,&#39;15:26&#39;,&#39;15:41&#39;,&#39;15:56&#39;,&#39;16:11&#39;,&#39;16:26&#39;,&#39;16:41&#39;,&#39;16:56&#39;,&#39;17:11&#39;,&#39;17:26&#39;,&#39;17:41&#39;,&#39;17:56&#39;,&#39;18:11&#39;,&#39;18:26&#39;,&#39;18:41&#39;,&#39;18:56&#39;,&#39;19:11&#39;,&#39;19:26&#39;,&#39;19:41&#39;,&#39;19:56&#39;,&#39;20:11&#39;,&#39;20:26&#39;,&#39;20:41&#39;,&#39;20:56&#39;,&#39;21:11&#39;,&#39;21:26&#39;,&#39;21:41&#39;,&#39;21:56&#39;,&#39;22:11&#39;,&#39;22:26&#39;,&#39;22:41&#39;]<br>
+  },<br>
+  &#39;کاوه&#39;: {<br>
+    down: [&#39;6:04&#39;,&#39;6:19&#39;,&#39;6:34&#39;,&#39;6:49&#39;,&#39;7:04&#39;,&#39;7:19&#39;,&#39;7:34&#39;,&#39;7:49&#39;,&#39;8:04&#39;,&#39;8:19&#39;,&#39;8:34&#39;,&#39;8:49&#39;,&#39;9:04&#39;,&#39;9:19&#39;,&#39;9:34&#39;,&#39;9:49&#39;,&#39;10:04&#39;,&#39;10:19&#39;,&#39;10:34&#39;,&#39;10:49&#39;,&#39;11:04&#39;,&#39;11:19&#39;,&#39;11:34&#39;,&#39;11:49&#39;,&#39;12:04&#39;,&#39;12:19&#39;,&#39;12:34&#39;,&#39;12:49&#39;,&#39;13:04&#39;,&#39;13:19&#39;,&#39;13:34&#39;,&#39;13:49&#39;,&#39;14:04&#39;,&#39;14:19&#39;,&#39;14:34&#39;,&#39;14:49&#39;,&#39;15:04&#39;,&#39;15:19&#39;,&#39;15:34&#39;,&#39;15:49&#39;,&#39;16:04&#39;,&#39;16:19&#39;,&#39;16:34&#39;,&#39;16:49&#39;,&#39;17:04&#39;,&#39;17:19&#39;,&#39;17:34&#39;,&#39;17:49&#39;,&#39;18:04&#39;,&#39;18:19&#39;,&#39;18:34&#39;,&#39;18:49&#39;,&#39;19:04&#39;,&#39;19:19&#39;,&#39;19:34&#39;,&#39;19:49&#39;,&#39;20:04&#39;,&#39;20:19&#39;,&#39;20:34&#39;,&#39;20:49&#39;,&#39;21:04&#39;,&#39;21:19&#39;,&#39;21:34&#39;,&#39;21:49&#39;,&#39;22:04&#39;,&#39;22:19&#39;,&#39;22:34&#39;],<br>
+    up: [&#39;5:54&#39;,&#39;6:09&#39;,&#39;6:24&#39;,&#39;6:39&#39;,&#39;6:54&#39;,&#39;7:09&#39;,&#39;7:24&#39;,&#39;7:39&#39;,&#39;7:54&#39;,&#39;8:09&#39;,&#39;8:24&#39;,&#39;8:39&#39;,&#39;8:54&#39;,&#39;9:09&#39;,&#39;9:24&#39;,&#39;9:39&#39;,&#39;9:54&#39;,&#39;10:09&#39;,&#39;10:24&#39;,&#39;10:39&#39;,&#39;10:54&#39;,&#39;11:09&#39;,&#39;11:24&#39;,&#39;11:39&#39;,&#39;11:54&#39;,&#39;12:09&#39;,&#39;12:24&#39;,&#39;12:39&#39;,&#39;12:54&#39;,&#39;13:09&#39;,&#39;13:24&#39;,&#39;13:39&#39;,&#39;13:54&#39;,&#39;14:09&#39;,&#39;14:24&#39;,&#39;14:39&#39;,&#39;14:54&#39;,&#39;15:09&#39;,&#39;15:24&#39;,&#39;15:39&#39;,&#39;15:54&#39;,&#39;16:09&#39;,&#39;16:24&#39;,&#39;16:39&#39;,&#39;16:54&#39;,&#39;17:09&#39;,&#39;17:24&#39;,&#39;17:39&#39;,&#39;17:54&#39;,&#39;18:09&#39;,&#39;18:24&#39;,&#39;18:39&#39;,&#39;18:54&#39;,&#39;19:09&#39;,&#39;19:24&#39;,&#39;19:39&#39;,&#39;19:54&#39;,&#39;20:09&#39;,&#39;20:24&#39;,&#39;20:39&#39;,&#39;20:54&#39;,&#39;21:09&#39;,&#39;21:24&#39;,&#39;21:39&#39;,&#39;21:54&#39;,&#39;22:09&#39;,&#39;22:24&#39;,&#39;22:39&#39;]<br>
+  },<br>
+  &#39;فضیلت&#39;: {<br>
+    down: [&#39;6:06&#39;,&#39;6:21&#39;,&#39;6:36&#39;,&#39;6:51&#39;,&#39;7:06&#39;,&#39;7:21&#39;,&#39;7:36&#39;,&#39;7:51&#39;,&#39;8:06&#39;,&#39;8:21&#39;,&#39;8:36&#39;,&#39;8:51&#39;,&#39;9:06&#39;,&#39;9:21&#39;,&#39;9:36&#39;,&#39;9:51&#39;,&#39;10:06&#39;,&#39;10:21&#39;,&#39;10:36&#39;,&#39;10:51&#39;,&#39;11:06&#39;,&#39;11:21&#39;,&#39;11:36&#39;,&#39;11:51&#39;,&#39;12:06&#39;,&#39;12:21&#39;,&#39;12:36&#39;,&#39;12:51&#39;,&#39;13:06&#39;,&#39;13:21&#39;,&#39;13:36&#39;,&#39;13:51&#39;,&#39;14:06&#39;,&#39;14:21&#39;,&#39;14:36&#39;,&#39;14:51&#39;,&#39;15:06&#39;,&#39;15:21&#39;,&#39;15:36&#39;,&#39;15:51&#39;,&#39;16:06&#39;,&#39;16:21&#39;,&#39;16:36&#39;,&#39;16:51&#39;,&#39;17:06&#39;,&#39;17:21&#39;,&#39;17:36&#39;,&#39;17:51&#39;,&#39;18:06&#39;,&#39;18:21&#39;,&#39;18:36&#39;,&#39;18:51&#39;,&#39;19:06&#39;,&#39;19:21&#39;,&#39;19:36&#39;,&#39;19:51&#39;,&#39;20:06&#39;,&#39;20:21&#39;,&#39;20:36&#39;,&#39;20:51&#39;,&#39;21:06&#39;,&#39;21:21&#39;,&#39;21:36&#39;,&#39;21:51&#39;,&#39;22:06&#39;,&#39;22:21&#39;,&#39;22:36&#39;],<br>
+    up: [&#39;5:52&#39;,&#39;6:07&#39;,&#39;6:22&#39;,&#39;6:37&#39;,&#39;6:52&#39;,&#39;7:07&#39;,&#39;7:22&#39;,&#39;7:37&#39;,&#39;7:52&#39;,&#39;8:07&#39;,&#39;8:22&#39;,&#39;8:37&#39;,&#39;8:52&#39;,&#39;9:07&#39;,&#39;9:22&#39;,&#39;9:37&#39;,&#39;9:52&#39;,&#39;10:07&#39;,&#39;10:22&#39;,&#39;10:37&#39;,&#39;10:52&#39;,&#39;11:07&#39;,&#39;11:22&#39;,&#39;11:37&#39;,&#39;11:52&#39;,&#39;12:07&#39;,&#39;12:22&#39;,&#39;12:37&#39;,&#39;12:52&#39;,&#39;13:07&#39;,&#39;13:22&#39;,&#39;13:37&#39;,&#39;13:52&#39;,&#39;14:07&#39;,&#39;14:22&#39;,&#39;14:37&#39;,&#39;14:52&#39;,&#39;15:07&#39;,&#39;15:22&#39;,&#39;15:37&#39;,&#39;15:52&#39;,&#39;16:07&#39;,&#39;16:22&#39;,&#39;16:37&#39;,&#39;16:52&#39;,&#39;17:07&#39;,&#39;17:22&#39;,&#39;17:37&#39;,&#39;17:52&#39;,&#39;18:07&#39;,&#39;18:22&#39;,&#39;18:37&#39;,&#39;18:52&#39;,&#39;19:07&#39;,&#39;19:22&#39;,&#39;19:37&#39;,&#39;19:52&#39;,&#39;20:07&#39;,&#39;20:22&#39;,&#39;20:37&#39;,&#39;20:52&#39;,&#39;21:07&#39;,&#39;21:22&#39;,&#39;21:37&#39;,&#39;21:52&#39;,&#39;22:07&#39;,&#39;22:22&#39;,&#39;22:37&#39;]<br>
+  },<br>
+  &#39;غدیر&#39;: {<br>
+    down: [&#39;6:10&#39;,&#39;6:25&#39;,&#39;6:40&#39;,&#39;6:55&#39;,&#39;7:10&#39;,&#39;7:25&#39;,&#39;7:40&#39;,&#39;7:55&#39;,&#39;8:10&#39;,&#39;8:25&#39;,&#39;8:40&#39;,&#39;8:55&#39;,&#39;9:10&#39;,&#39;9:25&#39;,&#39;9:40&#39;,&#39;9:55&#39;,&#39;10:10&#39;,&#39;10:25&#39;,&#39;10:40&#39;,&#39;10:55&#39;,&#39;11:10&#39;,&#39;11:25&#39;,&#39;11:40&#39;,&#39;11:55&#39;,&#39;12:10&#39;,&#39;12:25&#39;,&#39;12:40&#39;,&#39;12:55&#39;,&#39;13:10&#39;,&#39;13:25&#39;,&#39;13:40&#39;,&#39;13:55&#39;,&#39;14:10&#39;,&#39;14:25&#39;,&#39;14:40&#39;,&#39;14:55&#39;,&#39;15:10&#39;,&#39;15:25&#39;,&#39;15:40&#39;,&#39;15:55&#39;,&#39;16:10&#39;,&#39;16:25&#39;,&#39;16:40&#39;,&#39;16:55&#39;,&#39;17:10&#39;,&#39;17:25&#39;,&#39;17:40&#39;,&#39;17:55&#39;,&#39;18:10&#39;,&#39;18:25&#39;,&#39;18:40&#39;,&#39;18:55&#39;,&#39;19:10&#39;,&#39;19:25&#39;,&#39;19:40&#39;,&#39;19:55&#39;,&#39;20:10&#39;,&#39;20:25&#39;,&#39;20:40&#39;,&#39;20:55&#39;,&#39;21:10&#39;,&#39;21:25&#39;,&#39;21:40&#39;,&#39;21:55&#39;,&#39;22:10&#39;,&#39;22:25&#39;,&#39;22:40&#39;],<br>
+    up: [&#39;5:48&#39;,&#39;6:03&#39;,&#39;6:18&#39;,&#39;6:33&#39;,&#39;6:48&#39;,&#39;7:03&#39;,&#39;7:18&#39;,&#39;7:33&#39;,&#39;7:48&#39;,&#39;8:03&#39;,&#39;8:18&#39;,&#39;8:33&#39;,&#39;8:48&#39;,&#39;9:03&#39;,&#39;9:18&#39;,&#39;9:33&#39;,&#39;9:48&#39;,&#39;10:03&#39;,&#39;10:18&#39;,&#39;10:33&#39;,&#39;10:48&#39;,&#39;11:03&#39;,&#39;11:18&#39;,&#39;11:33&#39;,&#39;11:48&#39;,&#39;12:03&#39;,&#39;12:18&#39;,&#39;12:33&#39;,&#39;12:48&#39;,&#39;13:03&#39;,&#39;13:18&#39;,&#39;13:33&#39;,&#39;13:48&#39;,&#39;14:03&#39;,&#39;14:18&#39;,&#39;14:33&#39;,&#39;14:48&#39;,&#39;15:03&#39;,&#39;15:18&#39;,&#39;15:33&#39;,&#39;15:48&#39;,&#39;16:03&#39;,&#39;16:18&#39;,&#39;16:33&#39;,&#39;16:48&#39;,&#39;17:03&#39;,&#39;17:18&#39;,&#39;17:33&#39;,&#39;17:48&#39;,&#39;18:03&#39;,&#39;18:18&#39;,&#39;18:33&#39;,&#39;18:48&#39;,&#39;19:03&#39;,&#39;19:18&#39;,&#39;19:33&#39;,&#39;19:48&#39;,&#39;20:03&#39;,&#39;20:18&#39;,&#39;20:33&#39;,&#39;20:48&#39;,&#39;21:03&#39;,&#39;21:18&#39;,&#39;21:33&#39;,&#39;21:48&#39;,&#39;22:03&#39;,&#39;22:18&#39;,&#39;22:33&#39;]<br>
+  },<br>
+  &#39;رازی&#39;: {<br>
+    down: [&#39;6:08&#39;,&#39;6:23&#39;,&#39;6:38&#39;,&#39;6:53&#39;,&#39;7:08&#39;,&#39;7:23&#39;,&#39;7:38&#39;,&#39;7:53&#39;,&#39;8:08&#39;,&#39;8:23&#39;,&#39;8:38&#39;,&#39;8:53&#39;,&#39;9:08&#39;,&#39;9:23&#39;,&#39;9:38&#39;,&#39;9:53&#39;,&#39;10:08&#39;,&#39;10:23&#39;,&#39;10:38&#39;,&#39;10:53&#39;,&#39;11:08&#39;,&#39;11:23&#39;,&#39;11:38&#39;,&#39;11:53&#39;,&#39;12:08&#39;,&#39;12:23&#39;,&#39;12:38&#39;,&#39;12:53&#39;,&#39;13:08&#39;,&#39;13:23&#39;,&#39;13:38&#39;,&#39;13:53&#39;,&#39;14:08&#39;,&#39;14:23&#39;,&#39;14:38&#39;,&#39;14:53&#39;,&#39;15:08&#39;,&#39;15:23&#39;,&#39;15:38&#39;,&#39;15:53&#39;,&#39;16:08&#39;,&#39;16:23&#39;,&#39;16:38&#39;,&#39;16:53&#39;,&#39;17:08&#39;,&#39;17:23&#39;,&#39;17:38&#39;,&#39;17:53&#39;,&#39;18:08&#39;,&#39;18:23&#39;,&#39;18:38&#39;,&#39;18:53&#39;,&#39;19:08&#39;,&#39;19:23&#39;,&#39;19:38&#39;,&#39;19:53&#39;,&#39;20:08&#39;,&#39;20:23&#39;,&#39;20:38&#39;,&#39;20:53&#39;,&#39;21:08&#39;,&#39;21:23&#39;,&#39;21:38&#39;,&#39;21:53&#39;,&#39;22:08&#39;,&#39;22:23&#39;,&#39;22:38&#39;],<br>
+    up: [&#39;5:50&#39;,&#39;6:05&#39;,&#39;6:20&#39;,&#39;6:35&#39;,&#39;6:50&#39;,&#39;7:05&#39;,&#39;7:20&#39;,&#39;7:35&#39;,&#39;7:50&#39;,&#39;8:05&#39;,&#39;8:20&#39;,&#39;8:35&#39;,&#39;8:50&#39;,&#39;9:05&#39;,&#39;9:20&#39;,&#39;9:35&#39;,&#39;9:50&#39;,&#39;10:05&#39;,&#39;10:20&#39;,&#39;10:35&#39;,&#39;10:50&#39;,&#39;11:05&#39;,&#39;11:20&#39;,&#39;11:35&#39;,&#39;11:50&#39;,&#39;12:05&#39;,&#39;12:20&#39;,&#39;12:35&#39;,&#39;12:50&#39;,&#39;13:05&#39;,&#39;13:20&#39;,&#39;13:35&#39;,&#39;13:50&#39;,&#39;14:05&#39;,&#39;14:20&#39;,&#39;14:35&#39;,&#39;14:50&#39;,&#39;15:05&#39;,&#39;15:20&#39;,&#39;15:35&#39;,&#39;15:50&#39;,&#39;16:05&#39;,&#39;16:20&#39;,&#39;16:35&#39;,&#39;16:50&#39;,&#39;17:05&#39;,&#39;17:20&#39;,&#39;17:35&#39;,&#39;17:50&#39;,&#39;18:05&#39;,&#39;18:20&#39;,&#39;18:35&#39;,&#39;18:50&#39;,&#39;19:05&#39;,&#39;19:20&#39;,&#39;19:35&#39;,&#39;19:50&#39;,&#39;20:05&#39;,&#39;20:20&#39;,&#39;20:35&#39;,&#39;20:50&#39;,&#39;21:05&#39;,&#39;21:20&#39;,&#39;21:35&#39;,&#39;21:50&#39;,&#39;22:05&#39;,&#39;22:20&#39;,&#39;22:35&#39;]<br>
+  },<br>
+  &#39;جانبازان&#39;: {<br>
+    down: [&#39;6:12&#39;,&#39;6:27&#39;,&#39;6:42&#39;,&#39;6:57&#39;,&#39;7:12&#39;,&#39;7:27&#39;,&#39;7:42&#39;,&#39;7:57&#39;,&#39;8:12&#39;,&#39;8:27&#39;,&#39;8:42&#39;,&#39;8:57&#39;,&#39;9:12&#39;,&#39;9:27&#39;,&#39;9:42&#39;,&#39;9:57&#39;,&#39;10:12&#39;,&#39;10:27&#39;,&#39;10:42&#39;,&#39;10:57&#39;,&#39;11:12&#39;,&#39;11:27&#39;,&#39;11:42&#39;,&#39;11:57&#39;,&#39;12:12&#39;,&#39;12:27&#39;,&#39;12:42&#39;,&#39;12:57&#39;,&#39;13:12&#39;,&#39;13:27&#39;,&#39;13:42&#39;,&#39;13:57&#39;,&#39;14:12&#39;,&#39;14:27&#39;,&#39;14:42&#39;,&#39;14:57&#39;,&#39;15:12&#39;,&#39;15:27&#39;,&#39;15:42&#39;,&#39;15:57&#39;,&#39;16:12&#39;,&#39;16:27&#39;,&#39;16:42&#39;,&#39;16:57&#39;,&#39;17:12&#39;,&#39;17:27&#39;,&#39;17:42&#39;,&#39;17:57&#39;,&#39;18:12&#39;,&#39;18:27&#39;,&#39;18:42&#39;,&#39;18:57&#39;,&#39;19:12&#39;,&#39;19:27&#39;,&#39;19:42&#39;,&#39;19:57&#39;,&#39;20:12&#39;,&#39;20:27&#39;,&#39;20:42&#39;,&#39;20:57&#39;,&#39;21:12&#39;,&#39;21:27&#39;,&#39;21:42&#39;,&#39;21:57&#39;,&#39;22:12&#39;,&#39;22:27&#39;,&#39;22:42&#39;],<br>
+    up: [&#39;5:46&#39;,&#39;6:01&#39;,&#39;6:16&#39;,&#39;6:31&#39;,&#39;6:46&#39;,&#39;7:01&#39;,&#39;7:16&#39;,&#39;7:31&#39;,&#39;7:46&#39;,&#39;8:01&#39;,&#39;8:16&#39;,&#39;8:31&#39;,&#39;8:46&#39;,&#39;9:01&#39;,&#39;9:16&#39;,&#39;9:31&#39;,&#39;9:46&#39;,&#39;10:01&#39;,&#39;10:16&#39;,&#39;10:31&#39;,&#39;10:46&#39;,&#39;11:01&#39;,&#39;11:16&#39;,&#39;11:31&#39;,&#39;11:46&#39;,&#39;12:01&#39;,&#39;12:16&#39;,&#39;12:31&#39;,&#39;12:46&#39;,&#39;13:01&#39;,&#39;13:16&#39;,&#39;13:31&#39;,&#39;13:46&#39;,&#39;14:01&#39;,&#39;14:16&#39;,&#39;14:31&#39;,&#39;14:46&#39;,&#39;15:01&#39;,&#39;15:16&#39;,&#39;15:31&#39;,&#39;15:46&#39;,&#39;16:01&#39;,&#39;16:16&#39;,&#39;16:31&#39;,&#39;16:46&#39;,&#39;17:01&#39;,&#39;17:16&#39;,&#39;17:31&#39;,&#39;17:46&#39;,&#39;18:01&#39;,&#39;18:16&#39;,&#39;18:31&#39;,&#39;18:46&#39;,&#39;19:01&#39;,&#39;19:16&#39;,&#39;19:31&#39;,&#39;19:46&#39;,&#39;20:01&#39;,&#39;20:16&#39;,&#39;20:31&#39;,&#39;20:46&#39;,&#39;21:01&#39;,&#39;21:16&#39;,&#39;21:31&#39;,&#39;21:46&#39;,&#39;22:01&#39;,&#39;22:16&#39;,&#39;22:31&#39;]<br>
+  },<br>
+  &#39;شهید دوران&#39;: {<br>
+    down: [&#39;6:16&#39;,&#39;6:31&#39;,&#39;6:46&#39;,&#39;7:01&#39;,&#39;7:16&#39;,&#39;7:31&#39;,&#39;7:46&#39;,&#39;8:01&#39;,&#39;8:16&#39;,&#39;8:31&#39;,&#39;8:46&#39;,&#39;9:01&#39;,&#39;9:16&#39;,&#39;9:31&#39;,&#39;9:46&#39;,&#39;10:01&#39;,&#39;10:16&#39;,&#39;10:31&#39;,&#39;10:46&#39;,&#39;11:01&#39;,&#39;11:16&#39;,&#39;11:31&#39;,&#39;11:46&#39;,&#39;12:01&#39;,&#39;12:16&#39;,&#39;12:31&#39;,&#39;12:46&#39;,&#39;13:01&#39;,&#39;13:16&#39;,&#39;13:31&#39;,&#39;13:46&#39;,&#39;14:01&#39;,&#39;14:16&#39;,&#39;14:31&#39;,&#39;14:46&#39;,&#39;15:01&#39;,&#39;15:16&#39;,&#39;15:31&#39;,&#39;15:46&#39;,&#39;16:01&#39;,&#39;16:16&#39;,&#39;16:31&#39;,&#39;16:46&#39;,&#39;17:01&#39;,&#39;17:16&#39;,&#39;17:31&#39;,&#39;17:46&#39;,&#39;18:01&#39;,&#39;18:16&#39;,&#39;18:31&#39;,&#39;18:46&#39;,&#39;19:01&#39;,&#39;19:16&#39;,&#39;19:31&#39;,&#39;19:46&#39;,&#39;20:01&#39;,&#39;20:16&#39;,&#39;20:31&#39;,&#39;20:46&#39;,&#39;21:01&#39;,&#39;21:16&#39;,&#39;21:31&#39;,&#39;21:46&#39;,&#39;22:01&#39;,&#39;22:16&#39;,&#39;22:31&#39;],<br>
+    up: [&#39;5:42&#39;,&#39;5:57&#39;,&#39;6:12&#39;,&#39;6:27&#39;,&#39;6:42&#39;,&#39;6:57&#39;,&#39;7:12&#39;,&#39;7:27&#39;,&#39;7:42&#39;,&#39;7:57&#39;,&#39;8:12&#39;,&#39;8:27&#39;,&#39;8:42&#39;,&#39;8:57&#39;,&#39;9:12&#39;,&#39;9:27&#39;,&#39;9:42&#39;,&#39;9:57&#39;,&#39;10:12&#39;,&#39;10:27&#39;,&#39;10:42&#39;,&#39;10:57&#39;,&#39;11:12&#39;,&#39;11:27&#39;,&#39;11:42&#39;,&#39;11:57&#39;,&#39;12:12&#39;,&#39;12:27&#39;,&#39;12:42&#39;,&#39;12:57&#39;,&#39;13:12&#39;,&#39;13:27&#39;,&#39;13:42&#39;,&#39;13:57&#39;,&#39;14:12&#39;,&#39;14:27&#39;,&#39;14:42&#39;,&#39;14:57&#39;,&#39;15:12&#39;,&#39;15:27&#39;,&#39;15:42&#39;,&#39;15:57&#39;,&#39;16:12&#39;,&#39;16:27&#39;,&#39;16:42&#39;,&#39;16:57&#39;,&#39;17:12&#39;,&#39;17:27&#39;,&#39;17:42&#39;,&#39;17:57&#39;,&#39;18:12&#39;,&#39;18:27&#39;,&#39;18:42&#39;,&#39;18:57&#39;,&#39;19:12&#39;,&#39;19:27&#39;,&#39;19:42&#39;,&#39;19:57&#39;,&#39;20:12&#39;,&#39;20:27&#39;,&#39;20:42&#39;,&#39;20:57&#39;,&#39;21:12&#39;,&#39;21:27&#39;,&#39;21:42&#39;,&#39;21:57&#39;,&#39;22:12&#39;,&#39;22:27&#39;,&#39;22:42&#39;]<br>
+  },<br>
+  &#39;فرصت شیرازی&#39;: {<br>
+    down: [&#39;6:14&#39;,&#39;6:29&#39;,&#39;6:44&#39;,&#39;6:59&#39;,&#39;7:14&#39;,&#39;7:29&#39;,&#39;7:44&#39;,&#39;7:59&#39;,&#39;8:14&#39;,&#39;8:29&#39;,&#39;8:44&#39;,&#39;8:59&#39;,&#39;9:14&#39;,&#39;9:29&#39;,&#39;9:44&#39;,&#39;9:59&#39;,&#39;10:14&#39;,&#39;10:29&#39;,&#39;10:44&#39;,&#39;10:59&#39;,&#39;11:14&#39;,&#39;11:29&#39;,&#39;11:44&#39;,&#39;11:59&#39;,&#39;12:14&#39;,&#39;12:29&#39;,&#39;12:44&#39;,&#39;12:59&#39;,&#39;13:14&#39;,&#39;13:29&#39;,&#39;13:44&#39;,&#39;13:59&#39;,&#39;14:14&#39;,&#39;14:29&#39;,&#39;14:44&#39;,&#39;14:59&#39;,&#39;15:14&#39;,&#39;15:29&#39;,&#39;15:44&#39;,&#39;15:59&#39;,&#39;16:14&#39;,&#39;16:29&#39;,&#39;16:44&#39;,&#39;16:59&#39;,&#39;17:14&#39;,&#39;17:29&#39;,&#39;17:44&#39;,&#39;17:59&#39;,&#39;18:14&#39;,&#39;18:29&#39;,&#39;18:44&#39;,&#39;18:59&#39;,&#39;19:14&#39;,&#39;19:29&#39;,&#39;19:44&#39;,&#39;19:59&#39;,&#39;20:14&#39;,&#39;20:29&#39;,&#39;20:44&#39;,&#39;20:59&#39;,&#39;21:14&#39;,&#39;21:29&#39;,&#39;21:44&#39;,&#39;21:59&#39;,&#39;22:14&#39;,&#39;22:29&#39;,&#39;22:44&#39;],<br>
+    up: [&#39;5:44&#39;,&#39;5:59&#39;,&#39;6:14&#39;,&#39;6:29&#39;,&#39;6:44&#39;,&#39;6:59&#39;,&#39;7:14&#39;,&#39;7:29&#39;,&#39;7:44&#39;,&#39;7:59&#39;,&#39;8:14&#39;,&#39;8:29&#39;,&#39;8:44&#39;,&#39;8:59&#39;,&#39;9:14&#39;,&#39;9:29&#39;,&#39;9:44&#39;,&#39;9:59&#39;,&#39;10:14&#39;,&#39;10:29&#39;,&#39;10:44&#39;,&#39;10:59&#39;,&#39;11:14&#39;,&#39;11:29&#39;,&#39;11:44&#39;,&#39;11:59&#39;,&#39;12:14&#39;,&#39;12:29&#39;,&#39;12:44&#39;,&#39;12:59&#39;,&#39;13:14&#39;,&#39;13:29&#39;,&#39;13:44&#39;,&#39;13:59&#39;,&#39;14:14&#39;,&#39;14:29&#39;,&#39;14:44&#39;,&#39;14:59&#39;,&#39;15:14&#39;,&#39;15:29&#39;,&#39;15:44&#39;,&#39;15:59&#39;,&#39;16:14&#39;,&#39;16:29&#39;,&#39;16:44&#39;,&#39;16:59&#39;,&#39;17:14&#39;,&#39;17:29&#39;,&#39;17:44&#39;,&#39;17:59&#39;,&#39;18:14&#39;,&#39;18:29&#39;,&#39;18:44&#39;,&#39;18:59&#39;,&#39;19:14&#39;,&#39;19:29&#39;,&#39;19:44&#39;,&#39;19:59&#39;,&#39;20:14&#39;,&#39;20:29&#39;,&#39;20:44&#39;,&#39;20:59&#39;,&#39;21:14&#39;,&#39;21:29&#39;,&#39;21:44&#39;,&#39;21:59&#39;,&#39;22:14&#39;,&#39;22:29&#39;,&#39;22:44&#39;]<br>
+  },<br>
+  &#39;شهید دستغیب&#39;: {<br>
+    down: [],<br>
+    up: [&#39;5:40&#39;,&#39;5:55&#39;,&#39;6:10&#39;,&#39;6:25&#39;,&#39;6:40&#39;,&#39;6:55&#39;,&#39;7:10&#39;,&#39;7:25&#39;,&#39;7:40&#39;,&#39;7:55&#39;,&#39;8:10&#39;,&#39;8:25&#39;,&#39;8:40&#39;,&#39;8:55&#39;,&#39;9:10&#39;,&#39;9:25&#39;,&#39;9:40&#39;,&#39;9:55&#39;,&#39;10:10&#39;,&#39;10:25&#39;,&#39;10:40&#39;,&#39;10:55&#39;,&#39;11:10&#39;,&#39;11:25&#39;,&#39;11:40&#39;,&#39;11:55&#39;,&#39;12:10&#39;,&#39;12:25&#39;,&#39;12:40&#39;,&#39;12:55&#39;,&#39;13:10&#39;,&#39;13:25&#39;,&#39;13:40&#39;,&#39;13:55&#39;,&#39;14:10&#39;,&#39;14:25&#39;,&#39;14:40&#39;,&#39;14:55&#39;,&#39;15:10&#39;,&#39;15:25&#39;,&#39;15:40&#39;,&#39;15:55&#39;,&#39;16:10&#39;,&#39;16:25&#39;,&#39;16:40&#39;,&#39;16:55&#39;,&#39;17:10&#39;,&#39;17:25&#39;,&#39;17:40&#39;,&#39;17:55&#39;,&#39;18:10&#39;,&#39;18:25&#39;,&#39;18:40&#39;,&#39;18:55&#39;,&#39;19:10&#39;,&#39;19:25&#39;,&#39;19:40&#39;,&#39;19:55&#39;,&#39;20:10&#39;,&#39;20:25&#39;,&#39;20:40&#39;,&#39;20:55&#39;,&#39;21:10&#39;]<br>
+  }<br>
+};<br>
+<br>
+/* اسم کوتاه ایستگاه بعدی و قبلی */<br>
+function getPrevStation(idx){ return idx &gt; 0 ? METRO_STATIONS_ORDER[idx - 1] : null; }<br>
+function getNextStation(idx){ return idx &lt; METRO_STATIONS_ORDER.length - 1 ? METRO_STATIONS_ORDER[idx + 1] : null; }<br>
+<br>
+/* تبدیل &quot;17:35&quot; به دقیقه از نیمه‌شب */<br>
+function timeToMin(str){<br>
+  const p = str.split(&#39;:&#39;);<br>
+  return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);<br>
+}<br>
+/* تبدیل دقیقه به &quot;17:35&quot; */<br>
+function minToTime(min){<br>
+  const h = Math.floor(min / 60);<br>
+  const m = min % 60;<br>
+  return String(h).padStart(2,&#39;0&#39;) + &#39;:&#39; + String(m).padStart(2,&#39;0&#39;);<br>
+}<br>
+/* ساعت فعلی به وقت ایران */<br>
+function getIranNow(){<br>
+  const now = new Date();<br>
+  const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;<br>
+  return new Date(utcMs + 3.5 * 3600000);<br>
+}<br>
+function getIranNowMinutes(){<br>
+  const t = getIranNow();<br>
+  return t.getHours() * 60 + t.getMinutes();<br>
+}<br>
+function getIranNowString(){<br>
+  const t = getIranNow();<br>
+  return String(t.getHours()).padStart(2,&#39;0&#39;) + &#39;:&#39; + String(t.getMinutes()).padStart(2,&#39;0&#39;);<br>
+}<br>
+<br>
+/* ساخت کارت لیست ایستگاه‌ها */<br>
+function buildMetroStationsListHTML(){<br>
+  let html = &#39;&lt;div class=&quot;metro-wrap&quot;&gt;&#39;;<br>
+  html += &#39;&lt;div class=&quot;metro-title&quot;&gt;مترو شیراز — خط ۱&lt;/div&gt;&#39;;<br>
+  html += &#39;&lt;div class=&quot;metro-sub&quot;&gt;⏰ ساعت ایران: &lt;span class=&quot;metro-live-clock&quot; id=&quot;metroLiveClock&quot;&gt;&#39; + getIranNowString() + &#39;&lt;/span&gt;&lt;/div&gt;&#39;;<br>
+  html += &#39;&lt;ul class=&quot;metro-stations-list&quot;&gt;&#39;;<br>
+  METRO_STATIONS_ORDER.forEach(function(name, i){<br>
+    html += &#39;&lt;li class=&quot;metro-station-row&quot; onclick=&quot;showMetroStation(\&#39;&#39; + name.replace(/&#39;/g, &quot;\\\\&#39;&quot;) + &#39;\&#39;)&quot;&gt;&#39; +<br>
+              &#39;&lt;span class=&quot;metro-station-num&quot;&gt;&#39; + (i + 1) + &#39;&lt;/span&gt;&#39; +<br>
+              &#39;&lt;span class=&quot;metro-station-name&quot;&gt;&#39; + name + &#39;&lt;/span&gt;&#39; +<br>
+              &#39;&lt;span class=&quot;metro-station-arrow&quot;&gt;◀&lt;/span&gt;&#39; +<br>
+            &#39;&lt;/li&gt;&#39;;<br>
+  });<br>
+  html += &#39;&lt;/ul&gt;&#39;;<br>
+  html += &#39;&lt;div class=&quot;metro-footer-note&quot;&gt;📍 روی هر ایستگاه بزن تا زمان‌بندی دقیق هر دو جهت رو ببینی.&lt;/div&gt;&#39;;<br>
+  html += &#39;&lt;/div&gt;&#39;;<br>
+  return html;<br>
+}<br>
+<br>
+/* ساخت کارت جزئیات یک ایستگاه */<br>
+function buildMetroStationDetailHTML(stationName){<br>
+  const idx = METRO_STATIONS_ORDER.indexOf(stationName);<br>
+  if (idx &lt; 0) return &#39;&lt;div class=&quot;metro-detail&quot;&gt;ایستگاه پیدا نشد&lt;/div&gt;&#39;;<br>
+  const times = METRO_TIMES[stationName];<br>
+  if (!times) return &#39;&lt;div class=&quot;metro-detail&quot;&gt;زمان‌بندی برای این ایستگاه ثبت نشده&lt;/div&gt;&#39;;<br>
+<br>
+  const nowMin = getIranNowMinutes();<br>
+  const nowStr = getIranNowString();<br>
+  const prevName = getPrevStation(idx);<br>
+  const nextName = getNextStation(idx);<br>
+<br>
+  let html = &#39;&lt;div class=&quot;metro-detail&quot; id=&quot;metroDetail&quot;&gt;&#39;;<br>
+  html += &#39;&lt;div class=&quot;metro-detail-head&quot;&gt;&#39;;<br>
+  html +=   &#39;&lt;div class=&quot;metro-detail-name&quot;&gt;&#39; + stationName + &#39;&lt;/div&gt;&#39;;<br>
+  html +=   &#39;&lt;button class=&quot;metro-back-btn&quot; onclick=&quot;backToMetroList()&quot;&gt;↩ بازگشت&lt;/button&gt;&#39;;<br>
+  html += &#39;&lt;/div&gt;&#39;;<br>
+  html += &#39;&lt;div class=&quot;metro-now&quot;&gt;⏰ ساعت ایران الان: &lt;span id=&quot;metroLiveClockDetail&quot;&gt;&#39; + nowStr + &#39;&lt;/span&gt;&lt;/div&gt;&#39;;<br>
+<br>
+  // جهت DOWN = به سمت شهید دستغیب (انتهای خط)<br>
+  html += &#39;&lt;div class=&quot;metro-dir down&quot;&gt;&#39;;<br>
+  html +=   &#39;&lt;div class=&quot;metro-dir-title&quot;&gt;به سمت شهید دستغیب (انتهای خط)&lt;/div&gt;&#39;;<br>
+  if (prevName) html += &#39;&lt;div class=&quot;metro-dir-sub&quot;&gt;این قطار از سمت «&#39; + (nextName || &#39;—&#39;) + &#39;» می‌آید و بعد از این ایستگاه به «&#39; + prevName + &#39;» می‌رود&lt;/div&gt;&#39;;<br>
+  html +=   &#39;&lt;div class=&quot;metro-times&quot;&gt;&#39; + buildTimesRowsHTML(times.down, nowMin) + &#39;&lt;/div&gt;&#39;;<br>
+  html += &#39;&lt;/div&gt;&#39;;<br>
+<br>
+  // جهت UP = به سمت احسان (ابتدای خط)<br>
+  html += &#39;&lt;div class=&quot;metro-dir up&quot;&gt;&#39;;<br>
+  html +=   &#39;&lt;div class=&quot;metro-dir-title&quot;&gt;به سمت احسان (ابتدای خط)&lt;/div&gt;&#39;;<br>
+  if (nextName) html += &#39;&lt;div class=&quot;metro-dir-sub&quot;&gt;این قطار به سمت «&#39; + nextName + &#39;» و بعد به «&#39; + (prevName || &#39;—&#39;) + &#39;» می‌رود&lt;/div&gt;&#39;;<br>
+  html +=   &#39;&lt;div class=&quot;metro-times&quot;&gt;&#39; + buildTimesRowsHTML(times.up, nowMin) + &#39;&lt;/div&gt;&#39;;<br>
+  html += &#39;&lt;/div&gt;&#39;;<br>
+<br>
+  html += &#39;&lt;div class=&quot;metro-footer-note&quot;&gt;📌 سر فاصله حرکت: هر ۱۵ دقیقه | روزهای تعطیل: ۷:۰۵ تا ۲۱:۰۵&lt;/div&gt;&#39;;<br>
+  html += &#39;&lt;/div&gt;&#39;;<br>
+  return html;<br>
+}<br>
+<br>
+/* ساخت ردیف‌های زمان — مرتب‌شده بر اساس نزدیک‌ترین به الان */<br>
+function buildTimesRowsHTML(list, nowMin){<br>
+  if (!list || !list.length){<br>
+    return &#39;&lt;div class=&quot;metro-empty&quot;&gt;در این جهت قطاری ثبت نشده (مبدأ/مقصد)&lt;/div&gt;&#39;;<br>
+  }<br>
+  // پیدا کردن ایندکس نزدیک‌ترین زمان آینده<br>
+  let nextIdx = -1;<br>
+  for (let i = 0; i &lt; list.length; i++){<br>
+    if (timeToMin(list[i]) &gt;= nowMin){<br>
+      nextIdx = i;<br>
+      break;<br>
+    }<br>
+  }<br>
+  // مرتب‌سازی: چند تا قبل + چند تا بعد (5 قبل + 6 بعد)<br>
+  let rows = [];<br>
+  const start = nextIdx &lt; 0 ? list.length - 5 : Math.max(0, nextIdx - 3);<br>
+  const end = nextIdx &lt; 0 ? list.length : Math.min(list.length, nextIdx + 7);<br>
+<br>
+  for (let i = 0; i &lt; list.length; i++){<br>
+    const t = list[i];<br>
+    const tMin = timeToMin(t);<br>
+    const isPast = tMin &lt; nowMin;<br>
+    const isNext = (i === nextIdx);<br>
+    if (i &gt;= start &amp;&amp; i &lt; end){<br>
+      const cls = isNext ? &#39;next&#39; : (isPast ? &#39;past&#39; : &#39;&#39;);<br>
+      const label = isNext ? &#39;⏭️ قطار بعدی&#39; : (isPast ? &#39;قطار قبلی&#39; : &#39;قطار آینده&#39;);<br>
+      let countdown = &#39;&#39;;<br>
+      if (isNext){<br>
+        countdown = &#39;&lt;span class=&quot;metro-countdown&quot;&gt;(&#39; + (tMin - nowMin) + &#39; دقیقه دیگر)&lt;/span&gt;&#39;;<br>
+      } else if (!isPast){<br>
+        countdown = &#39;&lt;span class=&quot;metro-countdown&quot;&gt;(&#39; + (tMin - nowMin) + &#39; دقیقه دیگر)&lt;/span&gt;&#39;;<br>
+      } else {<br>
+        countdown = &#39;&lt;span class=&quot;metro-countdown&quot;&gt;(رفت)&lt;/span&gt;&#39;;<br>
+      }<br>
+      rows.push(&#39;&lt;div class=&quot;metro-time-row &#39; + cls + &#39;&quot;&gt;&#39; +<br>
+                  &#39;&lt;span class=&quot;metro-time-label&quot;&gt;&#39; + label + &#39;&lt;/span&gt;&#39; +<br>
+                  &#39;&lt;span&gt;&lt;span class=&quot;metro-time-val&quot;&gt;&#39; + t + &#39;&lt;/span&gt; &#39; + countdown + &#39;&lt;/span&gt;&#39; +<br>
+                &#39;&lt;/div&gt;&#39;);<br>
+    }<br>
+  }<br>
+  if (rows.length === 0){<br>
+    return &#39;&lt;div class=&quot;metro-empty&quot;&gt;امروز قطاری در این ساعت باقی نمانده&lt;/div&gt;&#39;;<br>
+  }<br>
+  return rows.join(&#39;&#39;);<br>
+}<br>
+<br>
+/* نمایش جزئیات ایستگاه در یک پیام جدید */<br>
+function showMetroStation(stationName){<br>
+  const div = document.createElement(&#39;div&#39;);<br>
+  div.className = &#39;msg ai&#39;;<br>
+  div.innerHTML = &#39;&lt;div class=&quot;av ai&quot;&gt;م&lt;/div&gt;&lt;div class=&quot;mc&quot;&gt;&lt;div class=&quot;mb&quot;&gt;&#39; + buildMetroStationDetailHTML(stationName) + &#39;&lt;/div&gt;&lt;/div&gt;&#39;;<br>
+  chat.appendChild(div);<br>
+  scrollBottom();<br>
+}<br>
+<br>
+/* بازگشت به لیست — با فرستادن پیام مجدد لیست */<br>
+function backToMetroList(){<br>
+  const div = document.createElement(&#39;div&#39;);<br>
+  div.className = &#39;msg ai&#39;;<br>
+  div.innerHTML = &#39;&lt;div class=&quot;av ai&quot;&gt;م&lt;/div&gt;&lt;div class=&quot;mc&quot;&gt;&lt;div class=&quot;mb&quot;&gt;&#39; + buildMetroStationsListHTML() + &#39;&lt;/div&gt;&lt;/div&gt;&#39;;<br>
+  chat.appendChild(div);<br>
+  scrollBottom();<br>
+}<br>
+<br>
+/* ================================================================<br>
+   ذرات<br>
+   ================================================================ */<br>
+function createParticles(){<br>
+  const c = document.getElementById(&#39;particles&#39;);<br>
+  if (!c) return;<br>
+  c.innerHTML = &#39;&#39;;<br>
+  const colors = [&#39;#4285f4&#39;,&#39;#9b72cb&#39;,&#39;#d96570&#39;,&#39;#f2a600&#39;,&#39;#a8c7fa&#39;,&#39;#00d9c0&#39;];<br>
+  const isMob = window.innerWidth &lt; 600;<br>
+  const count = isMob ? 20 : 35;<br>
+  for (let i = 0; i &lt; count; i++){<br>
+    const p = document.createElement(&#39;div&#39;);<br>
+    p.className = &#39;particle&#39;;<br>
+    const col = colors[(Math.random() * colors.length) | 0];<br>
+    p.style.left = (Math.random() * 100) + &#39;%&#39;;<br>
+    p.style.background = col;<br>
+    p.style.boxShadow = &#39;0 0 8px &#39; + col;<br>
+    p.style.animationDelay = (Math.random() * 12) + &#39;s&#39;;<br>
+    p.style.animationDuration = (10 + Math.random() * 8) + &#39;s&#39;;<br>
+    const s = (1.5 + Math.random() * 2.5) + &#39;px&#39;;<br>
+    p.style.width = s;<br>
+    p.style.height = s;<br>
+    c.appendChild(p);<br>
+  }<br>
+}<br>
+<br>
+/* ================================================================<br>
+   توابع کمکی<br>
+   ================================================================ */<br>
+function toast(msg, dur){<br>
+  dur = dur || 2200;<br>
+  const t = document.getElementById(&#39;toast&#39;);<br>
+  t.textContent = msg;<br>
+  t.classList.add(&#39;show&#39;);<br>
+  clearTimeout(t._t);<br>
+  t._t = setTimeout(function(){ t.classList.remove(&#39;show&#39;); }, dur);<br>
+}<br>
+function esc(t){<br>
+  const d = document.createElement(&#39;div&#39;);<br>
+  d.textContent = t;<br>
+  return d.innerHTML;<br>
+}<br>
+function scrollBottom(){<br>
+  requestAnimationFrame(function(){ chat.scrollTop = chat.scrollHeight; });<br>
+}<br>
+function pick(a){ return a[(Math.random() * a.length) | 0]; }<br>
+<br>
+/* ================================================================<br>
+   تشخیص سلام<br>
+   ================================================================ */<br>
+function isGreeting(text){<br>
+  const t = (text || &#39;&#39;).toLowerCase().trim();<br>
+  const clean = t.replace(/[^\u0600-\u06FF\s]/g, &#39;&#39;).trim();<br>
+  if (/^(سلام|سلم|درود|های|هی|hi|hello|hey|yo)/i.test(clean)) return true;<br>
+  if (/^(صبح بخیر|شب بخیر|عصر بخیر|ظهر بخیر|روز بخیر)/i.test(clean)) return true;<br>
+  if (clean === &#39;سلام&#39; || clean === &#39;درود&#39; || clean === &#39;سلام علیکم&#39; || clean === &#39;سلام علیک&#39;) return true;<br>
+  if (clean.startsWith(&#39;سلام &#39;) || clean.startsWith(&#39;درود &#39;)) return true;<br>
+  if (/^س+لام/i.test(clean)) return true;<br>
+  return false;<br>
+}<br>
+function greetingReply(){<br>
+  return pick([<br>
+    &#39;سلام! 👋&#39;,&#39;سلام رفیق! 😊&#39;,&#39;درود! 🌟&#39;,&#39;سلام! چطوری؟&#39;,<br>
+    &#39;هی سلام! 👋&#39;,&#39;سلام عزیز! 🌟&#39;,&#39;درود بر تو! 😊&#39;,&#39;سلام! خوش اومدی.&#39;<br>
+  ]);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   پاسخ آفلاین<br>
+   ================================================================ */<br>
+function offlineReply(text){<br>
+  const t = (text || &#39;&#39;).toLowerCase().trim();<br>
+  const clean = t.replace(/[^\u0600-\u06FF\s]/g, &#39;&#39;).trim();<br>
+  if (isGreeting(text)) return greetingReply();<br>
+  if (/(خداحافظ|بای|bye|خدانگهدار|فعلا|فعلاً|خدا نگهدار)/i.test(clean)){<br>
+    return pick([&#39;خداحافظ! 🌟&#39;,&#39;بای بای! 👋&#39;,&#39;خدانگهدار! 😊&#39;,&#39;فعلاً! 🌟&#39;]);<br>
+  }<br>
+  if (/(چطوری|حالت چطوره|خوبی|چخبر|چه خبر|چه خبرا|خوب هستی)/i.test(clean)){<br>
+    return pick([&#39;خوبم! 😄 تو چطوری؟&#39;,&#39;من که همیشه سرحالم! 😎&#39;,&#39;خوبم ممنون! 🌸 تو چه خبر؟&#39;,&#39;عالی! ⚡ تو بگو.&#39;]);<br>
+  }<br>
+  if (/(ممنون|مرسی|تشکر|سپاس|دستت درد نکنه)/i.test(clean)){<br>
+    return pick([&#39;خواهش! 🙏&#39;,&#39;قابلی نداشت! 😊&#39;,&#39;همیشه در خدمتم 🌟&#39;,&#39;خواهش می‌کنم!&#39;]);<br>
+  }<br>
+  if (/(کی هستی|اسمت چیه|تو کی ای|اسم شما|شما کی هستید)/i.test(clean)){<br>
+    return &#39;من هوش مصنوعی سام هستم 🤖 دستیار فارسی‌زبان شما که توسط محمد سام ملک زاده ساخته شده‌ام.&#39;;<br>
+  }<br>
+  return null;<br>
+}<br>
+<br>
+/* ================================================================<br>
+   تشخیص درخواست سایت همیار<br>
+   ================================================================ */<br>
+function isHamyarSiteRequest(text){<br>
+  if (!text) return false;<br>
+  const t = text.toLowerCase().trim();<br>
+  const clean = t.replace(/[^\u0600-\u06FF\s]/g, &#39;&#39;).trim();<br>
+  return /(سایت\s*همیار|همیار|همیار\.me|hamyar)/i.test(clean);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   تشخیص درخواست هواپیما<br>
+   ================================================================ */<br>
+function isAirplaneRequest(text){<br>
+  if (!text) return false;<br>
+  const t = text.toLowerCase();<br>
+  return /(هواپیما|هواپیمایی|فرودگاه|پرواز|airplane|flight|airport)/i.test(t);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   تشخیص درخواست مترو (عمومی → نشان)<br>
+   ================================================================ */<br>
+function isMetroRequest(text){<br>
+  if (!text) return false;<br>
+  const t = text.toLowerCase();<br>
+  return /(مترو|قطار\s*شهری|subway|metro|متروی|ایستگاه\s*مترو)/i.test(t);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   تشخیص درخواست اتوبوس<br>
+   ================================================================ */<br>
+function isBusRequest(text){<br>
+  if (!text) return false;<br>
+  const t = text.toLowerCase();<br>
+  return /(اتوبوس|بی\s*آر\s*تی|\bbrt\b|bus|اتوبوسرانی|ایستگاه\s*اتوبوس|ایستگاه\s*بی\s*آر\s*تی)/i.test(t);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   ⭐ تشخیص درخواست زمان‌بندی مترو (کارت تعاملی داخلی)<br>
+   ================================================================ */<br>
+function isMetroScheduleRequest(text){<br>
+  if (!text) return false;<br>
+  const t = text.toLowerCase();<br>
+  return /(زمان\s*بندی\s*مترو|زمانبندی\s*مترو|برنامه\s*مترو|ساعت\s*مترو|جدول\s*مترو)/i.test(t);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   ⭐ تشخیص درخواست اسنپ<br>
+   ================================================================ */<br>
+function isSnappRequest(text){<br>
+  if (!text) return false;<br>
+  const t = text.toLowerCase().trim();<br>
+  const clean = t.replace(/[^\u0600-\u06FF\s]/g, &#39;&#39;).trim();<br>
+  return /(اسنپ|snapp|تاکسی\s*اینترنتی|تاکسی\s*آنلاین|اسنپ\s*پی|اسنپ\s*فود|اسنپ\s*مارکت|اسنپ\s*تریپ|سوپر\s*اپ|سوپراپ)/i.test(clean);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   ⭐ تشخیص درخواست تلوبیون<br>
+   ================================================================ */<br>
+function isTelewebionRequest(text){<br>
+  if (!text) return false;<br>
+  const t = text.toLowerCase().trim();<br>
+  const clean = t.replace(/[^\u0600-\u06FF\s]/g, &#39;&#39;).trim();<br>
+  return /(تلوبیون|telewebion|پخش\s*زنده|پخش\s*زنده\s*تلویزیون|شبکه\s*های\s*تلویزیون|شبکه\s*تلویزیونی|آرشیو\s*تلویزیون|برنامه\s*های\s*تلویزیون)/i.test(clean);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   ⭐ تشخیص درخواست ترافیک<br>
+   ================================================================ */<br>
+function isTrafficRequest(text){<br>
+  if (!text) return false;<br>
+  const t = text.toLowerCase().trim();<br>
+  const clean = t.replace(/[^\u0600-\u06FF\s]/g, &#39;&#39;).trim();<br>
+  return /(ترافیک|traffic|trafficvision|ترافیک\s*زنده|وضعیت\s*ترافیک|ترافیک\s*شهر|دوربین\s*ترافیک|دوربین\s*شهری|مسیر\s*ترافیکی|شلوغی\s*مسیر|بزرگراه\s*ترافیک|آزادراه\s*ترافیک)/i.test(clean);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   پاسخ‌های آماده<br>
+   ================================================================ */<br>
+function buildNeshanReply(text){<br>
+  let intro = &#39;🗺️ سایت نشان رو برات باز می‌کنم:\n\n&#39;;<br>
+  if (isMetroRequest(text)){<br>
+    intro = &#39;🚇 سایت نشان (مسیریابی مترو) رو برات باز می‌کنم:\n\n&#39;;<br>
+  } else if (isBusRequest(text)){<br>
+    intro = &#39;🚌 سایت نشان (مسیریابی اتوبوس) رو برات باز می‌کنم:\n\n&#39;;<br>
+  }<br>
+  return intro + NESHAN_URL + &#39;\n\n📌 می‌تونی مسیر، زمان‌بندی و ایستگاه‌ها رو اونجا ببینی.&#39;;<br>
+}<br>
+function buildFlightReply(){<br>
+  return &#39;✈️ سایت FlightRadar24 (ردیابی پروازها) رو برات باز می‌کنم:\n\n&#39; + FLIGHTRADAR_URL + &#39;\n\n📌 می‌تونی پروازهای زنده، فرودگاه‌ها و مسیرها رو اونجا ببینی.&#39;;<br>
+}<br>
+function buildDeepSeekReply(){<br>
+  return &#39;🤖 برای تحلیل و جواب دادن به این عکس، سایت هوش مصنوعی سام (DeepSeek) رو برات باز می‌کنم:\n\n&#39; + DEEPSEEK_URL + &#39;\n\n📌 می‌تونی عکس رو اونجا آپلود کنی و جواب کامل بگیری.&#39;;<br>
+}<br>
+function buildHamyarSiteReply(){<br>
+  return &#39;📚 سایت همیار رو برات باز می‌کنم:\n\n&#39; + HAMYAR_URL + &#39;\n\n📌 می‌تونی جواب تمرین‌ها و گام‌به‌گام دروس رو اونجا ببینی.&#39;;<br>
+}<br>
+function buildSnappReply(){<br>
+  return &#39;🚗 سایت اسنپ (سوپراپلیکیشن حمل‌ونقل) رو برات باز می‌کنم:\n\n&#39; + SNAPP_URL + &#39;\n\n📌 می‌تونی تاکسی اینترنتی، اسنپ‌فود، اسنپ‌مارکت، اسنپ‌تریپ، اسنپ‌پی و بیمه رو از اونجا سفارش بدی.&#39;;<br>
+}<br>
+function buildTelewebionReply(){<br>
+  return &#39;📺 سایت تلوبیون (پخش زنده و آرشیو تلویزیون) رو برات باز می‌کنم:\n\n&#39; + TELEWEBION_URL + &#39;\n\n📌 می‌تونی شبکه‌های تلویزیون، فیلم، سریال و برنامه‌های آرشیوی رو اونجا ببینی.&#39;;<br>
+}<br>
+function buildTrafficVisionReply(){<br>
+  return &#39;🚦 سایت Traffic Vision (ترافیک زنده) رو برات باز می‌کنم:\n\n&#39; + TRAFFICVISION_URL + &#39;\n\n📌 می‌تونی وضعیت لحظه‌ای ترافیک، دوربین‌های شهری و مسیرهای شلوغ رو اونجا ببینی.&#39;;<br>
+}<br>
+<br>
+/* ================================================================<br>
+   تشخیص درخواست تمرین (متنی)<br>
+   ================================================================ */<br>
+function isHomeworkRequest(text){<br>
+  if (!text) return false;<br>
+  const t = text.toLowerCase();<br>
+  if (/(حل\s*تمرین|جواب\s*تمرین|پاسخ\s*تمرین|حل\s*فعالیت|جواب\s*فعالیت|گام\s*به\s*گام|پاسخ\s*ده|جواب\s*بده|جوابشو|جوابش\s*رو)/i.test(t)) return true;<br>
+  if (/جواب\s*صفحه\s*\d+/i.test(t)) return true;<br>
+  if (/حل\s*صفحه\s*\d+/i.test(t)) return true;<br>
+  if (/پاسخ\s*صفحه\s*\d+/i.test(t)) return true;<br>
+  if (/صفحه\s*\d+/.test(t) &amp;&amp; /(ریاضی|عربی|فارسی|علوم|قرآن|مطالعات|زبان|املا|تفکر|فناوری|هنر|ورزش|پیام|درس)/i.test(t)) return true;<br>
+  if (/درس\s+\S+\s+صفحه/i.test(t)) return true;<br>
+  if (/تمرین\s*\d+/i.test(t)) return true;<br>
+  return false;<br>
+}<br>
+function buildHamyarReply(text){<br>
+  const t = (text || &#39;&#39;).toLowerCase();<br>
+  let intro = &#39;📚 برای جواب این تمرین، سایت همیار رو برات باز می‌کنم:\n\n&#39;;<br>
+  const subjects = [&#39;ریاضی&#39;,&#39;عربی&#39;,&#39;فارسی&#39;,&#39;علوم&#39;,&#39;قرآن&#39;,&#39;مطالعات&#39;,&#39;زبان&#39;,&#39;املا&#39;,&#39;تفکر&#39;,&#39;فناوری&#39;,&#39;هنر&#39;,&#39;ورزش&#39;,&#39;پیام&#39;];<br>
+  for (const s of subjects){<br>
+    if (t.includes(s)){<br>
+      intro = &#39;📚 برای جواب تمرین &#39; + s + &#39;، سایت همیار رو برات باز می‌کنم:\n\n&#39;;<br>
+      break;<br>
+    }<br>
+  }<br>
+  return intro + HAMYAR_URL;<br>
+}<br>
+<br>
+/* ================================================================<br>
+   پیش‌بارگذاری تصویر<br>
+   ================================================================ */<br>
+function preloadImg(url, t){<br>
+  t = t || 25000;<br>
+  return new Promise(function(r){<br>
+    const i = new Image();<br>
+    const to = setTimeout(function(){ i.src = &#39;&#39;; r(false); }, t);<br>
+    i.onload = function(){ clearTimeout(to); r(true); };<br>
+    i.onerror = function(){ clearTimeout(to); r(false); };<br>
+    i.src = url;<br>
+  });<br>
+}<br>
+<br>
+/* ================================================================<br>
+   سرویس پایه Pollinations<br>
+   ================================================================ */<br>
+async function fetchPoll(prompt, model, timeout){<br>
+  timeout = timeout || 25000;<br>
+  try{<br>
+    const url = &#39;https://text.pollinations.ai/&#39; + encodeURIComponent(prompt) + &#39;?model=&#39; + model + &#39;&amp;seed=&#39; + Date.now() + &#39;&amp;nologo=true&#39;;<br>
+    const ctrl = new AbortController();<br>
+    const to = setTimeout(function(){ ctrl.abort(); }, timeout);<br>
+    const res = await fetch(url, { signal: ctrl.signal });<br>
+    clearTimeout(to);<br>
+    if (!res.ok) return null;<br>
+    const txt = (await res.text()).trim();<br>
+    if (txt &amp;&amp; txt.length &gt; 1 &amp;&amp; !/^\s*error/i.test(txt) &amp;&amp; !/rate.?limit/i.test(txt) &amp;&amp; !/^\s*&lt;html/i.test(txt)) return txt;<br>
+  }catch(e){}<br>
+  return null;<br>
+}<br>
+<br>
+/* ================================================================<br>
+   چت متنی<br>
+   ================================================================ */<br>
+async function chatText(userText){<br>
+  const sys = &#39;تو «هوش مصنوعی سام» هستی — دستیار هوشمند فارسی. مدیریت: محمد سام ملک زاده.\nپاسخ‌ها را کامل، دقیق و مفید بده.\n\nسوال کاربر: &#39; + userText;<br>
+  const models = [&#39;openai&#39;, &#39;deepseek&#39;, &#39;mistral&#39;, &#39;gemini&#39;, &#39;llama&#39;, &#39;openai-fast&#39;];<br>
+  const attempts = models.map(function(m){ return fetchPoll(sys, m, 25000); });<br>
+  const settled = await Promise.allSettled(attempts);<br>
+  const results = [];<br>
+  settled.forEach(function(r){<br>
+    if (r.status === &#39;fulfilled&#39; &amp;&amp; r.value &amp;&amp; r.value.length &gt; 2){<br>
+      results.push(r.value);<br>
+    }<br>
+  });<br>
+  if (results.length === 0) return null;<br>
+  return pick(results);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   پیام‌ها<br>
+   ================================================================ */<br>
+function addMsg(role, text, imgUrl, customHTML){<br>
+  const div = document.createElement(&#39;div&#39;);<br>
+  div.className = &#39;msg &#39; + (role === &#39;user&#39; ? &#39;u&#39; : &#39;ai&#39;);<br>
+  const av = role === &#39;user&#39; ? &#39;usr&#39; : &#39;ai&#39;;<br>
+<br>
+  let content = &#39;&#39;;<br>
+  if (customHTML){<br>
+    content = customHTML;<br>
+  } else {<br>
+    content = esc(text || &#39;&#39;);<br>
+    content = content.replace(/```(\w+)?\n?([\s\S]*?)```/g, &#39;&lt;pre&gt;$2&lt;/pre&gt;&#39;);<br>
+    content = content.replace(/`([^`]+)`/g, &#39;&lt;code&gt;$1&lt;/code&gt;&#39;);<br>
+    content = content.replace(/(https?:\/\/[^\s]+)/g, &#39;&lt;a href=&quot;$1&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;$1&lt;/a&gt;&#39;);<br>
+  }<br>
+<br>
+  let media = &#39;&#39;;<br>
+  if (imgUrl) media = &#39;&lt;img src=&quot;&#39; + imgUrl + &#39;&quot; alt=&quot;تصویر&quot; loading=&quot;lazy&quot;&gt;&#39;;<br>
+<br>
+  let actions = &#39;&#39;;<br>
+  if (role === &#39;ai&#39; &amp;&amp; text &amp;&amp; !imgUrl){<br>
+    const safeText = (text || &#39;&#39;).replace(/\\/g, &#39;\\\\&#39;).replace(/&#39;/g, &quot;\\&#39;&quot;).replace(/\n/g, &#39;\\n&#39;).substring(0, 500);<br>
+    actions = &#39;&lt;div class=&quot;chat-actions&quot;&gt;&#39; +<br>
+      &#39;&lt;button onclick=&quot;copyText(\&#39;&#39; + safeText + &#39;\&#39;)&quot;&gt;📋 کپی&lt;/button&gt;&#39; +<br>
+      &#39;&lt;button onclick=&quot;speakText(\&#39;&#39; + safeText + &#39;\&#39;)&quot;&gt;🔊 خواندن&lt;/button&gt;&#39; +<br>
+      &#39;&lt;button onclick=&quot;shareText(\&#39;&#39; + safeText + &#39;\&#39;)&quot;&gt;📤 اشتراک&lt;/button&gt;&#39; +<br>
+      &#39;&lt;/div&gt;&#39;;<br>
+  }<br>
+<br>
+  div.innerHTML = &#39;&lt;div class=&quot;av &#39; + av + &#39;&quot;&gt;م&lt;/div&gt;&lt;div class=&quot;mc&quot;&gt;&lt;div class=&quot;mb&quot;&gt;&#39; + content + media + actions + &#39;&lt;/div&gt;&lt;/div&gt;&#39;;<br>
+  chat.appendChild(div);<br>
+  scrollBottom();<br>
+}<br>
+function addTyping(){<br>
+  const m = document.createElement(&#39;div&#39;);<br>
+  m.className = &#39;msg ai&#39;; m.id = &#39;typing&#39;;<br>
+  m.innerHTML = &#39;&lt;div class=&quot;av ai&quot;&gt;م&lt;/div&gt;&lt;div class=&quot;mc&quot;&gt;&lt;div class=&quot;mb&quot;&gt;&lt;div class=&quot;typing&quot;&gt;&lt;div class=&quot;td&quot;&gt;&lt;/div&gt;&lt;div class=&quot;td&quot;&gt;&lt;/div&gt;&lt;div class=&quot;td&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&#39;;<br>
+  chat.appendChild(m); scrollBottom();<br>
+}<br>
+function removeTyping(){<br>
+  const el = document.getElementById(&#39;typing&#39;);<br>
+  if (el) el.remove();<br>
+}<br>
+<br>
+/* ================================================================<br>
+   پیوست فایل<br>
+   ================================================================ */<br>
+function attachFile(){<br>
+  const input = document.createElement(&#39;input&#39;);<br>
+  input.type = &#39;file&#39;; input.accept = &#39;image/*&#39;;<br>
+  input.onchange = async function(e){<br>
+    const f = e.target.files[0];<br>
+    if (!f) return;<br>
+    if (f.size &gt; MAX){ toast(&#39;❌ حداکثر ۲۰۰MB&#39;); return; }<br>
+    try{<br>
+      const dataUrl = await readFile(f);<br>
+      file = { type: &#39;image&#39;, dataUrl: dataUrl, name: f.name };<br>
+      showFP();<br>
+      toast(&#39;✅ عکس آماده است&#39;);<br>
+    }catch(err){ toast(&#39;❌ خطا در خواندن فایل&#39;); }<br>
+  };<br>
+  input.click();<br>
+}<br>
+function readFile(f){<br>
+  return new Promise(function(r, j){<br>
+    const rd = new FileReader();<br>
+    rd.onload = function(){ r(rd.result); };<br>
+    rd.onerror = j;<br>
+    rd.readAsDataURL(f);<br>
+  });<br>
+}<br>
+function showFP(){<br>
+  if (!file) return;<br>
+  fp.classList.add(&#39;show&#39;);<br>
+  fpImg.src = file.dataUrl;<br>
+  fi.textContent = file.name;<br>
+}<br>
+function removeFile(){<br>
+  file = null;<br>
+  fp.classList.remove(&#39;show&#39;);<br>
+  fpImg.src = &#39;&#39;;<br>
+}<br>
+<br>
+/* ================================================================<br>
+   پاسخ برنامه کلاسی<br>
+   ================================================================ */<br>
+function getScheduleAnswer(userText){<br>
+  const t = (userText || &#39;&#39;).toLowerCase();<br>
+  const today = getToday();<br>
+  const tomorrow = getTomorrow();<br>
+  if (/(فردا|tomorrow)/i.test(t) &amp;&amp; SCHEDULE[tomorrow]){<br>
+    let reply = &#39;📅 برنامه فردا (&#39; + tomorrow + &#39;):\n\n&#39;;<br>
+    SCHEDULE[tomorrow].forEach(function(l, i){<br>
+      reply += &#39;📚 زنگ &#39; + (i + 1) + &#39;: &#39; + l.subject + &#39; (&#39; + l.teacher + &#39;)\n&#39;;<br>
+    });<br>
+    reply += &#39;\n⏰ ساعت ۶:۳۰ بیدار شو!&#39;;<br>
+    return reply;<br>
+  }<br>
+  if (/(امروز|today)/i.test(t) &amp;&amp; SCHEDULE[today]){<br>
+    let reply = &#39;📅 برنامه امروز (&#39; + today + &#39;):\n\n&#39;;<br>
+    SCHEDULE[today].forEach(function(l, i){<br>
+      reply += &#39;📚 زنگ &#39; + (i + 1) + &#39;: &#39; + l.subject + &#39; (&#39; + l.teacher + &#39;)\n&#39;;<br>
+    });<br>
+    return reply;<br>
+  }<br>
+  if (/(برنامه|زنگ|کلاس|درس)/i.test(t)){<br>
+    let reply = &#39;📅 برنامه هفتگی:\n\n&#39;;<br>
+    for (const day in SCHEDULE){<br>
+      reply += &#39;• &#39; + day + &#39;: &#39; + SCHEDULE[day].map(function(l){ return l.subject; }).join(&#39; | &#39;) + &#39;\n\n&#39;;<br>
+    }<br>
+    return reply;<br>
+  }<br>
+  if (/(بیدار)/i.test(t)){<br>
+    if (SCHEDULE[tomorrow]){<br>
+      return &#39;⏰ برای زنگ اول فردا ساعت ۶:۳۰ بیدار شو.\n📚 زنگ اول: &#39; + SCHEDULE[tomorrow][0].subject;<br>
+    }<br>
+    return &#39;فردا تعطیله! 😴&#39;;<br>
+  }<br>
+  return null;<br>
+}<br>
+<br>
+/* ================================================================<br>
+   ⭐ قابلیت‌های جدید<br>
+   ================================================================ */<br>
+function toggleMic(){<br>
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;<br>
+  if (!SR){ toast(&#39;❌ مرورگر شما از ضبط صدا پشتیبانی نمی‌کند&#39;); return; }<br>
+  const btn = document.getElementById(&#39;micBtn&#39;);<br>
+  if (isRecording){<br>
+    if (recognition) recognition.stop();<br>
+    return;<br>
+  }<br>
+  recognition = new SR();<br>
+  recognition.lang = &#39;fa-IR&#39;;<br>
+  recognition.continuous = false;<br>
+  recognition.interimResults = true;<br>
+  recognition.onstart = function(){<br>
+    isRecording = true;<br>
+    btn.classList.add(&#39;recording&#39;);<br>
+    toast(&#39;🎤 در حال ضبط... صحبت کن&#39;);<br>
+  };<br>
+  recognition.onresult = function(e){<br>
+    let final = &#39;&#39;;<br>
+    for (let i = e.resultIndex; i &lt; e.results.length; i++){<br>
+      if (e.results[i].isFinal) final += e.results[i][0].transcript;<br>
+    }<br>
+    if (final){<br>
+      ci.value = (ci.value + &#39; &#39; + final).trim();<br>
+      ci.dispatchEvent(new Event(&#39;input&#39;));<br>
+    }<br>
+  };<br>
+  recognition.onerror = function(e){<br>
+    toast(&#39;❌ خطا در ضبط: &#39; + e.error);<br>
+    stopMic();<br>
+  };<br>
+  recognition.onend = stopMic;<br>
+  try{ recognition.start(); }catch(e){ toast(&#39;❌ خطا در شروع ضبط&#39;); }<br>
+}<br>
+function stopMic(){<br>
+  isRecording = false;<br>
+  const btn = document.getElementById(&#39;micBtn&#39;);<br>
+  if (btn) btn.classList.remove(&#39;recording&#39;);<br>
+}<br>
+function speakText(text){<br>
+  if (!(&#39;speechSynthesis&#39; in window)){ toast(&#39;❌ پشتیبانی نمی‌شود&#39;); return; }<br>
+  window.speechSynthesis.cancel();<br>
+  const u = new SpeechSynthesisUtterance(text);<br>
+  u.lang = &#39;fa-IR&#39;;<br>
+  u.rate = 1;<br>
+  u.pitch = 1;<br>
+  window.speechSynthesis.speak(u);<br>
+  toast(&#39;🔊 در حال خواندن...&#39;);<br>
+}<br>
+async function copyText(text){<br>
+  try{<br>
+    await navigator.clipboard.writeText(text);<br>
+    toast(&#39;📋 کپی شد!&#39;);<br>
+  }catch(e){<br>
+    const ta = document.createElement(&#39;textarea&#39;);<br>
+    ta.value = text; document.body.appendChild(ta);<br>
+    ta.select(); document.execCommand(&#39;copy&#39;);<br>
+    ta.remove(); toast(&#39;📋 کپی شد!&#39;);<br>
+  }<br>
+}<br>
+async function shareText(text){<br>
+  if (navigator.share){<br>
+    try{<br>
+      await navigator.share({ title: &#39;هوش مصنوعی سام&#39;, text: text });<br>
+    }catch(e){}<br>
+  } else {<br>
+    copyText(text);<br>
+  }<br>
+}<br>
+function toggleTheme(){<br>
+  theme = theme === &#39;dark&#39; ? &#39;light&#39; : &#39;dark&#39;;<br>
+  localStorage.setItem(&#39;sam_theme&#39;, theme);<br>
+  applyTheme();<br>
+}<br>
+function applyTheme(){<br>
+  document.body.classList.toggle(&#39;light-mode&#39;, theme === &#39;light&#39;);<br>
+  const btn = document.querySelector(&#39;.theme-toggle&#39;);<br>
+  if (btn) btn.textContent = theme === &#39;light&#39; ? &#39;☀️&#39; : &#39;🌙&#39;;<br>
+}<br>
+function updateClock(){<br>
+  const el = document.getElementById(&#39;headerClock&#39;);<br>
+  if (!el) return;<br>
+  const now = new Date();<br>
+  const h = String(now.getHours()).padStart(2, &#39;0&#39;);<br>
+  const m = String(now.getMinutes()).padStart(2, &#39;0&#39;);<br>
+  el.textContent = h + &#39;:&#39; + m;<br>
+  // آپدیت ساعت داخل کارت‌های مترو<br>
+  const metroClock = document.getElementById(&#39;metroLiveClock&#39;);<br>
+  if (metroClock) metroClock.textContent = getIranNowString();<br>
+  const metroClockDetail = document.getElementById(&#39;metroLiveClockDetail&#39;);<br>
+  if (metroClockDetail) metroClockDetail.textContent = getIranNowString();<br>
+}<br>
+function updateCharCounter(){<br>
+  const el = document.getElementById(&#39;charCounter&#39;);<br>
+  if (!el) return;<br>
+  const v = ci.value.length;<br>
+  el.textContent = v &gt; 0 ? v : &#39;&#39;;<br>
+}<br>
+function quickAsk(text){<br>
+  ci.value = text;<br>
+  ci.dispatchEvent(new Event(&#39;input&#39;));<br>
+  sendMsg();<br>
+}<br>
+function clearChat(){<br>
+  if (!chat.children.length){ toast(&#39;چت خالیه&#39;); return; }<br>
+  if (confirm(&#39;همه پیام‌ها پاک شوند؟&#39;)) newChat();<br>
+}<br>
+<br>
+/* ================================================================<br>
+   ارسال پیام<br>
+   ================================================================ */<br>
+async function sendMsg(){<br>
+  if (isGen) return;<br>
+  const text = ci.value.trim();<br>
+  if (!text &amp;&amp; !file) return;<br>
+<br>
+  if (isFirst){<br>
+    welcome.classList.add(&#39;hidden&#39;);<br>
+    chat.classList.add(&#39;active&#39;);<br>
+    isFirst = false;<br>
+  }<br>
+<br>
+  const userMsg = text || &#39;[عکس]&#39;;<br>
+  const userImg = file ? file.dataUrl : null;<br>
+  addMsg(&#39;user&#39;, userMsg, userImg);<br>
+<br>
+  const attached = file;<br>
+  removeFile();<br>
+  ci.value = &#39;&#39;;<br>
+  updateCharCounter();<br>
+  sb.classList.remove(&#39;active&#39;);<br>
+  isGen = true;<br>
+<br>
+  /* اولویت ۱: عکس → DeepSeek */<br>
+  if (attached &amp;&amp; attached.type === &#39;image&#39;){<br>
+    addMsg(&#39;ai&#39;, buildDeepSeekReply());<br>
+    setTimeout(function(){ window.open(DEEPSEEK_URL, &#39;_blank&#39;); }, 300);<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۲: سایت همیار */<br>
+  if (isHamyarSiteRequest(text)){<br>
+    addMsg(&#39;ai&#39;, buildHamyarSiteReply());<br>
+    setTimeout(function(){ window.open(HAMYAR_URL, &#39;_blank&#39;); }, 300);<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۳: سلام */<br>
+  if (isGreeting(text)){<br>
+    addMsg(&#39;ai&#39;, greetingReply());<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۴: آفلاین */<br>
+  const offline = offlineReply(text);<br>
+  if (offline){<br>
+    addMsg(&#39;ai&#39;, offline);<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۵: تمرین → همیار */<br>
+  if (isHomeworkRequest(text)){<br>
+    addMsg(&#39;ai&#39;, buildHamyarReply(text));<br>
+    setTimeout(function(){ window.open(HAMYAR_URL, &#39;_blank&#39;); }, 300);<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* ⭐ اولویت ۶: زمان‌بندی مترو → کارت تعاملی جدید */<br>
+  if (isMetroScheduleRequest(text)){<br>
+    addMsg(&#39;ai&#39;, &#39;🚇 لیست ۲۰ ایستگاه خط ۱ مترو شیراز — روی هر ایستگاه بزن:&#39;);<br>
+    const div = document.createElement(&#39;div&#39;);<br>
+    div.className = &#39;msg ai&#39;;<br>
+    div.innerHTML = &#39;&lt;div class=&quot;av ai&quot;&gt;م&lt;/div&gt;&lt;div class=&quot;mc&quot;&gt;&lt;div class=&quot;mb&quot;&gt;&#39; + buildMetroStationsListHTML() + &#39;&lt;/div&gt;&lt;/div&gt;&#39;;<br>
+    chat.appendChild(div);<br>
+    scrollBottom();<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۷: هواپیما */<br>
+  if (isAirplaneRequest(text)){<br>
+    addMsg(&#39;ai&#39;, buildFlightReply());<br>
+    setTimeout(function(){ window.open(FLIGHTRADAR_URL, &#39;_blank&#39;); }, 300);<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۸: مترو یا اتوبوس → نشان */<br>
+  if (isMetroRequest(text) || isBusRequest(text)){<br>
+    addMsg(&#39;ai&#39;, buildNeshanReply(text));<br>
+    setTimeout(function(){ window.open(NESHAN_URL, &#39;_blank&#39;); }, 300);<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۸.۱: اسنپ */<br>
+  if (isSnappRequest(text)){<br>
+    addMsg(&#39;ai&#39;, buildSnappReply());<br>
+    setTimeout(function(){ window.open(SNAPP_URL, &#39;_blank&#39;); }, 300);<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۸.۲: تلوبیون */<br>
+  if (isTelewebionRequest(text)){<br>
+    addMsg(&#39;ai&#39;, buildTelewebionReply());<br>
+    setTimeout(function(){ window.open(TELEWEBION_URL, &#39;_blank&#39;); }, 300);<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۸.۳: ترافیک */<br>
+  if (isTrafficRequest(text)){<br>
+    addMsg(&#39;ai&#39;, buildTrafficVisionReply());<br>
+    setTimeout(function(){ window.open(TRAFFICVISION_URL, &#39;_blank&#39;); }, 300);<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۹: برنامه کلاسی */<br>
+  if (/(برنامه|زنگ|کلاس|درس|معلم|فردا|امروز|بیدار)/i.test(text)){<br>
+    const scheduleAnswer = getScheduleAnswer(text);<br>
+    if (scheduleAnswer){<br>
+      addMsg(&#39;ai&#39;, scheduleAnswer);<br>
+      isGen = false;<br>
+      return;<br>
+    }<br>
+  }<br>
+<br>
+  /* اولویت ۱۰: تولید عکس */<br>
+  if (/(عکس|تصویر|نقاشی|بکش|طراحی|draw|image|picture|paint)/i.test(text)){<br>
+    addTyping();<br>
+    let prompt = text.replace(/(عکس|تصویر|نقاشی|بکش|طراحی|بساز|برام|درست کن|یه|یک|از|of|draw|image|picture|generate|create|paint)/gi, &#39; &#39;).replace(/\s+/g, &#39; &#39;).trim();<br>
+    if (prompt.length &lt; 2) prompt = &#39;منظره زیبای سینمایی&#39;;<br>
+    const models = [&#39;flux&#39;, &#39;flux-pro&#39;, &#39;turbo&#39;];<br>
+    const results = [];<br>
+    await Promise.all(models.map(async function(m){<br>
+      try{<br>
+        const seed = (Math.random() * 1e6) | 0;<br>
+        const url = &#39;https://image.pollinations.ai/prompt/&#39; + encodeURIComponent(prompt) + &#39;?width=1024&amp;height=1024&amp;seed=&#39; + seed + &#39;&amp;nologo=true&amp;model=&#39; + m + &#39;&amp;enhance=true&#39;;<br>
+        if (await preloadImg(url, 45000)) results.push(url);<br>
+      }catch(e){}<br>
+    }));<br>
+    removeTyping();<br>
+    if (results.length === 0){<br>
+      addMsg(&#39;ai&#39;, &#39;⚠️ نتونستم عکس بسازم. دوباره امتحان کن.&#39;);<br>
+    } else {<br>
+      addMsg(&#39;ai&#39;, &#39;🎨 &#39; + results.length + &#39; عکس:&#39;);<br>
+      results.forEach(function(u){ addMsg(&#39;ai&#39;, &#39;🎨&#39;, u); });<br>
+    }<br>
+    isGen = false;<br>
+    return;<br>
+  }<br>
+<br>
+  /* اولویت ۱۱: چت متنی */<br>
+  addTyping();<br>
+  try{<br>
+    const r = await chatText(text);<br>
+    removeTyping();<br>
+    if (r){<br>
+      addMsg(&#39;ai&#39;, r);<br>
+    } else {<br>
+      addMsg(&#39;ai&#39;, &#39;⚠️ سرورها الان پاسخ نمی‌دن. چند ثانیه صبر کن و دوباره بفرست.&#39;);<br>
+    }<br>
+  }catch(err){<br>
+    removeTyping();<br>
+    addMsg(&#39;ai&#39;, &#39;⚠️ خطا. دوباره امتحان کن.&#39;);<br>
+  }<br>
+  isGen = false;<br>
+}<br>
+<br>
+/* ================================================================<br>
+   گفتگوی جدید<br>
+   ================================================================ */<br>
+function newChat(){<br>
+  chat.innerHTML = &#39;&#39;;<br>
+  isFirst = true;<br>
+  isGen = false;<br>
+  removeFile();<br>
+  ci.value = &#39;&#39;;<br>
+  updateCharCounter();<br>
+  sb.classList.remove(&#39;active&#39;);<br>
+  welcome.classList.remove(&#39;hidden&#39;);<br>
+  chat.classList.remove(&#39;active&#39;);<br>
+  toast(&#39;✨ گفتگوی جدید&#39;);<br>
+}<br>
+<br>
+/* ================================================================<br>
+   رویدادها<br>
+   ================================================================ */<br>
+ci.addEventListener(&#39;input&#39;, function(){<br>
+  sb.classList.toggle(&#39;active&#39;, !!this.value.trim() || !!file);<br>
+  updateCharCounter();<br>
+});<br>
+ci.addEventListener(&#39;keydown&#39;, function(e){<br>
+  if (e.key === &#39;Enter&#39; &amp;&amp; !e.shiftKey){<br>
+    e.preventDefault();<br>
+    if (this.value.trim() || file) sendMsg();<br>
+  }<br>
+});<br>
+<br>
+/* ================================================================<br>
+   تب‌ها<br>
+   ================================================================ */<br>
+function showTab(tab, el){<br>
+  document.querySelectorAll(&#39;.tab&#39;).forEach(function(t){ t.classList.remove(&#39;active&#39;); });<br>
+  if (el) el.classList.add(&#39;active&#39;);<br>
+  chat.classList.remove(&#39;active&#39;);<br>
+  schedulePanel.classList.remove(&#39;active&#39;);<br>
+  reminderPanel.classList.remove(&#39;active&#39;);<br>
+  welcome.classList.add(&#39;hidden&#39;);<br>
+  inputWrap.style.display = &#39;none&#39;;<br>
+  if (tab === &#39;chat&#39;){<br>
+    chat.classList.add(&#39;active&#39;);<br>
+    inputWrap.style.display = &#39;block&#39;;<br>
+    if (isFirst){<br>
+      welcome.classList.remove(&#39;hidden&#39;);<br>
+      chat.classList.remove(&#39;active&#39;);<br>
+    }<br>
+  } else if (tab === &#39;schedule&#39;){<br>
+    schedulePanel.classList.add(&#39;active&#39;);<br>
+    updateScheduleView();<br>
+  } else if (tab === &#39;reminder&#39;){<br>
+    reminderPanel.classList.add(&#39;active&#39;);<br>
+    updateReminder();<br>
+  }<br>
+}<br>
+<br>
+function updateScheduleView(){<br>
+  const today = getToday();<br>
+  document.querySelectorAll(&#39;.st th&#39;).forEach(function(th){<br>
+    th.style.background = &#39;&#39;;<br>
+    if (th.textContent.trim() === today){<br>
+      th.style.background = &#39;linear-gradient(135deg,#f2a600,#d96570)&#39;;<br>
+    }<br>
+  });<br>
+}<br>
+<br>
+function updateReminder(){<br>
+  const tomorrow = getTomorrow();<br>
+  const tomorrowEl = document.getElementById(&#39;tomorrowLessons&#39;);<br>
+  const wakeEl = document.getElementById(&#39;wakeUpTime&#39;);<br>
+  if (SCHEDULE[tomorrow]){<br>
+    const lessons = SCHEDULE[tomorrow];<br>
+    let text = &#39;&lt;span class=&quot;hl&quot;&gt;&#39; + tomorrow + &#39;&lt;/span&gt; (فردا) — &#39; + lessons.length + &#39; زنگ:&lt;br&gt;&#39;;<br>
+    lessons.forEach(function(l, i){<br>
+      text += &#39;&lt;br&gt;📚 زنگ &#39; + (i + 1) + &#39;: &lt;span class=&quot;hl&quot;&gt;&#39; + l.subject + &#39;&lt;/span&gt; (&#39; + l.teacher + &#39;)&#39;;<br>
+    });<br>
+    tomorrowEl.innerHTML = text;<br>
+    wakeEl.innerHTML = &#39;برای زنگ اول فردا ساعت &lt;span class=&quot;hl&quot;&gt;۶:۳۰&lt;/span&gt; بیدار شو.&lt;br&gt;زنگ اول: &lt;span class=&quot;hl&quot;&gt;&#39; + SCHEDULE[tomorrow][0].subject + &#39;&lt;/span&gt;&#39;;<br>
+  } else {<br>
+    tomorrowEl.innerHTML = &#39;فردا &lt;span class=&quot;hl&quot;&gt;&#39; + tomorrow + &#39;&lt;/span&gt; — تعطیل! 🎉&#39;;<br>
+    wakeEl.innerHTML = &#39;فردا تعطیل است! 😴&#39;;<br>
+  }<br>
+  updateScheduleView();<br>
+}<br>
+<br>
+/* ================================================================<br>
+   راه‌اندازی<br>
+   ================================================================ */<br>
+window.addEventListener(&#39;DOMContentLoaded&#39;, function(){<br>
+  createParticles();<br>
+  applyTheme();<br>
+  updateClock();<br>
+  updateReminder();<br>
+  updateCharCounter();<br>
+  setInterval(updateClock, 1000);<br>
+  setInterval(updateReminder, 60000);<br>
+  ci.focus();<br>
+  console.log(&#39;%c✅ هوش مصنوعی سام آماده است&#39;, &#39;color:#4285f4;font-size:14px;font-weight:bold&#39;);<br>
+});<br>
+&lt;/script&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;</div>
 </body>
 </html>
